@@ -1,0 +1,51 @@
+jeudi le 1 septembre 2022		21h00 - 04h00		7hrs
+	départ du projet
+	copy create-react-app
+	modifier app.js, app.css
+	init git
+	commencer p/a 1-d
+	entête, id section
+
+vendredi le 2 septembre 2022		10h30 - 01h00		14.5hrs
+	continuer id section, responsive, select component
+
+samedi le 3 septembre 2022		08h30 - 11h30		3hrs
+	finir id section of p/a 1-d, validation phone number
+
+samedi le 3 septembre 2022		11h30 - 13h00		2hrs
+	age table, re-arrange code
+
+samedi le 3 septembre 2022		19h00 - 00h00		5hrs
+	continue age grid, work on printing format, re-arrange responsiveness
+
+dimanche le 4 septembre 2022	10h00 - 
+	work on printing format
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

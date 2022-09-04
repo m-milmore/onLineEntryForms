@@ -1,14 +1,18 @@
 {
-  "name": "ndcc2022_pro_am_1_dance",
+  "name": "ndcc2022 Registration",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "bootstrap": "^5.2.0",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "react-to-print": "^2.14.7",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

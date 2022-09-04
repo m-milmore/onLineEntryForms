@@ -1,11 +1,13 @@
+import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
+import ProAm1Dance from "./components/ProAm1Dance";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">NDCC 2022 Formulaire P/A 1-D</header>
+      <ProAm1Dance />
     </div>
   );
-}
+};
 
 export default App;

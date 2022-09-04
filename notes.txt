@@ -1,1 +1,113 @@
 github onlineEntryForms
+https://github.com/m-milmore/onLineEntryForms.git
+
+            <div className="form-floating">
+              <input
+                type="text"
+                className="form-control form-control-sm"
+                id="studio"
+                placeholder="studio"
+                name="studio"
+                value={id.studio}
+                onChange={handleChange}
+              />
+              <label className="" htmlFor="studio">
+                Studio
+              </label>
+            </div>
+
+*******************************************
+
+            <input
+              type="text"
+              className="form-control form-control-sm py-0"
+              id="studentFirstName"
+              placeholder="Prénom de l'élève"
+              name="studentFirstName"
+              value={ids.studentFirstName}
+              onChange={handleChange}
+            />
+
+*****************************************
+
+            <label className="label-id-section text-nowrap" htmlFor="studio">
+              Studio :
+            </label>
+            <input
+              type="text"
+              className="form-control form-control-sm ps-0 pe-1 text-primary fw-bold"
+              id="studio"
+              name="studio"
+              value={ids.studio}
+              onChange={handleChange}
+            />
+
+***********************************************
+
+    <select
+      className="form-select border-white"
+      name={name}
+      onChange={handleChange}
+      aria-label={label}
+    >
+      <option defaultValue disabled>{label}</option>
+      {options.map((option) => {
+        return (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        );
+      })}
+    </select>
+
+*************************************************
+
+    <div className="dropdown">
+      <button
+        className="btn btn-secondary dropdown-toggle"
+        type="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        {label}
+      </button>
+      <ul className="dropdown-menu">
+        {options.map((option) => {
+          return (
+            <li key={option} value={option}>
+              <a className="dropdown-item" href="#">
+                {option}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+
+*****************************************
+
+            {/* {i === canadaDivisions - 1 && <Dropdown.Divider key="divider" />} */}
+
+*******************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
