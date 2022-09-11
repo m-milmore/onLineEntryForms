@@ -1,9 +1,43 @@
-import LOGO from "./assets/logo.png";
-import DATES from "./assets/dates.png";
+import LOGO from "./assets/images/logo.png";
+import DATES from "./assets/images/dates.png";
 
 export const logo = LOGO;
-
 export const dates = DATES;
+
+export const levels = [
+  "Débutant",
+  "Bronze 1",
+  "Bronze",
+  "Argent 1",
+  "Argent",
+  "Or",
+  "or 1",
+  "Or Avancé",
+];
+
+export const ages = ["JV", "JR", "JE", "A", "B", "C", "D", "E", "F"];
+
+export const smooth = ["V", "T", "F", "VW", "P"];
+
+export const rhythm = [
+  "C",
+  "R",
+  "SW",
+  "B",
+  "M",
+  "ME",
+  "SAM",
+  "PD",
+  "H",
+  "BA",
+  "WCS",
+  "SAL",
+  "AT",
+];
+
+export const ballroom = [];
+
+export const latin = [];
 
 export const states = [
   "Alabama",

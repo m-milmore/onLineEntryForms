@@ -88,7 +88,81 @@ https://github.com/m-milmore/onLineEntryForms.git
 
             {/* {i === canadaDivisions - 1 && <Dropdown.Divider key="divider" />} */}
 
-*******************************************
+************************************
+
+16px = 1rem = 12pt
+
+********************************
+importing font
+	1- "CSS file imported from JS", 				shouldn't it say : "CSS file imported into JS"?
+	2- "by default src/index.js imports src/index.css"			by default? we wouldn't need : "import './index.css'; if it was "by default", no?
+	3- "For example, if you put a font in src/fonts/MyFont.woff"		.woff?
+								when I put Swiss721 from the Windows Fonts folder, I get 14 .otf files
+	4- "@font-face {...}"?					what does @font-face means in css?
+
+	MDN			The @font-face CSS at-rule specifies a custom font with which to display text; 
+				the font can be loaded from either a remote server or a locally-installed font on the user's own computer.
+
+	Syntax:
+
+				@font-face {
+ 					 font-family: "Open Sans";
+ 					 src: url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"),
+       					url("/fonts/OpenSans-Regular-webfont.woff") format("woff");
+				}
+
+	StackOverflow
+				@font-face {
+  					font-family: 'MyFont';
+  					src: local('MyFont'), url(./fonts/MyFont.woff) format('woff');
+  					/* other formats include: 'woff2', 'truetype, 'opentype', 'embedded-opentype', and 'svg' */
+				}
+
+				I don't have any of those formats, I have 14 files with .otf extension.
+
+	"Normally this should be enough." (???)
+
+******************************************
+
+    <div
+      className="d-flex flex-column flex-lg-row mb-5 flex-wrap flex-lg-nowrap
+    justify-content-center justify-content-md-between"
+    >
+      <div
+        className="d-flex flex-column align-items-center align-items-lg-start"
+        style={{ color: "var(--ndcc-red)" }}
+      >
+        <div className="fs-4 fw-bold lh-sm text-decoration-underline">
+          PRO-AM
+        </div>
+        <div className="fs-4 fw-bold lh-sm text-decoration-underline text-nowrap">
+          DANSES INDIVIDUELLES
+        </div>
+      </div>
+      <div className="d-flex flex-column align-items-center">
+        <div style={{ width: "100px" }}>
+          <img src={logo} alt="logo" />
+        </div>
+        <div className="fs-3 lh-sm text-center px-2 text-nowrap header-print">
+          Championnat Canadien National
+        </div>
+      </div>
+      <div className="position-relative ndcc-year-container">
+        <div
+          className="fs-3 fw-bolder ndcc-year"
+          style={{ color: "var(--ndcc-pink)" }}
+        >
+          2022
+        </div>
+        {/* <div
+          className="fs-4 fw-bolder position-absolute top-0 start-0 text-nowrap ndcc-dates"
+          style={{ color: "var(--ndcc-red)" }}
+        >
+          26 27 28 AOÛT
+        </div> */}
+        {/* <img src={dates} alt="dates" /> */}
+      </div>
+    </div>
 
 
 

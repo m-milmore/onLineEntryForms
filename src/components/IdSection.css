@@ -1,0 +1,25 @@
+@media print {
+  .col-6 {
+    width: 33.33% !important;
+    float: left !important;
+  }
+  .col-12 {
+    width: 50% !important;
+    float: left !important;
+  }
+  .col-9 {
+    width: 66.66% !important;
+    float: left !important;
+  }
+  .col-3 {
+    width: 33.33% !important;
+    float: left !important;
+  }
+  .print-mess {
+    font-size: 0.75rem !important;
+    text-align: start !important;
+  }
+  .print-radios {
+    padding-top: 4px !important;
+  }
+}

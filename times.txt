@@ -6,20 +6,35 @@ jeudi le 1 septembre 2022		21h00 - 04h00		7hrs
 	commencer p/a 1-d
 	entête, id section
 
-vendredi le 2 septembre 2022		10h30 - 01h00		14.5hrs
+vendredi le 2 septembre 2022		10h30 - 01h00		14.5hrs	cumul	21.5hrs
 	continuer id section, responsive, select component
 
-samedi le 3 septembre 2022		08h30 - 11h30		3hrs
+samedi le 3 septembre 2022		08h30 - 11h30		3hrs	cumul	24.5hrs
 	finir id section of p/a 1-d, validation phone number
 
-samedi le 3 septembre 2022		11h30 - 13h00		2hrs
+samedi le 3 septembre 2022		11h30 - 13h00		2hrs	cumul	26.5hrs
 	age table, re-arrange code
 
-samedi le 3 septembre 2022		19h00 - 00h00		5hrs
+samedi le 3 septembre 2022		19h00 - 00h00		5hrs	cumul	31.5hrs
 	continue age grid, work on printing format, re-arrange responsiveness
 
-dimanche le 4 septembre 2022	10h00 - 
+dimanche le 4 septembre 2022	10h00 - 13h00, 19h00-00h00	7hrs	cumul	38.5hrs
 	work on printing format
+
+lundi le 5 septembre 2022		09h15 - ...		3hrs	cumul	41.5hrs
+	work on printing format
+
+mardi le 6 septembre 2022		09h00 - 17h00		8hrs	cumul	49.5hrs
+	work on pdf w/ react
+
+jeudi le 8 septembre 2022		09h00 - 			8hrs (estimate)	cumul	57.5hrs
+	work on responsive header
+
+vendredi le 9 septembre 2022
+	work on printing capabilities				5hrs (estimate)	cumul	62.5hrs
+
+samedi le 10 septembre 2022
+	work on printing view
 
 
 

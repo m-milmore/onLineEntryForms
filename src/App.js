@@ -3,9 +3,10 @@ import "./App.css";
 import ProAm1Dance from "./components/ProAm1Dance";
 
 const App = () => {
+
   return (
     <div className="App">
-      <ProAm1Dance />
+      <ProAm1Dance/>
     </div>
   );
 };

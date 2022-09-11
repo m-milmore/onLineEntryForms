@@ -28,11 +28,13 @@ const ProAm1Dance = () => {
   const [ids, setIds] = useState(INIT_IDS);
 
   useEffect(() => {
-    setIds((prev) => ({
-      ...prev,
-      stateAbbrev:
-        countriesDivisionsAbbr[countriesDivisions.indexOf(ids.state)],
-    }));
+    if (ids.state !== "Province/État") {
+      setIds((prev) => ({
+        ...prev,
+        stateAbbrev:
+          countriesDivisionsAbbr[countriesDivisions.indexOf(ids.state)],
+      }));
+    }
   }, [ids.state]);
 
   const handleSubmit = (e) => {
@@ -55,10 +57,14 @@ const ProAm1Dance = () => {
           countriesDivisions={countriesDivisions}
         />
         <AgeSection />
-        {/* <SingleDances />
         <SingleDances />
+        {/*<SingleDances />
         <FormFooter /> */}
-        <input className="btn btn-primary mt-3" type="submit" value="Submit" />
+        <input
+          className="btn btn-primary mt-3 d-print-none"
+          type="submit"
+          value="Submit"
+        />
       </form>
     </div>
   );

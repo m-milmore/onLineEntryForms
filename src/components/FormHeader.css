@@ -1,0 +1,99 @@
+.ndcc-year-container {
+  position: relative;
+}
+.ndcc-year {
+  transform: scale(4, 2);
+  -webkit-transform: scale(4, 2);
+  display: inline-block;
+  color: var(--ndcc-pink);
+}
+
+.ndcc-dates {
+  transform: scale(1.5, 1.2) translate(-45%, 8%);
+  -webkit-transform: scale(1.5, 1.2) translate(-45%, 8%);
+  display: inline-block;
+  color: var(--ndcc-red);
+  position: absolute;
+}
+
+.logo {
+  width: 100px;
+}
+
+@media screen and (min-width: 992px) {
+  .ndcc-year-container {
+    width: 29%;
+    text-align: end;
+  }
+  .ndcc-year {
+    transform: scale(4.2, 1.5) translateX(-40%);
+    -webkit-transform: scale(4.2, 1.5) translateX(-40%);
+    display: inline-block;
+  }
+  .ndcc-dates {
+    transform: scale(1.25, 1.1) translate(-107%, 8%);
+    -webkit-transform: scale(1.25, 1.1) translate(-107%, 8%);
+    display: inline-block;
+    position: absolute;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .ndcc-year-container {
+    width: 28%;
+    text-align: end;
+    max-width: 275px;
+  }
+  .ndcc-year {
+    transform: scale(4.2, 1.5) translateX(-37%);
+    -webkit-transform: scale(4.2, 1.5) translateX(-37%);
+    display: inline-block;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .ndcc-year {
+    transform: scale(4.2, 1.5) translateX(-39%);
+    -webkit-transform: scale(4.2, 1.5) translateX(-39%);
+    display: inline-block;
+  }
+}
+
+@media print {
+  .print-header {
+    width: 7.5in !important;
+    flex-direction: row !important;
+  }
+  .print-pa {
+    width: 2.125in !important;
+    align-items: flex-start !important;
+  }
+  .print-pa div {
+    font-size: 1rem !important;
+  }
+  .print-ndcc {
+    width: 3in !important;
+  }
+  .logo {
+    width: 65px;
+  }
+  .print-ndcc div {
+    font-size: 1.25rem !important;
+    font-weight: bold !important;
+    letter-spacing: 1.5px !important;
+  }
+  .print-year {
+    width: 2.125in !important;
+  }
+  .ndcc-year {
+    transform: scale(3, 1.5) translateX(15%);
+    -webkit-transform: scale(3, 1.5) translateX(15%);
+    display: inline-block;
+  }
+	  .ndcc-dates {
+    transform: scale(1, 1) translate(-50%, 8%);
+    -webkit-transform: scale(1, 1) translate(-50%, 8%);
+    display: inline-block;
+    position: absolute;
+  }
+}

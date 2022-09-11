@@ -1,3 +1,8 @@
+:root {
+  --ndcc-red: rgb(208, 53, 58);
+  --ndcc-pink: rgba(250, 190, 191, 0.5);
+}
+
 .App {
   min-height: 100vh;
   display: flex;
@@ -64,4 +69,8 @@ input[type="email"],
 input[type="number"] {
   border: none;
   cursor: pointer;
+}
+
+th {
+  border: 1px solid black;
 }

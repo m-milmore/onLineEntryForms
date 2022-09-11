@@ -1,27 +1,37 @@
 import React from "react";
-import { logo, dates } from "../constants";
+import "./FormHeader.css";
+import { logo } from "../constants";
 
 const FormHeader = () => {
   return (
-    <div className="d-flex mb-5 flex-wrap justify-content-center justify-content-md-between d-print-flex">
-      <div className="d-flex flex-column align-items-center align-items-md-start">
+    <div
+      className="d-flex flex-column flex-lg-row mb-5 flex-wrap flex-lg-nowrap
+    justify-content-center justify-content-md-between print-header"
+    >
+      <div
+        className="d-flex flex-column align-items-center align-items-lg-start print-pa"
+        style={{ color: "var(--ndcc-red)" }}
+      >
         <div className="fs-4 fw-bold lh-sm text-decoration-underline">
           PRO-AM
         </div>
-        <div className="fs-4 fw-bold lh-sm text-decoration-underline">
+        <div className="fs-4 fw-bold lh-sm text-decoration-underline text-nowrap">
           DANSES INDIVIDUELLES
         </div>
       </div>
-      <div className="d-flex flex-column align-items-center">
-        <div style={{ width: "100px" }}>
+      <div className="d-flex flex-column align-items-center print-ndcc">
+        <div className="logo">
           <img src={logo} alt="logo" />
         </div>
-        <div className="fs-3 lh-sm text-center px-2">
-          Championnat Canadien National
+        <div className="fs-3 lh-sm text-center px-2 text-nowrap">
+          Championnats Canadiens National
         </div>
       </div>
-      <div className="" style={{ maxWidth: "225px", minWidth: "150px" }}>
-        <img src={dates} alt="dates" />
+      <div className="ndcc-year-container print-year">
+        <div className="fs-3 fw-bolder ndcc-year">2022</div>
+        <div className="fs-4 fw-bolder text-nowrap ndcc-dates">
+          26 27 28 AOÛT
+        </div>
       </div>
     </div>
   );

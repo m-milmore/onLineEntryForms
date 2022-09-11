@@ -4,7 +4,7 @@ const AgeSection = () => {
   const colClass = "col text-nowrap flex-grow-0";
 
   return (
-    <div className="container fs-6 fw-bold my-3 p-0">
+    <div className="fw-bold my-2 p-0" style={{fontSize: "11px"}}>
       <div className="row border border-dark m-0 py-1 px-0 justify-content-evenly">
         <div className={colClass}>ÂGE :</div>
         <div className={colClass}>(JV 11 -)</div>

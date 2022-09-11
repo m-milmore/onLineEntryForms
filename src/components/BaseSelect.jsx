@@ -21,7 +21,7 @@ const BaseSelect = ({ label, title, options, name, handleChange }) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu style={{ height: "32rem", overflowY: "scroll" }}>
-          {options.map((option, i) => {
+          {options && options.length && options.map((option, i) => {
             return (
               <div key={option}>
                 <Dropdown.Item
