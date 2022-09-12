@@ -17,7 +17,7 @@ export const levels = [
 
 export const ages = ["JV", "JR", "JE", "A", "B", "C", "D", "E", "F"];
 
-export const smooth = ["V", "T", "F", "VW", "P"];
+export const smooth = ["V", "T", "F", "VV", "PB"];
 
 export const rhythm = [
   "C",
@@ -32,12 +32,12 @@ export const rhythm = [
   "BA",
   "WCS",
   "SAL",
-  "AT",
+  "TA",
 ];
 
-export const ballroom = [];
+export const ballroom = ["V", "T", "VV", "F", "Q"];
 
-export const latin = [];
+export const latin = ["C", "S", "R", "PD", "J"];
 
 export const states = [
   "Alabama",
@@ -115,7 +115,7 @@ export const provinces = [
   "Yukon",
 ];
 
-export const canadaDivisions = provinces.length;
+export const canadaDivisions = provinces.length;  // to put a divider between Canada & US in the select input
 
 export const statesAbbr = [
   "AL",

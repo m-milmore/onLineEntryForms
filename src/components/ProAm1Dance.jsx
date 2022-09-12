@@ -6,7 +6,7 @@ import SingleDances from "./SingleDances";
 import FormFooter from "./FormFooter";
 import { provinces, states, provAbbr, statesAbbr } from "../constants";
 
-const INIT_IDS = {
+const INIT_INFO = {
   studio: "",
   teacherFirstName: "",
   teacherLastName: "",
@@ -25,22 +25,22 @@ const countriesDivisions = provinces.concat(states);
 const countriesDivisionsAbbr = provAbbr.concat(statesAbbr);
 
 const ProAm1Dance = () => {
-  const [ids, setIds] = useState(INIT_IDS);
+  const [info, setInfo] = useState(INIT_INFO);
 
   useEffect(() => {
-    if (ids.state !== "Province/État") {
-      setIds((prev) => ({
+    if (info.state !== "Province/État") {
+      setInfo((prev) => ({
         ...prev,
         stateAbbrev:
-          countriesDivisionsAbbr[countriesDivisions.indexOf(ids.state)],
+          countriesDivisionsAbbr[countriesDivisions.indexOf(info.state)],
       }));
     }
-  }, [ids.state]);
+  }, [info.state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
-    if (!ids.tel.match(phoneRegex)) {
+    if (!info.tel.match(phoneRegex)) {
       alert("Numéro de téléphone invalide.");
       return;
     }
@@ -52,12 +52,12 @@ const ProAm1Dance = () => {
       <form onSubmit={handleSubmit}>
         <FormHeader />
         <IdSection
-          ids={ids}
-          setIds={setIds}
+          info={info}
+          setInfo={setInfo}
           countriesDivisions={countriesDivisions}
         />
         <AgeSection />
-        <SingleDances />
+        <SingleDances syllabus="FERMÉ"/>
         {/*<SingleDances />
         <FormFooter /> */}
         <input

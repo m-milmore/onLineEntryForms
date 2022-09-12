@@ -33,8 +33,11 @@ jeudi le 8 septembre 2022		09h00 - 			8hrs (estimate)	cumul	57.5hrs
 vendredi le 9 septembre 2022
 	work on printing capabilities				5hrs (estimate)	cumul	62.5hrs
 
-samedi le 10 septembre 2022
+samedi le 10 septembre 2022					10hrs (estimate)	cumul	72.5hrs
 	work on printing view
+
+dimanche le 11 septembre 2022
+	work on 1d table
 
 
 

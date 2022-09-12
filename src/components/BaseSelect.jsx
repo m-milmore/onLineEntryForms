@@ -3,7 +3,14 @@ import Dropdown from "react-bootstrap/Dropdown";
 import PropTypes from "prop-types";
 import { canadaDivisions } from "../constants";
 
-const BaseSelect = ({ label, title, options, name, handleChange }) => {
+const BaseSelect = ({ label, value, options, name, setState }) => {
+  const handleSelect = ({ target: { value } }) => {
+    setState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <div
       className="d-flex align-items-center flex-wrap pb-1"
@@ -17,26 +24,28 @@ const BaseSelect = ({ label, title, options, name, handleChange }) => {
       </label>
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic" size="sm">
-          {title}
+          {value}
         </Dropdown.Toggle>
 
         <Dropdown.Menu style={{ height: "32rem", overflowY: "scroll" }}>
-          {options && options.length && options.map((option, i) => {
-            return (
-              <div key={option}>
-                <Dropdown.Item
-                  as="button"
-                  type="button"
-                  name={name}
-                  value={option}
-                  onClick={handleChange}
-                >
-                  {option}
-                </Dropdown.Item>
-                {i === canadaDivisions - 1 && <Dropdown.Divider />}
-              </div>
-            );
-          })}
+          {options &&
+            options.length &&
+            options.map((option, i) => {
+              return (
+                <div key={option}>
+                  <Dropdown.Item
+                    as="button"
+                    type="button"
+                    name={name}
+                    value={option}
+                    onClick={handleSelect}
+                  >
+                    {option}
+                  </Dropdown.Item>
+                  {i === canadaDivisions - 1 && <Dropdown.Divider />}
+                </div>
+              );
+            })}
         </Dropdown.Menu>
       </Dropdown>
     </div>
@@ -45,16 +54,14 @@ const BaseSelect = ({ label, title, options, name, handleChange }) => {
 
 BaseSelect.propTypes = {
   name: PropTypes.string,
-  handleChange: PropTypes.func,
-  title: PropTypes.string,
+  value: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string),
   label: PropTypes.string,
 };
 
 BaseSelect.defaultProps = {
   name: "",
-  handleChange: () => {},
-  title: "Dropdown",
+  value: "Dropdown",
   options: [],
   label: "",
 };

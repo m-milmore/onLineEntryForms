@@ -5,9 +5,9 @@ import BaseSelect from "./BaseSelect";
 import BaseRadio from "./BaseRadio";
 import PropTypes from "prop-types";
 
-const IdSection = ({ ids, setIds, countriesDivisions }) => {
+const IdSection = ({ info, setInfo, countriesDivisions }) => {
   const handleChange = ({ target: { name, value } }) => {
-    setIds({ ...ids, [name]: value });
+    setInfo({ ...info, [name]: value });
   };
 
   const rowClass =
@@ -20,27 +20,27 @@ const IdSection = ({ ids, setIds, countriesDivisions }) => {
           <BaseText
             inputType="text"
             commonInfo="studio"
-            inputValue={ids.studio}
+            inputValue={info.studio}
             handleChange={handleChange}
-            label="Studio :"
+            label="Studio"
           />
         </div>
         <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
           <BaseText
             inputType="text"
             commonInfo="city"
-            inputValue={ids.city}
+            inputValue={info.city}
             handleChange={handleChange}
-            label="Ville :"
+            label="Ville"
           />
         </div>
         <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
           <BaseSelect
             label="Province/État"
-            title={ids.state}
+            value={info.state}
             name="state"
             options={countriesDivisions}
-            handleChange={handleChange}
+            setState={setInfo}
           />
         </div>
       </div>
@@ -49,18 +49,18 @@ const IdSection = ({ ids, setIds, countriesDivisions }) => {
           <BaseText
             inputType="text"
             commonInfo="teacherFirstName"
-            inputValue={ids.teacherFirstName}
+            inputValue={info.teacherFirstName}
             handleChange={handleChange}
-            label="Prénom du professeur :"
+            label="Prénom du professeur"
           />
         </div>
         <div className="col-12 col-sm-6 col-lg-4 d-flex align-items-center ps-0 pe-1">
           <BaseText
             inputType="text"
             commonInfo="teacherLastName"
-            inputValue={ids.teacherLastName}
+            inputValue={info.teacherLastName}
             handleChange={handleChange}
-            label="Nom du professeur :"
+            label="Nom du professeur"
           />
         </div>
       </div>
@@ -69,25 +69,25 @@ const IdSection = ({ ids, setIds, countriesDivisions }) => {
           <BaseText
             inputType="text"
             commonInfo="tel"
-            inputValue={ids.tel}
+            inputValue={info.tel}
             handleChange={handleChange}
-            label="Téléphone :"
+            label="Téléphone"
           />
         </div>
         <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
           <BaseText
             inputType="email"
             commonInfo="email"
-            inputValue={ids.email}
+            inputValue={info.email}
             handleChange={handleChange}
-            label="Courriel :"
+            label="Courriel"
           />
         </div>
         <div className="col-6 col-sm-4 d-flex align-items-center justify-content-center ps-0 pe-1">
           <BaseText
             inputType="text"
             commonInfo="member"
-            inputValue={ids.member}
+            inputValue={info.member}
             handleChange={handleChange}
             label="Membre #"
           />
@@ -111,18 +111,18 @@ const IdSection = ({ ids, setIds, countriesDivisions }) => {
           <BaseText
             inputType="text"
             commonInfo="studentFirstName"
-            inputValue={ids.studentFirstName}
+            inputValue={info.studentFirstName}
             handleChange={handleChange}
-            label="Prénom de l'élève :"
+            label="Prénom de l'élève"
           />
         </div>
         <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
           <BaseText
             inputType="text"
             commonInfo="studentLastName"
-            inputValue={ids.studentLastName}
+            inputValue={info.studentLastName}
             handleChange={handleChange}
-            label="Nom de l'élève :"
+            label="Nom de l'élève"
           />
         </div>
         <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1 pt-md-1 print-radios">
