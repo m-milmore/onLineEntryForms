@@ -71,6 +71,8 @@ input[type="number"] {
   cursor: pointer;
 }
 
-table, th, tr {
+table,
+th,
+tr {
   border: 1px solid black;
 }

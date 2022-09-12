@@ -1,20 +1,14 @@
 import React from "react";
-import "./RegSelect";
 import PropTypes from "prop-types";
 
-const RegSelect = ({ options, setState, name }) => {
-  const handleSelect = ({ target: { value } }) => {
-    setState((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
+const RegSelect = ({ options, setState, name, value }) => {
   return (
     <select
       className="form-select form-select-sm px-1"
-      onChange={handleSelect}
+      onChange={setState}
       aria-label="generic select"
+      value={value}
+      name={name}
     >
       <option>--</option>
       {options.map((option) => (
@@ -28,10 +22,16 @@ const RegSelect = ({ options, setState, name }) => {
 
 RegSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string),
+  setState: PropTypes.func,
+  name: PropTypes.string,
+  value: PropTypes.string,
 };
 
 RegSelect.defaultProps = {
   options: [],
+  setState: () => {},
+  name: "",
+  value: "",
 };
 
 export default RegSelect;

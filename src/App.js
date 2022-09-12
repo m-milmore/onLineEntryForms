@@ -6,10 +6,9 @@ import ProAm1Dance from "./components/ProAm1Dance";
 export const appEmitter = new EventEmitter();
 
 const App = () => {
-
   return (
     <div className="App">
-      <ProAm1Dance/>
+      <ProAm1Dance />
     </div>
   );
 };

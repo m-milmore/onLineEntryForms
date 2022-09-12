@@ -3,6 +3,7 @@ import RegSelect from "./RegSelect";
 import Division from "./Division";
 import { levels, ages, smooth, rhythm, ballroom, latin } from "../constants";
 import { appEmitter } from "../App";
+import PropTypes from "prop-types";
 
 const TableRow = ({ syllabus }) => {
   const [comps, setComps] = useState({
@@ -11,8 +12,20 @@ const TableRow = ({ syllabus }) => {
     categories: [],
   });
 
+  const handleSelect = ({ target: { name, value } }) => {
+    setComps((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   useEffect(() => {
-    const onUpdateComps = ({dance, danceStyle, syllabus, newSelect: select}) => {
+    const onUpdateComps = ({
+      dance,
+      danceStyle,
+      syllabus,
+      newSelect: select,
+    }) => {
       const comp = {
         dance,
         danceStyle,
@@ -29,7 +42,6 @@ const TableRow = ({ syllabus }) => {
                 obj.syllabus === comp.syllabus
               )
           );
-					console.log(categories)
 
       setComps((prev) => ({
         ...prev,
@@ -49,18 +61,38 @@ const TableRow = ({ syllabus }) => {
   return (
     <tr>
       <td style={{ border: "1px solid black" }}>
-        <RegSelect options={levels} setState={setComps} name="level" />
+        <RegSelect
+          options={levels}
+          setState={handleSelect}
+          name="level"
+          value={comps.level}
+        />
       </td>
       <td style={{ border: "1px solid black" }}>
-        <RegSelect options={ages} setState={setComps} name="age" />
+        <RegSelect
+          options={ages}
+          setState={handleSelect}
+          name="age"
+          value={comps.age}
+        />
       </td>
       <Division division={smooth} syllabus={syllabus} danceStyle="smooth" />
       <Division division={rhythm} syllabus={syllabus} danceStyle="rhythm" />
       <Division division={ballroom} syllabus={syllabus} danceStyle="ballroom" />
       <Division division={latin} syllabus={syllabus} danceStyle="latin" />
-      <td style={{ border: "1px solid black" }}>{dances}</td>
+      <td style={{ border: "1px solid black", verticalAlign: "middle" }}>
+        {dances}
+      </td>
     </tr>
   );
+};
+
+TableRow.propTypes = {
+  syllabus: PropTypes.string,
+};
+
+TableRow.defaultProps = {
+  syllabus: "",
 };
 
 export default TableRow;

@@ -25,14 +25,16 @@ export const rhythm = [
   "SW",
   "B",
   "M",
+  "SAL",
   "ME",
+  "BA",
+  "H",
+  "WCS",
   "SAM",
   "PD",
-  "H",
-  "BA",
-  "WCS",
-  "SAL",
   "TA",
+  "MI",
+  "TV",
 ];
 
 export const ballroom = ["V", "T", "VV", "F", "Q"];

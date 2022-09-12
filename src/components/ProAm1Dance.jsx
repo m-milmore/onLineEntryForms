@@ -57,7 +57,7 @@ const ProAm1Dance = () => {
           countriesDivisions={countriesDivisions}
         />
         <AgeSection />
-        <SingleDances syllabus="FERMÉ"/>
+        <SingleDances syllabus="FERMÉ" />
         {/*<SingleDances />
         <FormFooter /> */}
         <input

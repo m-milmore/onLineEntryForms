@@ -1,0 +1,5 @@
+@media print {
+	.print-ages {
+		font-size: .75rem !important;
+	}
+}

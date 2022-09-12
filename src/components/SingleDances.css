@@ -1,13 +1,13 @@
 @media print {
   .table-print {
     width: 7.47in !important;
-    font-size: 0.75rem !important;
-		border: 1px solid black !important;
-		box-sizing: border-box !important;
-		padding: 0 !important;
-		margin: 0 !important;
-		/* display: block !important; */
-		/* border-collapse:unset !important; */
+    font-size: 8pt !important;
+    /* border: 1px solid black !important; */
+    /* box-sizing: border-box !important; */
+    /* padding: 0 !important; */
+    /* margin: 0 !important; */
+    /* display: block !important; */
+    /* border-collapse:unset !important; */
   }
   .table-responsive {
     overflow-x: hidden !important;
