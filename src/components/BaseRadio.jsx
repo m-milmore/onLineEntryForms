@@ -11,6 +11,7 @@ const BaseRadio = ({ commonInfo, name, handleChange, label }) => {
       <input
         type="radio"
         className="form-check-input"
+        style={{cursor: "pointer"}}
         id={commonInfo}
         name={name}
         value={commonInfo}

@@ -2,13 +2,13 @@ import React from "react";
 import Dance from "./Dance";
 import PropTypes from "prop-types";
 
-const Division = ({ division, syllabus, danceStyle }) => {
+const Division = ({ division, danceStyle, rowId }) => {
   return division.map((dance, i) => (
     <Dance
       key={dance}
       dance={dance}
       danceStyle={danceStyle}
-      syllabus={syllabus}
+			rowId={rowId}
       eol={i + 1 === division.length}
     />
   ));
@@ -16,14 +16,14 @@ const Division = ({ division, syllabus, danceStyle }) => {
 
 Division.propTypes = {
   division: PropTypes.arrayOf(PropTypes.string),
-  syllabus: PropTypes.string,
   danceStyle: PropTypes.string,
+	rowId: PropTypes.string,
 };
 
 Division.defaultProps = {
   division: [],
-  syllabus: "",
   danceStyle: "",
+	rowId: "",
 };
 
 export default Division;

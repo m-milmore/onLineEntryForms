@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import "./Dance.css";
 import { appEmitter } from "../App";
 import PropTypes from "prop-types";
 
-const Dance = ({ dance, danceStyle, syllabus, eol }) => {
+const Dance = ({ dance, danceStyle, rowId, eol }) => {
   const [select, setSelect] = useState(false);
 
   const handleClick = () => {
@@ -11,7 +12,7 @@ const Dance = ({ dance, danceStyle, syllabus, eol }) => {
     const comp = {
       dance,
       danceStyle,
-      syllabus,
+      rowId,
       newSelect,
     };
     appEmitter.emit("comp", comp);
@@ -19,13 +20,7 @@ const Dance = ({ dance, danceStyle, syllabus, eol }) => {
 
   return (
     <td
-      style={{
-        borderRight: eol ? "1px solid black" : "none",
-        cursor: "pointer",
-        textDecoration: select ? "underline" : "none",
-        padding: "2px",
-        verticalAlign: "middle",
-      }}
+      className={`td-style ${eol && "border-R"} ${select && "under-bg"}`}
       onClick={handleClick}
     >
       {dance}
@@ -36,14 +31,14 @@ const Dance = ({ dance, danceStyle, syllabus, eol }) => {
 Dance.propTypes = {
   dance: PropTypes.string,
   danceStyle: PropTypes.string,
-  syllabus: PropTypes.string,
+  rowId: PropTypes.string,
   eol: PropTypes.bool,
 };
 
 Dance.defaultProps = {
   dance: "",
   danceStyle: "",
-  syllabus: "",
+  rowId: "",
   eol: false,
 };
 

@@ -117,7 +117,7 @@ export const provinces = [
   "Yukon",
 ];
 
-export const canadaDivisions = provinces.length;  // to put a divider between Canada & US in the select input
+export const canadaDivisions = provinces.length; // to put a divider between Canada & US in the select input
 
 export const statesAbbr = [
   "AL",
@@ -194,3 +194,11 @@ export const provAbbr = [
   "NT",
   "YT",
 ];
+
+export const disclaimer = `L'organisateur n'est pas tenu responsable en cas de perte ou de vol d'articles 
+personnels laissés dans les vestiaires, salle de bal ou chambre d'hôtel. L'organisateur ne peut être tenu 
+responsable des blessures subies par les personnes suivantes : compétiteurs, spectateurs, employés, officiels, 
+vendeurs, bénévoles ou tout autre personne assistant à l'évènement. Chacun y participe à ses risques et périls. 
+Les organisateurs se réservent le droit d'annuler ou de refuser l'inscription d'un compétiteur ayant manqué 
+de respect envers les officiels ou le personnel travaillant pour le Championnat Canadien National, et 
+ne se conformant pas au présent règlement.`;

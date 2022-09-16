@@ -1,0 +1,19 @@
+.td-style {
+  border-radius: 100%;
+  padding: 1px;
+  vertical-align: middle;
+}
+
+.td-style:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.border-R {
+  border-right: 1px solid black;
+}
+
+tr .under-bg {
+  text-decoration: underline;
+  background-color: rgba(0, 0, 0, 0.1);
+}

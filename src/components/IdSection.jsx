@@ -97,7 +97,7 @@ const IdSection = ({ info, setInfo, countriesDivisions }) => {
         <div className="col-9 col-xl-8 ps-0 pe-1">
           <p className="print-mess">
             *Le professeur doit être membre en règle avec son association
-            professionnelle pour 2022.
+            professionnelle pour 2023.
           </p>
         </div>
         <div className="col-3 col-xl-4 ps-0 pe-1 fw-bold">

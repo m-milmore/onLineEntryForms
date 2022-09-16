@@ -28,9 +28,9 @@ const FormHeader = () => {
         </div>
       </div>
       <div className="ndcc-year-container print-year">
-        <div className="fs-3 fw-bolder ndcc-year">2022</div>
+        <div className="fs-3 fw-bolder ndcc-year">2023</div>
         <div className="fs-4 fw-bolder text-nowrap ndcc-dates">
-          26 27 28 AOÛT
+          25 26 27 AOÛT
         </div>
       </div>
     </div>

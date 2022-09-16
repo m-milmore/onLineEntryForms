@@ -1,11 +1,22 @@
 import React from "react";
+import "./RegSelect.css"
+import { appEmitter } from "../App";
 import PropTypes from "prop-types";
 
-const RegSelect = ({ options, setState, name, value }) => {
+const RegSelect = ({ options, name, value, rowId}) => {
+	const handleSelect = ({target: {value}}) => {
+		const selected = {
+			rowId,
+			name,
+			value,
+		}
+		appEmitter.emit("select", selected);
+	}
+
   return (
     <select
-      className="form-select form-select-sm px-1"
-      onChange={setState}
+      className="form-select form-select-sm px-1 hover-fx"
+      onChange={handleSelect}
       aria-label="generic select"
       value={value}
       name={name}
@@ -22,16 +33,16 @@ const RegSelect = ({ options, setState, name, value }) => {
 
 RegSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string),
-  setState: PropTypes.func,
   name: PropTypes.string,
   value: PropTypes.string,
+	rowId: PropTypes.string
 };
 
 RegSelect.defaultProps = {
   options: [],
-  setState: () => {},
   name: "",
   value: "",
+	rowId: "",
 };
 
 export default RegSelect;

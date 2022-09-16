@@ -39,6 +39,17 @@ samedi le 10 septembre 2022					10hrs (estimate)	cumul	72.5hrs
 dimanche le 11 septembre 2022				10hrs (estimate)	cumul	82.5hrs
 	work on 1d table
 
+lundi le 12 septembre 2022					10hrs (estimate)	cumul	92.5hrs
+	work on dynamic table
+
+mercredi le 14 septembre 2022				8hrs (estimate)	cumul	100.5hrs
+	work on dynamic tables
+
+jeudi le 15 septembre 2022
+	table crud operations				6hrs (estimate)	cumul	106.5hrs
+
+vendredi le 16 septembre 2022
+	start server side
 
 
 
