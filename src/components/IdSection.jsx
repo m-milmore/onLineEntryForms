@@ -3,13 +3,12 @@ import "./IdSection.css";
 import BaseText from "./BaseText";
 import BaseSelect from "./BaseSelect";
 import BaseRadio from "./BaseRadio";
+import { countries, states, provinces } from "../constants";
 import PropTypes from "prop-types";
 
-const IdSection = ({ info, setInfo, countriesDivisions }) => {
-  const handleChange = ({ target: { name, value } }) => {
-    setInfo({ ...info, [name]: value });
-  };
-
+const IdSection = ({ info, handleChange }) => {
+  const territories = provinces.concat(states.concat(countries));
+  const dividers = [provinces.length - 1, provinces.length + states.length - 1];
   const rowClass =
     "row border-bottom border-dark m-0 p-0 d-flex align-items-start";
 
@@ -36,36 +35,16 @@ const IdSection = ({ info, setInfo, countriesDivisions }) => {
         </div>
         <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
           <BaseSelect
-            label="Province/État"
+            label="Territoire"
             value={info.state}
-            name="state"
-            options={countriesDivisions}
-            setState={setInfo}
+            options={territories}
+            handleChange={handleChange}
+            dividers={dividers}
           />
         </div>
       </div>
       <div className={rowClass}>
         <div className="col-12 col-sm-6 col-lg-4 d-flex align-items-center ps-0 pe-1">
-          <BaseText
-            inputType="text"
-            commonInfo="teacherFirstName"
-            inputValue={info.teacherFirstName}
-            handleChange={handleChange}
-            label="Prénom du professeur"
-          />
-        </div>
-        <div className="col-12 col-sm-6 col-lg-4 d-flex align-items-center ps-0 pe-1">
-          <BaseText
-            inputType="text"
-            commonInfo="teacherLastName"
-            inputValue={info.teacherLastName}
-            handleChange={handleChange}
-            label="Nom du professeur"
-          />
-        </div>
-      </div>
-      <div className={rowClass}>
-        <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
           <BaseText
             inputType="text"
             commonInfo="tel"
@@ -74,13 +53,33 @@ const IdSection = ({ info, setInfo, countriesDivisions }) => {
             label="Téléphone"
           />
         </div>
-        <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
+        <div className="col-12 col-sm-6 col-lg-4 d-flex align-items-center ps-0 pe-1">
           <BaseText
             inputType="email"
             commonInfo="email"
             inputValue={info.email}
             handleChange={handleChange}
             label="Courriel"
+          />
+        </div>
+      </div>
+      <div className={rowClass}>
+        <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
+          <BaseText
+            inputType="text"
+            commonInfo="teacherFirstName"
+            inputValue={info.teacherFirstName}
+            handleChange={handleChange}
+            label="Prénom du professeur"
+          />
+        </div>
+        <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
+          <BaseText
+            inputType="text"
+            commonInfo="teacherLastName"
+            inputValue={info.teacherLastName}
+            handleChange={handleChange}
+            label="Nom du professeur"
           />
         </div>
         <div className="col-6 col-sm-4 d-flex align-items-center justify-content-center ps-0 pe-1">

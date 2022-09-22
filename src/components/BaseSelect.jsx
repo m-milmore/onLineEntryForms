@@ -1,14 +1,14 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
+import { appEmitter } from "../App";
 import PropTypes from "prop-types";
-import { canadaDivisions } from "../constants";
 
-const BaseSelect = ({ label, value, options, name, setState }) => {
-  const handleSelect = ({ target: { value } }) => {
-    setState((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+const BaseSelect = ({ label, value, options, dividers }) => {
+  const handleClick = ({ target: { value } }) => {
+    const territory = {
+      territory: value,
+    };
+    appEmitter.emit("territory", territory);
   };
 
   return (
@@ -36,13 +36,12 @@ const BaseSelect = ({ label, value, options, name, setState }) => {
                   <Dropdown.Item
                     as="button"
                     type="button"
-                    name={name}
                     value={option}
-                    onClick={handleSelect}
+                    onClick={handleClick}
                   >
                     {option}
                   </Dropdown.Item>
-                  {i === canadaDivisions - 1 && <Dropdown.Divider />}
+                  {dividers.includes(i) && <Dropdown.Divider />}
                 </div>
               );
             })}
@@ -53,17 +52,17 @@ const BaseSelect = ({ label, value, options, name, setState }) => {
 };
 
 BaseSelect.propTypes = {
-  name: PropTypes.string,
+  label: PropTypes.string,
   value: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.string),
-  label: PropTypes.string,
+  dividers: PropTypes.arrayOf(PropTypes.number),
 };
 
 BaseSelect.defaultProps = {
-  name: "",
-  value: "Dropdown",
-  options: [],
   label: "",
+  value: "",
+  options: [],
+  dividers: [],
 };
 
 export default BaseSelect;

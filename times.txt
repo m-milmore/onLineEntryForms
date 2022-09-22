@@ -47,9 +47,29 @@ mercredi le 14 septembre 2022				8hrs (estimate)	cumul	100.5hrs
 
 jeudi le 15 septembre 2022
 	table crud operations				6hrs (estimate)	cumul	106.5hrs
+	what's left: implement signature pads,
+	put form in broader context with all the other forms
+	allow for multiple occurences of the form
+	implement summary form linked with filled forms
+	test responsiveness, print preview, other browsers, other browser versions
+	allow adding extra level, age, dance
+	allow adding country if not from US or Canada, si pays=>pays=ville+stateAbbrv pcq je n'aurais pas d'abbréviation
+	other points?
 
-vendredi le 16 septembre 2022
+vendredi le 16 septembre 2022				6hrs (estimate)	cumul 112.5hrs
 	start server side
+
+samedi le 17 septembre 2022					6hrs (estimate)	cumul 118.5hrs
+	server-side
+
+dimanche le 18 septembre 2022				6hrs (estimate)	cumul 124.5hrs
+	work on territories menus
+
+mardi le 20 septembre 2022					6hrs (estimate)	cumul 130.5hrs
+	work on schema
+
+mercredi le 21 septembre 2022
+	work on schema
 
 
 

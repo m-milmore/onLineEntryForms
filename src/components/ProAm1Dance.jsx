@@ -5,26 +5,21 @@ import AgeSection from "./AgeSection";
 import SingleDances from "./SingleDances";
 import FormFooter from "./FormFooter";
 import { nanoid } from "nanoid";
-import { provinces, states, provAbbr, statesAbbr } from "../constants";
 import { appEmitter } from "../App";
 
 const INIT_INFO = {
   studio: "",
-  teacherFirstName: "",
-  teacherLastName: "",
   city: "",
-  state: "Province/État",
+  state: "Choisir",
   tel: "",
   email: "",
+  teacherFirstName: "",
+  teacherLastName: "",
   member: "",
   studentFirstName: "",
   studentLastName: "",
   studentGender: "",
-  stateAbbrev: "",
 };
-
-const countriesDivisions = provinces.concat(states);
-const countriesDivisionsAbbr = provAbbr.concat(statesAbbr);
 
 const ProAm1Dance = () => {
   const [info, setInfo] = useState(INIT_INFO);
@@ -47,16 +42,22 @@ const ProAm1Dance = () => {
   ]);
 
   useEffect(() => {
-    if (info.state !== "Province/État") {
-      setInfo((prev) => ({
-        ...prev,
-        stateAbbrev:
-          countriesDivisionsAbbr[countriesDivisions.indexOf(info.state)],
-      }));
-    }
-  }, [info.state]);
+    const onUpdateTerritory = ({ territory }) => {
+      setInfo({ ...info, state: territory });
+    };
+
+    const territoryListener = appEmitter.addListener(
+      "territory",
+      onUpdateTerritory
+    );
+
+    return () => {
+      territoryListener.remove();
+    };
+  }, [info]);
 
   useEffect(() => {
+    // choose a level or an age category
     const onUpdateSelect = ({ rowId, name, value }) => {
       setRows(
         rows.map((row) =>
@@ -73,6 +74,7 @@ const ProAm1Dance = () => {
   }, [rows]);
 
   useEffect(() => {
+    // add or remove dances
     const onUpdateComps = ({ dance, danceStyle, rowId, newSelect: select }) => {
       const comp = {
         dance,
@@ -116,6 +118,10 @@ const ProAm1Dance = () => {
     };
   }, [rows]);
 
+  const handleChange = ({ target: { name, value } }) => {
+    setInfo({ ...info, [name]: value });
+  };
+
   const handleAddRow = (syllabus) => {
     const newRow = {
       rowId: nanoid(),
@@ -141,11 +147,7 @@ const ProAm1Dance = () => {
     <div className="container text-center py-3">
       <form onSubmit={handleSubmit}>
         <FormHeader />
-        <IdSection
-          info={info}
-          setInfo={setInfo}
-          countriesDivisions={countriesDivisions}
-        />
+        <IdSection info={info} handleChange={handleChange} />
         <AgeSection />
         <SingleDances
           rows={rows}

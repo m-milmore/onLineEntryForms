@@ -7,6 +7,7 @@ const BaseText = ({
   inputValue,
   handleChange,
   label,
+  placeholder,
 }) => {
   // commonInfo is for id, name & htmlFor, example "studio"
   return (
@@ -14,11 +15,8 @@ const BaseText = ({
       className="d-flex align-items-center flex-xs-nowrap flex-sm-wrap flex-md-nowrap justify-content-start mb-1"
       style={{ width: "100%" }}
     >
-      <label
-        className="label-id-section text-nowrap"
-        htmlFor={commonInfo}
-      >
-        {label}
+      <label className="label-id-section text-nowrap" htmlFor={commonInfo}>
+        {inputValue ? `${label}:` : `${label}`}
       </label>
       <input
         type={inputType}
@@ -27,6 +25,7 @@ const BaseText = ({
         name={commonInfo}
         value={inputValue}
         onChange={handleChange}
+        placeholder={placeholder}
       />
     </div>
   );
@@ -38,6 +37,7 @@ BaseText.propTypes = {
   inputValue: PropTypes.string,
   handleChange: PropTypes.func,
   label: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 BaseText.defaultProps = {
@@ -46,6 +46,7 @@ BaseText.defaultProps = {
   inputValue: "",
   handleChange: () => {},
   label: "",
+  placeholder: "",
 };
 
 export default BaseText;
