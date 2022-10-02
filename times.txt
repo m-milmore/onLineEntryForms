@@ -68,8 +68,42 @@ dimanche le 18 septembre 2022				6hrs (estimate)	cumul 124.5hrs
 mardi le 20 septembre 2022					6hrs (estimate)	cumul 130.5hrs
 	work on schema
 
-mercredi le 21 septembre 2022
+mercredi le 21 septembre 2022				6hrs (estimate)	cumul 136.5hrs
 	work on schema
+
+jeudi le 22 septembre 2022					8hrs (estimate)	cumul 144.5hrs				
+	work on back end
+
+vendredi le 23 septembre 2022				6hrs (estimate)	cumul 150.5hrs
+	work on back end
+
+samedi le 24 septembre 2022					8hrs (estimate)	cumul 158.5hrs
+	work on back end (Advanced filtering)				
+
+dimanche le 25 septembre 2022				6hrs (estimate)	cumul 164.5hrs
+	work on back end (authentication)
+
+lundi le 26 septembre 2022					1.5hrs		cumul 166hrs
+	work on authentication
+
+mardi le 27 septembre 2022					6hrs (estimate)	cumul 172hrs
+	login
+
+mercredi le 28 septembre 2022				6hrs (estimate)	cumul 178hrs
+	password
+
+jeudi le 29 septembre 2022					4hrs (estimate)	cumul 182hrs
+	finishing server
+
+vendredi le 30 septembre 2022	19h00 - 			2hrs (estimate)	cumul 184hrs
+	front-end service
+
+samedi le 1er octobre 2022					8hrs (estimate)	cumul 192hrs
+	front-end SPA | MPA
+
+dimanche le 2 octobre 2022
+	front-end service
+	
 
 
 

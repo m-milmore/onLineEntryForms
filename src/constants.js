@@ -1,8 +1,15 @@
 import LOGO from "./assets/images/logo.png";
 import DATES from "./assets/images/dates.png";
+import EYE_ICON from "./assets/images/eye-icon.png";
+import EYE_ICON_HIDE from "./assets/images/eye-icon-hide.png";
 
 export const logo = LOGO;
 export const dates = DATES;
+
+export const EYE_ICONS = {
+  SHOW: EYE_ICON,
+  HIDE: EYE_ICON_HIDE,
+};
 
 export const levels = [
   "Débutant",

@@ -63,13 +63,13 @@ select {
   padding-right: 6px;
 }
 
-input[type="text"],
+/* input[type="text"],
 input[type="tel"],
 input[type="email"],
 input[type="number"] {
   border: none;
   cursor: pointer;
-}
+} */
 
 table,
 th,

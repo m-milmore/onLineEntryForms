@@ -256,11 +256,153 @@ import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
 
 height: "32rem", 
 
+************************************************
 
+const greeting = (name) => {
+    alert(`Hello, ${name}`);}
 
+const processUserInput = (callback) => {
+    
+	const name = prompt("Please enter you name.");
+    
+	callback(name);
 
+}
 
+processUserInput(greeting);
 
+						error: mis ` et ensuite '
+						error: écris propmt au lieu de prompt
+
+processUserInput((name) => {
+    alert(`Hello, ${name}`);});	name va recevoir sa valeur dans le code de processUserInput et va être passé au callback qui est appellé dans la fonction processUserInput
+
+						1-déclarer une fonction avec paramètres (au moins un, qui tiendra lieu de callback, la fonction devient ainsi une higher-order fonction)
+						2-appeller ce callback quelque part dans le code de la higher-order fonction
+						3-maintenant, dans le code principal, appeller la fonction higher-order
+						4-définir le callback dans les arguments de l'appel de la higher-order fonction
+
+						mais comment sait-on que la higher-order fonction aura les bons paramètres disponibles pour le callback? (name dans notre cas)
+						et si on ne définit pas le callback dans les arguments de la higher-order fonction, comment sait-on que l'argument en question
+						correspond à un callback?
+
+Why do we use callback functions (as opposed to just putting all the code inside the higher-order function): for the principle of separation of concerns (among other things)
+
+***********************************************
+
+to have an error displayed on a unique field:
+	1. delete collection
+	2. make a field unique
+	3. restart server
+	4. create a document
+	5. create another document but with the same field that is unique
+
+**************************************************
+
+  fs.readFile('/file-does-not-exist', (err, data) => {
+    if (err) {
+      next(err) // Pass errors to Express.
+    } else {
+      res.send(data)
+    }
+  })
+
+*********************************************
+the way to put a query for gte in the browser is member[gte]=10, 
+which gives the object in the req.query as { member: { gte: '10'}}
+now the syntax for MongoDB is { field: { $gte: value } }
+so we have to modify the req.query object to look like the MongoDB syntax
+and then send that object ot MongoDB to get the result that we want
+
+{{URL}}/api/v1/entries/?limit=3&page=2&sort=dance&select=dance,danceStyle&danceStyle=rhythm&member[gte]=10
+
+1) req.query:
+	{
+	  limit: '3',
+	  page: '2',
+	  sort: 'danceStyle,dance',
+	  select: 'dance,danceStyle',
+	  danceStyle: 'rhythm',
+	  member: { gte: '10' }
+	}
+
+2) reqQuery (after removing select, sort, limit, page)
+	{ danceStyle: 'rhythm', member: { gte: '10' } }
+
+3) queryStr (after stringify reqQuery)		we need to put it in a string in order to use the string replace function
+	{"danceStyle":"rhythm","member":{"gte":"10"}}
+
+4) queryStr (after applying regex)		question: how come it work when we have characters not inside quotes, :,{} (??)
+	{"danceStyle":"rhythm","member":{"$gte":"10"}}
+
+5) queryStr (after JSON.parsing it)		now we put back the string into a json object
+	{ danceStyle: 'rhythm', member: { '$gte': '10' } }
+
+6) req.query.select & req.query.sort
+	danceStyle,dance
+
+7) the way MongoDB wants it => req.query.select.split(",").join(" "); => query = query.select(fields);
+	danceStyle dance
+
+**************************************************
+
+			Authentication => authentification
+identification => indicate a person identity
+authentication => verifying that identity
+
+jsonwebtoken
+bcrypt.js
+crypto included with Express?
+
+***************************************************
+
+MPA: whenever you request new content, the page has to reload all over again
+MPAs are best suited for complex websites that do not require a continuation of approach.
+For e.g. on Amazon, you don’t require your page to stay the same when you want to view a product or category.
+
+SPAs allow continuation, mobile-friendliness, and ease of access. Mobile apps are also developed on the same architecture as SPAs, 
+so you can get the idea of how they complement the same experience as them.
+
+But if creating an optimized information architecture is your priority to power a better user experience, then you need to opt for an MPA.
+
+You can add as much content to it as you like. Continuing with the example of Amazon, the main “user experience” there is the number of products available on the platform.
+
+So in terms of user experience, both MPAs and SPAs come good, and the variance here is subjective, based mostly upon what aim you have in mind to create the app.
+
+XSS-Clean: This will sanitize any data in req.body, req.query, and req.params.
+ex. { "title": "My title <script>Alert('Virus here')</script>" }, with XSS =>
+{ "title": "My title &lt;script>Alert('Virus here')&lt;/script>" }
+
+**************************************************
+
+.center-display {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-itmes: center;
+	width: 100%;
+	height: 100vh;
+}
+
+**********************************************
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 20px 20px 20px;
+  overflow: hidden;
+}
+
+******************************
+
+npm install => to install all the depencies in the package.json file
+
+Dave Gray
+The Net Ninja
+	
 
 
 
