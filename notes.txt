@@ -402,6 +402,28 @@ npm install => to install all the depencies in the package.json file
 
 Dave Gray
 The Net Ninja
+
+*************************************
+
+    setTimeout(() => {
+      if (true) {
+        appEmitter.emit("isLoggedIn", true);
+        setProcessing(false);
+        navigate("/");
+      } else {
+        setProcessing(false);
+        setError("Sorry, you've entered an incorrect email or password.");
+      }
+    }, 500);
+
+**************************
+
+whenever we make changes to the service.js we must restart the app
+
+**************************
+
+"I believe that if he uses create-react-app there is no need to import dotenv" Stackoverflow
+about: const BASE_URL = process.env.REACT_APP_BASE_URL;
 	
 
 

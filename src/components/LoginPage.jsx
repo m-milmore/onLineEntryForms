@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../App";
+import { appEmitter } from "../App";
 import "./LoginPage.css";
 import { EYE_ICONS } from "../constants";
-import { appEmitter } from "../App";
 
 const LoginPage = () => {
+  const { authService } = useContext(UserContext);
   const navigate = useNavigate();
 
   const [userCredentials, setUserCredentials] = useState({
@@ -42,20 +44,24 @@ const LoginPage = () => {
     setPersist(!persist);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = userCredentials;
+    setError("");
     setProcessing(true);
-    setTimeout(() => {
-      if (true) {
-        appEmitter.emit("isLoggedIn", true);
-        setProcessing(false);
-        navigate("/");
-      } else {
-        setProcessing(false);
+    try {
+      await authService.loginUser(email, password);
+      appEmitter.emit("isLoggedIn", true);
+      setProcessing(false);
+      navigate("/");
+    } catch (error) {
+      setProcessing(false);
+      if (error.code === "ERR_BAD_REQUEST") {
         setError("Sorry, you've entered an incorrect email or password.");
+      } else {
+        setError(error.message);
       }
-    }, 2000);
+    }
   };
 
   const { email, password } = userCredentials;

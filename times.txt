@@ -101,8 +101,11 @@ vendredi le 30 septembre 2022	19h00 - 			2hrs (estimate)	cumul 184hrs
 samedi le 1er octobre 2022					8hrs (estimate)	cumul 192hrs
 	front-end SPA | MPA
 
-dimanche le 2 octobre 2022
+dimanche le 2 octobre 2022					6hrs (estimate)	cumul 198hrs
 	front-end service
+
+lundi le 3 octobre 2022
+	login user/forgot password/persistent login
 	
 
 
