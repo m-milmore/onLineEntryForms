@@ -104,8 +104,21 @@ samedi le 1er octobre 2022					8hrs (estimate)	cumul 192hrs
 dimanche le 2 octobre 2022					6hrs (estimate)	cumul 198hrs
 	front-end service
 
-lundi le 3 octobre 2022
+lundi le 3 octobre 2022					8hrs (estimate)	cumul 206hrs
 	login user/forgot password/persistent login
+
+mardi le 4 octobre 2022					8hrs (estimate)	cumul 214hrs
+	resetpassword
+
+mercredi le 5 octobre 2022					6hrs (estimate)	cumul 220hrs
+	finishing password reset
+
+vendredi le 7 octobre 2022					3hrs (estimate)	cumul 223hrs
+	completing login/forgot password/reset password
+	start service entries
+
+samedi le 8 octobre 2022
+	entries service
 	
 
 

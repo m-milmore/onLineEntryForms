@@ -8,17 +8,18 @@ import { nanoid } from "nanoid";
 import { appEmitter } from "../App";
 
 const INIT_INFO = {
-  studio: "",
-  city: "",
-  state: "Choisir",
-  tel: "",
-  email: "",
-  teacherFirstName: "",
-  teacherLastName: "",
-  member: "",
-  studentFirstName: "",
-  studentLastName: "",
-  studentGender: "",
+  form: "paSD",
+  studio: "Wow!",
+  city: "Heckville",
+  state: "Maine",
+  tel: "212-321-6547",
+  email: "z@z.com",
+  teacherFirstName: "Ed",
+  teacherLastName: "Eckell",
+  member: "654321",
+  studentFirstName: "Faith",
+  studentLastName: "Flash",
+  studentGender: "female",
 };
 
 const ProAm1Dance = () => {
@@ -164,6 +165,7 @@ const ProAm1Dance = () => {
           className="btn btn-primary mt-3 d-print-none"
           type="submit"
           value="Submit"
+          disabled={false}
         />
       </form>
     </div>

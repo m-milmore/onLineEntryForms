@@ -4,6 +4,8 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 const URL_AUTH = `${BASE_URL}/auth`;
 
 const URL_LOGIN = `${URL_AUTH}/login`;
+const URL_FORGOT_PASSWORD = `${URL_AUTH}/forgotpassword`;
+const URL_RESET_PASSWORD = `${URL_AUTH}/resetpassword/`;
 
 // for APIs that don't need a token in the header
 const headers = { "Content-Type": "application/json" };
@@ -65,6 +67,35 @@ export class AuthService extends User {
 
     try {
       const response = await axios.post(URL_LOGIN, body, {
+        headers,
+      });
+      this.setBearerHeader(response.data.token);
+      this.setUserData(response.data.data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async forgotPassword(email, urlLink) {
+    const body = {
+      email,
+      urlLink,
+    };
+
+    try {
+      await axios.post(URL_FORGOT_PASSWORD, body, { headers });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async resetPassword(password, token) {
+    const body = {
+      password,
+    };
+
+    try {
+      const response = await axios.put(URL_RESET_PASSWORD + token, body, {
         headers,
       });
       this.setBearerHeader(response.data.token);

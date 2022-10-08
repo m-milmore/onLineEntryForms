@@ -131,6 +131,7 @@ const IdSection = ({ info, handleChange }) => {
               name="studentGender"
               handleChange={handleChange}
               label="Homme"
+              inputValue={info.studentGender}
             />
           </div>
           <div className="form-check">
@@ -139,6 +140,7 @@ const IdSection = ({ info, handleChange }) => {
               name="studentGender"
               handleChange={handleChange}
               label="Femme"
+              inputValue={info.studentGender}
             />
           </div>
         </div>

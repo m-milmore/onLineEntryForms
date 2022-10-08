@@ -3,8 +3,12 @@ import DATES from "./assets/images/dates.png";
 import EYE_ICON from "./assets/images/eye-icon.png";
 import EYE_ICON_HIDE from "./assets/images/eye-icon-hide.png";
 
+export const CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
+
 export const logo = LOGO;
 export const dates = DATES;
+
+export const INIT_MSG = "msg"
 
 export const EYE_ICONS = {
   SHOW: EYE_ICON,
@@ -212,7 +216,6 @@ export const countries = [
   "Nigeria",
   "Niue",
   "Norfolk Island",
-  "Northern Mariana Islands",
   "Norway",
   "Oman",
   "Pakistan",

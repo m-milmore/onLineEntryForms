@@ -424,6 +424,31 @@ whenever we make changes to the service.js we must restart the app
 
 "I believe that if he uses create-react-app there is no need to import dotenv" Stackoverflow
 about: const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+**********************
+
+my choice: if I want to put the components in sub-folder of their name
+my choice: if I want to do a SPA or MPA
+
+**************************
+
+third party login, can I request one from a small business? OAuth (Open Authentication)
+allows third-party services to exchange your information without you having to give away your password
+(tierce entité)
+
+resetPassword != updatePassword
+
+credentials = identifiants
+
+**************************
+
+il faut que l'utilisateur soit logged in pour que je puisse associer le record avec le créateur du record
+pour donner les privilèges de modification et suppression
+
+greedy vs lazy
+
+quality - fault
+qualité - défaut
 	
 
 

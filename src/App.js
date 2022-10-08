@@ -12,6 +12,9 @@ import "./App.css";
 import { EventEmitter } from "fbemitter";
 import MainPage from "./components/MainPage";
 import LoginPage from "./components/LoginPage";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
+import ProAm1Dance from "./components/ProAm1Dance"
 import Page404 from "./components/Page404";
 
 const authService = new AuthService();
@@ -33,11 +36,16 @@ const PrivateRoute = ({ children, isLoggedIn, ...props }) => {
 };
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [email, setEmail] = useState(""); // to pass email of forgotpassword to login page via listener
 
   useEffect(() => {
     const onUpdateIsLoggedIn = (isLoggedIn) => {
       setIsLoggedIn(isLoggedIn);
+    };
+
+    const onUpdateEmail = (email) => {
+      setEmail(email);
     };
 
     const isLoggedInListener = appEmitter.addListener(
@@ -45,20 +53,29 @@ const App = () => {
       onUpdateIsLoggedIn
     );
 
+    const forgotPasswordEmailListener = appEmitter.addListener(
+      "forgotPasswordEmail",
+      onUpdateEmail
+    );
+
     return () => {
       isLoggedInListener.remove();
+      forgotPasswordEmailListener.remove();
     };
-  }, [isLoggedIn]);
+  }, []);
 
   return (
     <div className="App">
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<PrivateRoute isLoggedIn={isLoggedIn}/>}>
+            <Route path="/" element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
               <Route path="/" element={<MainPage />} />
+              <Route path="/pa1d" element={<ProAm1Dance />} />
             </Route>
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<LoginPage initEmail={email} />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/resetpassword/:token" element={<ResetPassword />} />
             <Route path="/*" element={<Page404 />} />
           </Routes>
         </Router>

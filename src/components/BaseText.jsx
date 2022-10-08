@@ -20,7 +20,7 @@ const BaseText = ({
       </label>
       <input
         type={inputType}
-        className="form-control form-control-sm ps-0 pe-1 text-primary fw-bold"
+        className="form-control form-control-sm ps-0 pe-1 text-primary fw-bold border-0"
         id={commonInfo}
         name={commonInfo}
         value={inputValue}

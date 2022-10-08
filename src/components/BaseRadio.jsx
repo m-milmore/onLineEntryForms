@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const BaseRadio = ({ commonInfo, name, handleChange, label }) => {
+const BaseRadio = ({ commonInfo, name, handleChange, label, inputValue }) => {
   // commonInfo: male | female; name: studentGender; label: Homme | Femme (en français, faire une version bilingue)
   return (
     <>
@@ -16,6 +16,7 @@ const BaseRadio = ({ commonInfo, name, handleChange, label }) => {
         name={name}
         value={commonInfo}
         onChange={handleChange}
+        checked={commonInfo === inputValue}
       />
     </>
   );
