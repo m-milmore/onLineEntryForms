@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../App";
 import "./TableRow.css";
 import RegSelect from "./RegSelect";
 import Division from "./Division";
-import { levels, ages, smooth, rhythm, ballroom, latin } from "../constants";
+// import { levels, ages, smooth, rhythm, ballroom, latin } from "../constants";
 import { appEmitter } from "../App";
 import PropTypes from "prop-types";
 
 const TableRow = ({ row }) => {
+  const { entriesService } = useContext(UserContext);
+  const { levels, ages, smooth, rhythm, ballroom, latin } =
+    entriesService.formConstants;
   const dances = row.categories.length;
 
   const handleDeleteRow = (rowId) => {

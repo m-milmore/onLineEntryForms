@@ -2,10 +2,13 @@ import axios from "axios";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 const URL_AUTH = `${BASE_URL}/auth`;
+const URL_ENTRIES = `${BASE_URL}/entries`;
 
 const URL_LOGIN = `${URL_AUTH}/login`;
 const URL_FORGOT_PASSWORD = `${URL_AUTH}/forgotpassword`;
 const URL_RESET_PASSWORD = `${URL_AUTH}/resetpassword/`;
+
+const URL_GET_FORM_CONSTANTS = `${URL_ENTRIES}/formconstants`;
 
 // for APIs that don't need a token in the header
 const headers = { "Content-Type": "application/json" };
@@ -19,7 +22,7 @@ class User {
     this.createdAt = "";
   }
 
-  // for forgot password
+  // for forgot password, not used(??)
   setUserEmail(email) {
     this.email = email.toLowerCase();
   }
@@ -55,9 +58,15 @@ export class AuthService extends User {
     };
   }
 
-  getBearerHeader() {
-    return this.bearerHeader;
-  }
+  // doesn't work for
+  // const entriesService = new EntriesService(authService.getBearerHeader);
+  // getBearerHeader() {
+  //   return this.bearerHeader;
+  // }
+
+  // works for
+  // const entriesService = new EntriesService(authService.getBearerHeader);
+  getBearerHeader = () => this.bearerHeader;
 
   async loginUser(email, password) {
     const body = {
@@ -100,6 +109,41 @@ export class AuthService extends User {
       });
       this.setBearerHeader(response.data.token);
       this.setUserData(response.data.data);
+    } catch (error) {
+      throw error;
+    }
+  }
+}
+
+export class EntriesService {
+  constructor(authHeader) {
+    this.getAuthHeader = authHeader;
+    this.formConstants = {};
+  }
+
+  setFormConstants(formConstants) {
+    this.formConstants = formConstants;
+  }
+
+  getFormConstants() {
+    return this.formConstants;
+  }
+
+  async createEntries(entries) {
+    const body = { entries };
+    const headers = this.getAuthHeader();
+
+    try {
+      await axios.post(URL_ENTRIES, body, { headers });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async fetchFormConstants() {
+    try {
+      const response = await axios.get(URL_GET_FORM_CONSTANTS);
+      this.setFormConstants(response.data.data);
     } catch (error) {
       throw error;
     }

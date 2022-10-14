@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../App";
 import "./IdSection.css";
 import BaseText from "./BaseText";
 import BaseSelect from "./BaseSelect";
 import BaseRadio from "./BaseRadio";
-import { countries, states, provinces } from "../constants";
 import PropTypes from "prop-types";
 
 const IdSection = ({ info, handleChange }) => {
+  const { entriesService } = useContext(UserContext);
+  const {countries, states, provinces} = entriesService.formConstants
   const territories = provinces.concat(states.concat(countries));
   const dividers = [provinces.length - 1, provinces.length + states.length - 1];
   const rowClass =
@@ -47,8 +49,8 @@ const IdSection = ({ info, handleChange }) => {
         <div className="col-12 col-sm-6 col-lg-4 d-flex align-items-center ps-0 pe-1">
           <BaseText
             inputType="text"
-            commonInfo="tel"
-            inputValue={info.tel}
+            commonInfo="phone"
+            inputValue={info.phone}
             handleChange={handleChange}
             label="Téléphone"
           />

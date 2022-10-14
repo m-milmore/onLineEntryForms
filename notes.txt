@@ -449,6 +449,33 @@ greedy vs lazy
 
 quality - fault
 qualité - défaut
+
+3 reasons for git
+	archive
+	work with different computers
+	creating branches and merging
+
+on ne peut pas passer une fonction dans une propriété d'un élément HTML dans React
+on doit passer une constante scalaire qui retourne une valeur vrai ou faux
+
+quand il n'y a pas de user intercation pour causer un changement dans le UI, on utilise un useEffect
+
+to disable an input: useState + useEffect
+useState has true/false value
+useEffect has if input has value useState false else true
+input disable prop conditional on useState		disabled={disableSubmitBtn}
+
+**************************************
+
+When you can't connect ot the MongoDB server:
+I had this similar problem. 'Go to network access' -> 'IP whitelist' -> you can only connect to your cluster from those IP addresses , so if your IP is not present in that list
+
+Then Click the 'Add IP address' Button-> in there click the button 'Add your current IP address'.
+
+*********************************
+
+we cannot use async inside useEffect,
+we have to use chained thenables
 	
 
 
