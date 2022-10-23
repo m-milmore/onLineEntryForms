@@ -1,12 +1,12 @@
 import React from "react";
-import "./AgeSection.css"
+import "./AgeSection.css";
 
 const AgeSection = () => {
-  const colClass = "col text-nowrap flex-grow-0";
+  const colClass = "col text-nowrap flex-grow-0 age-class";
 
   return (
-    <div className="fs-6 fw-bold my-2 p-0 print-ages">
-      <div className="row border border-dark m-0 py-1 px-0 justify-content-evenly">
+    <div className="fw-bold my-2 p-0">
+      <div className="row flex-md-nowrap border border-dark m-0 py-1 px-0 justify-content-evenly">
         <div className={colClass}>ÂGE :</div>
         <div className={colClass}>(JV 11 -)</div>
         <div className={colClass}>(JR 12-15)</div>

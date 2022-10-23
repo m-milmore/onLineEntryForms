@@ -476,7 +476,154 @@ Then Click the 'Add IP address' Button-> in there click the button 'Add your cur
 
 we cannot use async inside useEffect,
 we have to use chained thenables
+
+************************************
+
+const func1 = async () => {
+	try {
+
+	} catch (error) {
+		throw(error)
+	}
+}
+
+const mainFunc = async () => {
+	try {
+		await func1();
+		await func2();
+		await func3();
+	}
+	catch (error) {
+		throw(error)
+	}
+}
+
+*************************************
+
+    // const values = Object.values(entry);
+    // values.forEach((value) => {
+    //   entryStr = entryStr.concat(value + "|");
+    // });
+    // entryStr = countriesDivisions.includes(entry.state)
+    //   ? entryStr.concat(
+    //       countriesDivisionsAbbr[countriesDivisions.indexOf(entry.state)] +
+    //         "|"
+    //     )
+    //   : entryStr.concat(entry.country + "|");
+    // entryStr = entryStr.concat(Date(Date.now()) + "|\r\n");
+
+**************************************
+
+    const myArray = [
+      { a: 1, b: 2 },
+      { a: 3, b: 4 },
+    ];
+    const myObj = myArray.find((obj) => obj.a === 1);
+    console.log(myObj);
+
+*********************************
+
+    const danceCategory = paSD.find(
+      (category) =>
+        category.danceStyle === danceStyle && category.syllabus === syllabus
+    );
+    const { categoryCode } = danceCategory;
+
+***********************************
+
+function looseJsonParse(obj) {
+  return eval(`(${obj})`);
+}
+console.log(looseJsonParse(
+  "{a:(4-1), b:function(){}, c:new Date()}"
+))
+
+function looseJsonParse(obj) {
+  return Function(`"use strict";return (${obj})`)();
+}
+console.log(looseJsonParse(
+  "{a:(4-1), b:function(){}, c:new Date()}"
+))
+
+**********************************
+
+The findIndex() method returns the index of the first element in an array that satisfies the provided testing function. If no elements satisfy the testing function, -1 is returned.
+const array1 = [5, 12, 8, 130, 44];
+
+
+
+const isLargeNumber = (element) => element > 13;
+
+
+
+console.log(array1.findIndex(isLargeNumber));
+// expected output: 3
+
+**********************************
+
+The indexOf() method returns the first index at which a given element can be found in the array, or -1 if it is not present.
+const beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
+
+
+
+console.log(beasts.indexOf('bison'));
+// expected output: 1
+
+
+
+// start from index 2
+
+console.log(beasts.indexOf('bison', 2));
+// expected output: 4
+
+
+
+console.log(beasts.indexOf('giraffe'));
+// expected output: -1
+
+**********************************
+
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
-import { UserContext } from "../App";
+import { appEmitter, UserContext } from "../App";
 import "./TableRow.css";
 import RegSelect from "./RegSelect";
 import Division from "./Division";
-// import { levels, ages, smooth, rhythm, ballroom, latin } from "../constants";
-import { appEmitter } from "../App";
 import PropTypes from "prop-types";
 
 const TableRow = ({ row }) => {

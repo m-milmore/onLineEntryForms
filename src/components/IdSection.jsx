@@ -129,7 +129,7 @@ const IdSection = ({ info, handleChange }) => {
         <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1 pt-md-1 print-radios">
           <div className="form-check pe-2">
             <BaseRadio
-              commonInfo="male"
+              commonInfo="M"
               name="studentGender"
               handleChange={handleChange}
               label="Homme"
@@ -138,7 +138,7 @@ const IdSection = ({ info, handleChange }) => {
           </div>
           <div className="form-check">
             <BaseRadio
-              commonInfo="female"
+              commonInfo="F"
               name="studentGender"
               handleChange={handleChange}
               label="Femme"

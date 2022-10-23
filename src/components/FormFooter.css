@@ -1,0 +1,27 @@
+.disclaimer-class {
+  font-size: 0.75rem;
+  text-align: justify;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.limit-class {
+  font-size: 1rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+@media print {
+  .disclaimer-class {
+    font-size: 8pt !important;
+    font-weight: normal !important;
+    line-height: 0.95;
+  }
+  .limit-class {
+    font-size: 9pt !important;
+  }
+  .print-class {
+    display: flex !important;
+    flex-direction: row!important;
+  }
+}

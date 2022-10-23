@@ -126,12 +126,35 @@ dimanche le 9 octobre 2022					4hrs (estimate)	cumul 231hrs
 mercredi le 12 octobre 2022					2hrs (estimate)	cumul 233hrs
 	entries service
 
-jeudi le 13 octobre 2022
+jeudi le 13 octobre 2022					3hrs (estimate)	cumul 236hrs
+	entries service
+
+vendredi le 14 octobre 2022					4hrs (estimate)	cumul 240hrs
 	entries service
 	
+samedi le 15 octobre 2022					6hrs (estimate	cumul 246hrs
+	entries service
 
+dimanche le 16 octobre 2022					4hrs (estimate)	cumul 250hrs
+	entries service
 
+mardi le 18 octobre 2022					3hrs (estimate)	cumul 253hrs
+	entries service
 
+mercredi le 19 octobre 2022					6hrs (estimate)	cumul 259hrs
+	entries service
+
+jeudi le 20 octobre 2022					6hrs (estimate)	cumul 265hrs
+	entries formatting
+
+vendredi le 21 octobre 2022					6hrs (estimate)	cumul 271hrs
+	entries conversion
+
+samedi le 22 octobre 2022					6hrs (estimate)	cumul 277hrs
+	entries conversion
+
+dimanche le 23 octobre 2022
+	entries conversion
 
 
 

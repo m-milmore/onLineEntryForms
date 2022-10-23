@@ -8,7 +8,7 @@ const Division = ({ division, danceStyle, rowId }) => {
       key={dance}
       dance={dance}
       danceStyle={danceStyle}
-			rowId={rowId}
+      rowId={rowId}
       eol={i + 1 === division.length}
     />
   ));
@@ -17,13 +17,13 @@ const Division = ({ division, danceStyle, rowId }) => {
 Division.propTypes = {
   division: PropTypes.arrayOf(PropTypes.string),
   danceStyle: PropTypes.string,
-	rowId: PropTypes.string,
+  rowId: PropTypes.string,
 };
 
 Division.defaultProps = {
   division: [],
   danceStyle: "",
-	rowId: "",
+  rowId: "",
 };
 
 export default Division;

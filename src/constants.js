@@ -22,3 +22,29 @@ vendeurs, bénévoles ou tout autre personne assistant à l'évènement. Chacun 
 Les organisateurs se réservent le droit d'annuler ou de refuser l'inscription d'un compétiteur ayant manqué 
 de respect envers les officiels ou le personnel travaillant pour le Championnat Canadien National, et 
 ne se conformant pas au présent règlement.`;
+
+export const danceNames = {
+  w: "waltz",
+  t: "tango",
+  f: "foxtrot",
+  vw: "viennese waltz",
+  pb: "peabody",
+  c: "chacha",
+  r: "rumba",
+  sw: "swing",
+  b: "bolero",
+  m: "mambo",
+  sal: "salsa",
+  me: "merengue",
+  ba: "bachata",
+  h: "hustle",
+  wcs: "west coast swing",
+  sam: "samba",
+  pd: "paso doble",
+  ta: "argentine tango",
+  mi: "milonga",
+  tv: "tango vals",
+  q: "quickstep",
+  s: "samba",
+  j: "jive",
+}

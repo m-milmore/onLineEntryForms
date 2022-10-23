@@ -11,27 +11,27 @@ const SingleDances = ({ rows, syllabus, handleAddRow }) => {
       <table className="table table-sm fs-6 mb-1 table-print">
         <thead>
           <tr>
-            <th scope="col" style={{ paddingRight: "50px" }}>
+            <th scope="col" className="level-class">
               NIVEAU
             </th>
-            <th scope="col" style={{ paddingRight: "25px" }}>
+            <th scope="col" className="ages-class">
               ÂGE
             </th>
-            <th scope="col" colSpan="5" style={{ width: "12%" }}>
-              SMOOTH {transformSyllabus}
+            <th scope="col" colSpan="5" className="dance-division">
+              SMOOTH
+              <br className="br-class" /> {transformSyllabus}
             </th>
             <th scope="col" colSpan="15">
-              RHYTHM {transformSyllabus}
+              RHYTHM
+              <br className="br-class" /> {transformSyllabus}
             </th>
-            <th
-              scope="col"
-              colSpan="5"
-              style={{ width: "12%", letterSpacing: "-1px" }}
-            >
-              BALLROOM {transformSyllabus}
+            <th scope="col" colSpan="5" className="dance-division">
+              BALLROOM
+              <br className="br-class" /> {transformSyllabus}
             </th>
-            <th scope="col" colSpan="5" style={{ width: "12%" }}>
-              LATIN {transformSyllabus}
+            <th scope="col" colSpan="5" className="dance-division">
+              LATIN
+              <br className="br-class" /> {transformSyllabus}
             </th>
             <th scope="col" style={{ width: "5%" }}>
               TOTAL
@@ -52,7 +52,7 @@ const SingleDances = ({ rows, syllabus, handleAddRow }) => {
               <button
                 type="button"
                 className="btn btn-secondary py-0 px-1 m-0 d-print-none"
-								onClick={() => handleAddRow(syllabus)}
+                onClick={() => handleAddRow(syllabus)}
               >
                 {syllabus} (+)
               </button>
@@ -80,13 +80,13 @@ SingleDances.propTypes = {
     })
   ),
   syllabus: PropTypes.string,
-	handleAddRow: PropTypes.func,
+  handleAddRow: PropTypes.func,
 };
 
 SingleDances.defaultProps = {
   rows: [],
   syllabus: "",
-	handleAddRow: () => {}
+  handleAddRow: () => {},
 };
 
 export default SingleDances;

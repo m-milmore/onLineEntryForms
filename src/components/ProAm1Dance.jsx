@@ -22,7 +22,7 @@ const INIT_INFO = {
   member: "654321",
   studentFirstName: "Faith",
   studentLastName: "Flash",
-  studentGender: "female",
+  studentGender: "F",
 };
 
 const ProAm1Dance = () => {
@@ -133,7 +133,7 @@ const ProAm1Dance = () => {
     };
   }, [rows]);
 
-  // to disable or enable te submit button
+  // to disable or enable the submit button
   useEffect(() => {
     const {
       studio,
@@ -200,7 +200,8 @@ const ProAm1Dance = () => {
     rows.forEach((row) => {
       row.categories.forEach((category) => {
         const { level, age, syllabus } = row;
-        entries.push({ level, age, syllabus, ...category, ...info });
+        const syllabusTranslated = syllabus === "ouvert" ? "open" : "closed";
+        entries.push({ level, age, syllabus: syllabusTranslated, ...category, ...info });
       });
     });
     setMsg("processing entries...");
@@ -239,7 +240,7 @@ const ProAm1Dance = () => {
             handleAddRow={handleAddRow}
           />
           <FormFooter />
-          <div className="d-flex justify-content-center align-items-center mt-3 ">
+          <div className="d-flex justify-content-center align-items-center mt-3">
             <input
               className="btn btn-primary d-print-none me-2"
               type="submit"

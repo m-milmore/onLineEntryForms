@@ -1,13 +1,13 @@
 import React from "react";
+import "./FormFooter.css";
 import { disclaimer } from "../constants";
 
 const FormFooter = () => {
-
   return (
-    <div className="d-flex">
+    <div className="d-flex flex-column flex-xl-row print-class">
       <div style={{ flex: "70%" }}>
-        <p style={{ fontSize: ".75rem", textAlign: "left" }}>{disclaimer}</p>
-        <p style={{ fontSize: "1rem", textAlign: "left", fontWeight: "bold" }}>
+        <p className="disclaimer-class">{disclaimer}</p>
+        <p className="limit-class">
           DATE LIMITE : 5 AOÛT 2023 - SVP REMPLIR LE BON DE COMMANDE
         </p>
       </div>
@@ -16,7 +16,7 @@ const FormFooter = () => {
         style={{ flex: "30%" }}
       >
         <p
-          className="mb-4"
+          className="mb-4 mt-4"
           style={{
             fontSize: "1rem",
             fontWeight: "bold",

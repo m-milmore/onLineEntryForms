@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 import "./Dance.css";
 import { appEmitter } from "../App";
+import { danceNames } from "../constants";
 import PropTypes from "prop-types";
 
 const Dance = ({ dance, danceStyle, rowId, eol }) => {
@@ -19,12 +22,21 @@ const Dance = ({ dance, danceStyle, rowId, eol }) => {
   };
 
   return (
-    <td
-      className={`td-style ${eol && "border-R"} ${select && "under-bg"}`}
-      onClick={handleClick}
+    <OverlayTrigger
+      placement="bottom"
+      overlay={
+        <Tooltip>
+          <strong>{danceNames[dance.toLowerCase()]}</strong>
+        </Tooltip>
+      }
     >
-      {dance}
-    </td>
+      <td
+        className={`td-style ${eol && "border-R"} ${select && "under-bg"}`}
+        onClick={handleClick}
+      >
+        {dance}
+      </td>
+    </OverlayTrigger>
   );
 };
 

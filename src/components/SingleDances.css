@@ -1,7 +1,26 @@
+.level-class {
+  padding-right: 50px !important;
+}
+
+.ages-class {
+  padding-right: 25px !important;
+}
+
+.dance-division {
+  width: 12%;
+  letter-spacing: -1px;
+}
+
+@media only screen and (min-width: 1400px) {
+  .br-class {
+    display: none;
+  }
+}
+
 @media print {
   .table-print {
     width: 7.47in !important;
-    font-size: 8pt !important;
+    font-size: 7pt !important;
     /* border: 1px solid black !important; */
     /* box-sizing: border-box !important; */
     /* padding: 0 !important; */
@@ -11,5 +30,17 @@
   }
   .table-responsive {
     overflow-x: hidden !important;
+  }
+  .br-class {
+    display: block;
+  }
+  .level-class {
+    padding-right: 30px !important;
+  }
+  .age-class {
+    padding-right: 15px !important;
+  }
+  .dance-division {
+    width: 10%;
   }
 }
