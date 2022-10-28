@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../App";
+import { UserContext } from "../../App";
 import { useParams, useSearchParams } from "react-router-dom";
-import { EYE_ICONS, INIT_MSG } from "../constants";
-import AppMsg from "./AppMsg";
+import { EYE_ICONS, INIT_MSG } from "../../constants";
+import AppMsg from "../Utils/AppMsg";
 
 const ResetPassword = () => {
   const { authService } = useContext(UserContext);

@@ -1,14 +1,11 @@
-import React, { useContext } from "react";
-import { UserContext } from "../App";
+import React from "react";
 import "./IdSection.css";
 import BaseText from "./BaseText";
 import BaseSelect from "./BaseSelect";
 import BaseRadio from "./BaseRadio";
-import PropTypes from "prop-types";
+import { countries, states, provinces } from "../../constants";
 
 const IdSection = ({ info, handleChange }) => {
-  const { entriesService } = useContext(UserContext);
-  const {countries, states, provinces} = entriesService.formConstants
   const territories = provinces.concat(states.concat(countries));
   const dividers = [provinces.length - 1, provinces.length + states.length - 1];
   const rowClass =
@@ -149,18 +146,6 @@ const IdSection = ({ info, handleChange }) => {
       </div>
     </div>
   );
-};
-
-BaseText.propTypes = {
-  ids: PropTypes.object,
-  setIds: PropTypes.func,
-  countriesDivision: PropTypes.arrayOf(PropTypes.string),
-};
-
-BaseText.defaultProps = {
-  ids: {},
-  setIds: () => {},
-  countriesDivision: [],
 };
 
 export default IdSection;

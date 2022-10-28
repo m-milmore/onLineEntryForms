@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext, appEmitter } from "../App";
-import AppMsg from "./AppMsg";
-import { CLIENT_URL, INIT_MSG } from "../constants";
+import { UserContext, appEmitter } from "../../App";
+import AppMsg from "../Utils/AppMsg";
+import { CLIENT_URL, INIT_MSG } from "../../constants";
 
 const ForgotPassword = () => {
   const { authService } = useContext(UserContext);

@@ -153,8 +153,17 @@ vendredi le 21 octobre 2022					6hrs (estimate)	cumul 271hrs
 samedi le 22 octobre 2022					6hrs (estimate)	cumul 277hrs
 	entries conversion
 
-dimanche le 23 octobre 2022
+dimanche le 23 octobre 2022					6hrs (estimate)	cumul 283hrs
 	entries conversion
+
+lundi le 24 octobre 2022					4hrs (estimate)	cumul 287hrs
+	start p/a-multi
+
+jeudi le 27 octobre 2022					6hrs (estimate)	cumul 293hrs
+	work on persistent states
+
+vendredi le 28 octobre 2022
+	work on persistent state
 
 
 

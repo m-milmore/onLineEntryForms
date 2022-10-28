@@ -583,6 +583,35 @@ console.log(beasts.indexOf('giraffe'));
 
 **********************************
 
+single responsability principle
+separation of concerns
+
+****************************************
+
+          <div className="d-flex justify-content-center align-items-center mt-3 d-print-none ">
+            <input
+              className="btn btn-primary me-2"
+              type="submit"
+              value="Submit"
+              disabled={disableSubmitBtn}
+            />
+            <input
+              className="btn btn-primary me-2"
+              type="button"
+              value="Formulaires"
+              onClick={() => navigate("/")}
+            />
+            <AppMsg msg={msg} />
+          </div>
+
+******************************************
+
+      setRows(
+        rows.map((row) =>
+          row.rowId === rowId ? { ...row, [name]: value } : row
+        )
+      );
+
 	
 
 

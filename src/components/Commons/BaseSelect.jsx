@@ -1,6 +1,6 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import { appEmitter } from "../App";
+import { appEmitter } from "../../App";
 import PropTypes from "prop-types";
 
 const BaseSelect = ({ label, value, options, dividers }) => {

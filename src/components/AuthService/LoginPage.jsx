@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext, appEmitter } from "../App";
+import { UserContext, appEmitter } from "../../App";
 import "./LoginPage.css";
-import ConfirmationToast from "./ConfirmationToast";
-import AppMsg from "./AppMsg";
-import { EYE_ICONS, INIT_MSG } from "../constants";
+import ConfirmationToast from "../Utils/ConfirmationToast";
+import AppMsg from "../Utils/AppMsg";
+import { EYE_ICONS, INIT_MSG } from "../../constants";
 
 const LoginPage = ({ initEmail }) => {
   const { authService } = useContext(UserContext);

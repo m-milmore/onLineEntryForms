@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
-import FormHeader from "./FormHeader";
-import IdSection from "./IdSection";
+import { useLocation } from "react-router-dom";
+import { nanoid } from "nanoid";
+import { appEmitter, UserContext } from "../../App";
+import FormHeader from "../Commons/FormHeader";
+import IdSection from "../Commons/IdSection";
 import AgeSection from "./AgeSection";
 import SingleDances from "./SingleDances";
-import FormFooter from "./FormFooter";
-import AppMsg from "./AppMsg";
-import ConfirmationToast from "./ConfirmationToast";
-import { nanoid } from "nanoid";
-import { appEmitter, UserContext } from "../App";
-import { INIT_MSG } from "../constants";
+import FormFooter from "../Commons/FormFooter";
+import FormsControls from "../Commons/FormsControls";
+import ConfirmationToast from "../Utils/ConfirmationToast";
+import { INIT_MSG } from "../../constants";
 
 const INIT_INFO = {
   form: "paSD",
@@ -23,13 +24,7 @@ const INIT_INFO = {
   studentFirstName: "Faith",
   studentLastName: "Flash",
   studentGender: "F",
-};
-
-const ProAm1Dance = () => {
-  const { entriesService } = useContext(UserContext);
-  const [info, setInfo] = useState(INIT_INFO);
-
-  const [rows, setRows] = useState([
+  rows: [
     {
       rowId: nanoid(),
       level: "",
@@ -44,9 +39,18 @@ const ProAm1Dance = () => {
       syllabus: "ouvert",
       categories: [],
     },
-  ]);
+  ],
+};
 
-  const [disableSubmitBtn, setDisableSubmitBtn] = useState(true);
+const ProAm1Dance = () => {
+  const {
+    state: { formId },
+  } = useLocation();
+  console.log(formId)
+  const { entriesService } = useContext(UserContext);
+  const [info, setInfo] = useState(INIT_INFO);
+
+  const [disableSaveBtn, setDisableSaveBtn] = useState(true);
   const [msg, setMsg] = useState(INIT_MSG);
 
   const [showToast, setShowToast] = useState(false);
@@ -54,6 +58,13 @@ const ProAm1Dance = () => {
     setShowToast(!showToast);
   }, [showToast]);
   const [toastMsg, setToastMsg] = useState("");
+
+  useEffect(() => {
+    const data = localStorage.getItem(formId);
+    if (data) {
+      setInfo(JSON.parse(data));
+    }
+  }, [formId]);
 
   // data sent from BaseSelect component
   useEffect(() => {
@@ -74,11 +85,12 @@ const ProAm1Dance = () => {
   // data sent from RegSelect component for level and age
   useEffect(() => {
     const onUpdateSelect = ({ rowId, name, value }) => {
-      setRows(
-        rows.map((row) =>
+      setInfo((prevState) => ({
+        ...prevState,
+        rows: prevState.rows.map((row) =>
           row.rowId === rowId ? { ...row, [name]: value } : row
-        )
-      );
+        ),
+      }));
     };
 
     const selectListener = appEmitter.addListener("select", onUpdateSelect);
@@ -86,7 +98,7 @@ const ProAm1Dance = () => {
     return () => {
       selectListener.remove();
     };
-  }, [rows]);
+  }, [info]);
 
   // data sent from Dance component, add or remove a dance: select is a true/false toggle
   useEffect(() => {
@@ -96,8 +108,9 @@ const ProAm1Dance = () => {
         danceStyle,
       };
 
-      setRows(
-        rows.map((row) => {
+      setInfo((prevState) => ({
+        ...prevState,
+        rows: prevState.rows.map((row) => {
           if (row.rowId === rowId) {
             const categories = select
               ? [...row.categories, comp]
@@ -110,8 +123,8 @@ const ProAm1Dance = () => {
                 );
             return { ...row, categories };
           } else return row;
-        })
-      );
+        }),
+      }));
     };
 
     const compListener = appEmitter.addListener("comp", onUpdateComps);
@@ -119,11 +132,14 @@ const ProAm1Dance = () => {
     return () => {
       compListener.remove();
     };
-  }, [rows]);
+  }, [info]);
 
   useEffect(() => {
     const onDeleteRow = ({ rowId }) => {
-      setRows(rows.filter((row) => row.rowId !== rowId));
+      setInfo((prevState) => ({
+        ...prevState,
+        rows: prevState.rows.filter((row) => row.rowId !== rowId),
+      }));
     };
 
     const deleteListener = appEmitter.addListener("deleteRow", onDeleteRow);
@@ -131,9 +147,9 @@ const ProAm1Dance = () => {
     return () => {
       deleteListener.remove();
     };
-  }, [rows]);
+  }, [info]);
 
-  // to disable or enable the submit button
+  // to disable or enable the save button
   useEffect(() => {
     const {
       studio,
@@ -148,7 +164,7 @@ const ProAm1Dance = () => {
       studentGender,
     } = info;
     let missingInRows = false;
-    rows.forEach((row) => {
+    info.rows.forEach((row) => {
       if (
         !row.level ||
         !row.age ||
@@ -158,7 +174,7 @@ const ProAm1Dance = () => {
       )
         missingInRows = true;
     });
-    setDisableSubmitBtn(
+    setDisableSaveBtn(
       !studio ||
         !city ||
         !state ||
@@ -169,10 +185,10 @@ const ProAm1Dance = () => {
         !studentFirstName ||
         !studentLastName ||
         !studentGender ||
-        rows.length === 0 ||
+        info.rows.length === 0 ||
         missingInRows
     );
-  }, [info, rows]);
+  }, [info]);
 
   const handleChange = ({ target: { name, value } }) => {
     setInfo({ ...info, [name]: value });
@@ -186,7 +202,14 @@ const ProAm1Dance = () => {
       syllabus: syllabus,
       categories: [],
     };
-    setRows((prev) => [...prev, newRow]);
+    setInfo((prevState) => ({
+      ...prevState,
+      rows: [...prevState.rows, newRow],
+    }));
+  };
+
+  const handleSave = () => {
+    localStorage.setItem(formId, JSON.stringify(info));
   };
 
   const handleSubmit = async (e) => {
@@ -197,11 +220,17 @@ const ProAm1Dance = () => {
       return;
     }
     const entries = [];
-    rows.forEach((row) => {
+    info.rows.forEach((row) => {
       row.categories.forEach((category) => {
         const { level, age, syllabus } = row;
         const syllabusTranslated = syllabus === "ouvert" ? "open" : "closed";
-        entries.push({ level, age, syllabus: syllabusTranslated, ...category, ...info });
+        entries.push({
+          level,
+          age,
+          syllabus: syllabusTranslated,
+          ...category,
+          ...info,
+        });
       });
     });
     setMsg("processing entries...");
@@ -226,30 +255,26 @@ const ProAm1Dance = () => {
     <>
       <div className="container text-center py-3">
         <form onSubmit={handleSubmit}>
-          <FormHeader />
+          <FormHeader title1="PRO_AM" title2="DANSES INDIVIDUELLES" />
           <IdSection info={info} handleChange={handleChange} />
           <AgeSection />
           <SingleDances
-            rows={rows}
+            rows={info.rows}
             syllabus="fermé"
             handleAddRow={handleAddRow}
           />
           <SingleDances
-            rows={rows}
+            rows={info.rows}
             syllabus="ouvert"
             handleAddRow={handleAddRow}
           />
           <FormFooter />
-          <div className="d-flex justify-content-center align-items-center mt-3">
-            <input
-              className="btn btn-primary d-print-none me-2"
-              type="submit"
-              value="Submit"
-              disabled={disableSubmitBtn}
-            />
-            <AppMsg msg={msg} />
-          </div>
         </form>
+        <FormsControls
+          disableSaveBtn={disableSaveBtn}
+          msg={msg}
+          handleSave={handleSave}
+        />
       </div>
       <ConfirmationToast
         show={showToast}

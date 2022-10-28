@@ -1,5 +1,5 @@
 import React from "react"
-import {INIT_MSG} from "../constants"
+import {INIT_MSG} from "../../constants"
 
 const AppMsg = ({msg}) => {
 	return (

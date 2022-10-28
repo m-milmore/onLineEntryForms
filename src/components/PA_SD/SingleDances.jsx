@@ -39,11 +39,10 @@ const SingleDances = ({ rows, syllabus, handleAddRow }) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map(
-            (row) =>
-              row.syllabus === syllabus && (
-                <TableRow key={row.rowId} row={row} />
-              )
+          {rows.map((row) =>
+            row.syllabus === syllabus ? (
+              <TableRow key={row.rowId} row={row} />
+            ) : null
           )}
         </tbody>
         <tfoot>

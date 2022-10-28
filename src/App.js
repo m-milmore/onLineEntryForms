@@ -10,13 +10,15 @@ import { AuthService, EntriesService } from "./services";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import { EventEmitter } from "fbemitter";
+import { nanoid } from "nanoid";
 import MainPage from "./components/MainPage";
-import LoginPage from "./components/LoginPage";
-import ForgotPassword from "./components/ForgotPassword";
-import ResetPassword from "./components/ResetPassword";
-import ProAm1Dance from "./components/ProAm1Dance";
+import LoginPage from "./components/AuthService/LoginPage";
+import ForgotPassword from "./components/AuthService/ForgotPassword";
+import ResetPassword from "./components/AuthService/ResetPassword";
+import ProAm1Dance from "./components/PA_SD/ProAm1Dance";
+import ProAmMulti from "./components/PA_Multi/ProAmMulti";
 import Page404 from "./components/Page404";
-import AppMsg from "./components/AppMsg";
+import AppMsg from "./components/Utils/AppMsg";
 import { INIT_MSG } from "./constants";
 
 const authService = new AuthService();
@@ -40,9 +42,21 @@ const PrivateRoute = ({ children, isLoggedIn, ...props }) => {
 };
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [email, setEmail] = useState(""); // to pass email of forgotpassword to login page via listener
   const [msg, setMsg] = useState(INIT_MSG);
+    const [forms, setForms] = useState([
+      {
+        formId: nanoid(),
+        formName: "Pro/Am 1 Danse",
+        navigate: "/pa1d",
+      },
+      {
+        formId: nanoid(),
+        formName: "Pro/Am Multi Danse",
+        navigate: "/pamulti",
+      },
+    ]);
 
   // fetches form constants
   useEffect(() => {
@@ -60,9 +74,10 @@ const App = () => {
     (async () => await fetchItems())();
   }, []);
 
+  // 2 tasks:
   // when logging in, the Login Page will send a true value to set the isLoggedIn var
-  // when forgot password, the component will send the value of the email address to Login Page via prop
-  // how come I don't have to specified dependencies(??)
+  // when forgot password, the component will send the value of the email address to the Login Page via prop
+  // how come I don't have to specified dependencies(??), because there is a listener?
   useEffect(() => {
     const onUpdateIsLoggedIn = (isLoggedIn) => {
       setIsLoggedIn(isLoggedIn);
@@ -95,8 +110,9 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
-              <Route path="/" element={<MainPage />} />
+              <Route path="/" element={<MainPage forms={forms}/>} />
               <Route path="/pa1d" element={<ProAm1Dance />} />
+              <Route path="/pamulti" element={<ProAmMulti />} />
             </Route>
             <Route path="/login" element={<LoginPage initEmail={email} />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />

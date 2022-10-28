@@ -2,7 +2,7 @@ import React from "react";
 import Dance from "./Dance";
 import PropTypes from "prop-types";
 
-const Division = ({ division, danceStyle, rowId }) => {
+const Division = ({ division, danceStyle, rowId, categories }) => {
   return division.map((dance, i) => (
     <Dance
       key={dance}
@@ -10,6 +10,7 @@ const Division = ({ division, danceStyle, rowId }) => {
       danceStyle={danceStyle}
       rowId={rowId}
       eol={i + 1 === division.length}
+      categories={categories}
     />
   ));
 };

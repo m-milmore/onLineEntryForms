@@ -1,6 +1,6 @@
 import React from "react";
 import "./RegSelect.css"
-import { appEmitter } from "../App";
+import { appEmitter } from "../../App";
 import PropTypes from "prop-types";
 
 const RegSelect = ({ options, name, value, rowId}) => {

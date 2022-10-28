@@ -1,6 +1,6 @@
 import React from "react";
 import "./FormFooter.css";
-import { disclaimer } from "../constants";
+import { disclaimer } from "../../constants";
 
 const FormFooter = () => {
   return (

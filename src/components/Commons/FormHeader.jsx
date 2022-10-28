@@ -1,8 +1,8 @@
 import React from "react";
 import "./FormHeader.css";
-import { logo } from "../constants";
+import { logo } from "../../constants";
 
-const FormHeader = () => {
+const FormHeader = ({title1, title2}) => {
   return (
     <div
       className="d-flex flex-column flex-lg-row mb-5 flex-wrap flex-lg-nowrap
@@ -13,10 +13,10 @@ const FormHeader = () => {
         style={{ color: "var(--ndcc-red)" }}
       >
         <div className="fs-4 fw-bold lh-sm text-decoration-underline">
-          PRO-AM
+          {title1}
         </div>
         <div className="fs-4 fw-bold lh-sm text-decoration-underline text-nowrap">
-          DANSES INDIVIDUELLES
+          {title2}
         </div>
       </div>
       <div className="d-flex flex-column align-items-center print-ndcc">
