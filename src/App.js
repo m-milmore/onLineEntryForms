@@ -6,11 +6,11 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
+import { EventEmitter } from "fbemitter";
+import { nanoid } from "nanoid";
 import { AuthService, EntriesService } from "./services";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import { EventEmitter } from "fbemitter";
-import { nanoid } from "nanoid";
 import MainPage from "./components/MainPage";
 import LoginPage from "./components/AuthService/LoginPage";
 import ForgotPassword from "./components/AuthService/ForgotPassword";
@@ -41,22 +41,24 @@ const PrivateRoute = ({ children, isLoggedIn, ...props }) => {
   return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
 };
 
+const FORMS_INIT = [
+  {
+    formId: nanoid(),
+    formName: "Pro/Am 1 Danse",
+    navigate: "/pa1d",
+  },
+  {
+    formId: nanoid(),
+    formName: "Pro/Am Multi Danse",
+    navigate: "/pamulti",
+  },
+];
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [email, setEmail] = useState(""); // to pass email of forgotpassword to login page via listener
   const [msg, setMsg] = useState(INIT_MSG);
-    const [forms, setForms] = useState([
-      {
-        formId: nanoid(),
-        formName: "Pro/Am 1 Danse",
-        navigate: "/pa1d",
-      },
-      {
-        formId: nanoid(),
-        formName: "Pro/Am Multi Danse",
-        navigate: "/pamulti",
-      },
-    ]);
+  const [forms, setForms] = useState(FORMS_INIT);
 
   // fetches form constants
   useEffect(() => {
@@ -103,6 +105,34 @@ const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const onAddForm = ({formName, navigate}) => {
+      const newForm = {
+        formId: nanoid(),
+        formName,
+        navigate,
+      };
+      setForms([...forms, newForm]);
+    };
+
+    const onDeleteForm = (formId) => {
+      localStorage.removeItem(formId);
+      setForms((prev) => prev.filter((form) => form.formId !== formId));
+    };
+
+    const addFormListener = appEmitter.addListener("addForm", onAddForm);
+
+    const deleteFormListener = appEmitter.addListener(
+      "deleteForm",
+      onDeleteForm
+    );
+
+    return () => {
+      addFormListener.remove();
+      deleteFormListener.remove();
+    };
+  }, [forms]);
+
   return (
     <div className="App">
       <AppMsg msg={msg} />
@@ -110,7 +140,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
-              <Route path="/" element={<MainPage forms={forms}/>} />
+              <Route path="/" element={<MainPage forms={forms} />} />
               <Route path="/pa1d" element={<ProAm1Dance />} />
               <Route path="/pamulti" element={<ProAmMulti />} />
             </Route>

@@ -44,13 +44,12 @@ const INIT_INFO = {
 
 const ProAm1Dance = () => {
   const {
-    state: { formId },
+    state: { formId, i },
   } = useLocation();
-  console.log(formId)
   const { entriesService } = useContext(UserContext);
   const [info, setInfo] = useState(INIT_INFO);
 
-  const [disableSaveBtn, setDisableSaveBtn] = useState(true);
+  const [submittable, setSubmittable] = useState(false);
   const [msg, setMsg] = useState(INIT_MSG);
 
   const [showToast, setShowToast] = useState(false);
@@ -65,6 +64,10 @@ const ProAm1Dance = () => {
       setInfo(JSON.parse(data));
     }
   }, [formId]);
+
+  useEffect(() => {
+    localStorage.setItem(formId, JSON.stringify(info));
+  }, [info, formId]);
 
   // data sent from BaseSelect component
   useEffect(() => {
@@ -174,19 +177,19 @@ const ProAm1Dance = () => {
       )
         missingInRows = true;
     });
-    setDisableSaveBtn(
-      !studio ||
-        !city ||
-        !state ||
-        !phone ||
-        !email ||
-        !teacherFirstName ||
-        !teacherLastName ||
-        !studentFirstName ||
-        !studentLastName ||
-        !studentGender ||
-        info.rows.length === 0 ||
-        missingInRows
+    setSubmittable(
+      studio &&
+        city &&
+        state &&
+        phone &&
+        email &&
+        teacherFirstName &&
+        teacherLastName &&
+        studentFirstName &&
+        studentLastName &&
+        studentGender &&
+        info.rows.length > 0 &&
+        !missingInRows
     );
   }, [info]);
 
@@ -206,10 +209,6 @@ const ProAm1Dance = () => {
       ...prevState,
       rows: [...prevState.rows, newRow],
     }));
-  };
-
-  const handleSave = () => {
-    localStorage.setItem(formId, JSON.stringify(info));
   };
 
   const handleSubmit = async (e) => {
@@ -255,7 +254,10 @@ const ProAm1Dance = () => {
     <>
       <div className="container text-center py-3">
         <form onSubmit={handleSubmit}>
-          <FormHeader title1="PRO_AM" title2="DANSES INDIVIDUELLES" />
+          <FormHeader
+            title1={`${i + 1}.PRO_AM`}
+            title2="DANSES INDIVIDUELLES"
+          />
           <IdSection info={info} handleChange={handleChange} />
           <AgeSection />
           <SingleDances
@@ -270,11 +272,7 @@ const ProAm1Dance = () => {
           />
           <FormFooter />
         </form>
-        <FormsControls
-          disableSaveBtn={disableSaveBtn}
-          msg={msg}
-          handleSave={handleSave}
-        />
+        <FormsControls submittable={submittable} msg={msg} />
       </div>
       <ConfirmationToast
         show={showToast}

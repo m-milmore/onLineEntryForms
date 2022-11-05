@@ -37,7 +37,6 @@ const IdSection = ({ info, handleChange }) => {
             label="Territoire"
             value={info.state}
             options={territories}
-            handleChange={handleChange}
             dividers={dividers}
           />
         </div>

@@ -63,18 +63,31 @@ select {
   padding-right: 6px;
 }
 
-/* input[type="text"],
-input[type="tel"],
-input[type="email"],
-input[type="number"] {
-  border: none;
-  cursor: pointer;
-} */
-
 table,
 th,
 tr {
   border: 1px solid black;
+}
+
+/* css styles related to react-bootstrap */
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+    color: rgba(255, 255, 255, .75);
+}
+
+.nav-link:focus {
+    color: white;
+}
+
+.navbar-nav .show > .nav-link, .navbar-nav .nav-link.active {
+    color: white;
+}
+
+.card-footer {
+  padding: 0
 }
 
 @import url("https://cdn.syncfusion.com/ej2/bootstrap5.css");

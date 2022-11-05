@@ -1,0 +1,13 @@
+.card-class {
+  padding: 0;
+  margin: 5px;
+	border-radius: 5px;
+}
+
+.card-class:hover {
+  box-shadow: 0 0 2px black;
+}
+
+.card-class:active {
+	box-shadow: 0 0 4px black;
+}

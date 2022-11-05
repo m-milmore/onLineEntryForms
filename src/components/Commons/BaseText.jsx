@@ -12,7 +12,7 @@ const BaseText = ({
   // commonInfo is for id, name & htmlFor, example "studio"
   return (
     <div
-      className="d-flex align-items-center flex-xs-nowrap flex-sm-wrap flex-md-nowrap justify-content-start mb-1"
+      className="d-flex align-items-center flex-wrap flex-xs-nowrap flex-sm-wrap flex-md-nowrap justify-content-start mb-1"
       style={{ width: "100%" }}
     >
       <label className="label-id-section text-nowrap" htmlFor={commonInfo}>

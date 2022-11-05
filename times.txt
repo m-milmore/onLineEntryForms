@@ -162,9 +162,26 @@ lundi le 24 octobre 2022					4hrs (estimate)	cumul 287hrs
 jeudi le 27 octobre 2022					6hrs (estimate)	cumul 293hrs
 	work on persistent states
 
-vendredi le 28 octobre 2022
+vendredi le 28 octobre 2022					6hrs (estimate)	cumul 299hrs
 	work on persistent state
 
+samedi le 29 octobre 2022					4hrs (estimate)	cumul 303hrs
+	work on fontawesome
+
+dimanche le 30 octobre 2022					2hrs (estimate)	cumul 305hrs
+	work on Main page
+
+mercredi le 2 novembre 2022					2hrs (estimate)	cumul 307hrs
+	work on navbar
+
+jeudi le 3 novembre 2022					6hrs (estimate)	cumul 313hrs
+	work on navbar
+
+vendredi le 4 novembre 2022					6hrs (estimate)	cumul 319hrs
+	work on display forms
+
+samedi le 5 novembre 2022
+	work on pa-multi
 
 
 

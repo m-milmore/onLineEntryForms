@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import {isEqual} from "lodash";
 import Tooltip from "react-bootstrap/Tooltip";
+import { isEqual } from "lodash";
 import "./Dance.css";
 import { appEmitter } from "../../App";
 import { danceNames } from "../../constants";

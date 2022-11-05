@@ -13,6 +13,11 @@ export const EYE_ICONS = {
   HIDE: EYE_ICON_HIDE,
 };
 
+export const formList = [
+  { formName: "Pro/Am 1 Danse", navigate: "/pa1d" },
+  { formName: "Pro/Am Multi Danse", navigate: "/pamulti" },
+];
+
 export const INIT_MSG = "msg";
 
 export const disclaimer = `L'organisateur n'est pas tenu responsable en cas de perte ou de vol d'articles 
@@ -48,6 +53,33 @@ export const danceNames = {
   q: "quickstep",
   s: "samba",
   j: "jive",
+};
+
+export const paChampClosedData = {
+  paChampAgeGroups: [
+    "JV 11 & -",
+    "JR 12-15",
+    "JE 16-18",
+    "A 19+",
+    "B 36+",
+    "C 51+",
+    "D 51+",
+    "D 61+",
+    "E 71+",
+  ],
+  paChampDances: [
+    "Smooth (W/T/F)",
+    "Rhythm (C/R/Sw)",
+    "Ballroom (W/T/F)",
+    "Latin (C/R/S)",
+  ],
+  paChampClosedLevels: ["Déb. à Bronze", "Argent & Or"],
+  paChampMultiDances: [
+    "Waltz/Tango/Foxtrot",
+    "Chacha/Rumba/Swing",
+    "Waltz/Tango/Foxtrot",
+    "Chacha/Rumba/Samba",
+  ],
 };
 
 export const countries = [
