@@ -180,12 +180,20 @@ jeudi le 3 novembre 2022					6hrs (estimate)	cumul 313hrs
 vendredi le 4 novembre 2022					6hrs (estimate)	cumul 319hrs
 	work on display forms
 
-samedi le 5 novembre 2022
+samedi le 5 novembre 2022					6hrs (estimate)	cumul 325hrs
 	work on pa-multi
 
+dimanche le 6 novembre 2022				4hrs (estimate)	cumul 329hrs
+	work on data structure for pro/am forms
 
+lundi le 7 novembre 2022					2hrs (estimate)	cumul 331hrs
+	working on data structure for pro/am forms
 
+mardi le 8 novembre 2022					4hrs (estimate)	cumul 335hrs
+	work on factoring paSD/paMulti forms
 
+mercredi le 9 novembre 2022				
+	work on factoring paSD, paMulti forms
 
 
 

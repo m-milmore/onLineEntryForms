@@ -4,10 +4,13 @@ import { isEqual } from "lodash";
 import { appEmitter } from "../../App";
 import FormHeader from "../Commons/FormHeader";
 import IdSection from "../Commons/IdSection";
-import ChampsClosed from "./ChampsClosed";
+import Championships from "./Championships";
+import Scholarships from "./Scholarships";
+import ProAmSolos from "./ProAmSolos";
 import FormFooter from "../Commons/FormFooter";
 import FormsControls from "../Commons/FormsControls";
 import ConfirmationToast from "../Utils/ConfirmationToast";
+import { INIT_MSG } from "../../constants";
 
 const INIT_INFO = {
   form: "paMD",
@@ -24,6 +27,7 @@ const INIT_INFO = {
   studentLastName: "Wind",
   studentGender: "F",
   entries: [],
+  solos: "",
 };
 
 const ProAmMulti = () => {
@@ -32,6 +36,9 @@ const ProAmMulti = () => {
   } = useLocation();
 
   const [info, setInfo] = useState(INIT_INFO);
+
+  const [submittable, setSubmittable] = useState(false);
+  const [msg, setMsg] = useState(INIT_MSG);
 
   const [showToast, setShowToast] = useState(false);
   const toggleToast = useCallback(() => {
@@ -75,20 +82,55 @@ const ProAmMulti = () => {
       }));
     };
 
-    const entryListener = appEmitter.addListener("3DChamp", onUpdateEntries);
+    const entryListener = appEmitter.addListener("paMulti", onUpdateEntries);
 
     return () => {
       entryListener.remove();
     };
   }, [info]);
 
+  // to show a "submittable-form" icon or an "incomplete-form" icon
+  useEffect(() => {
+    const {
+      studio,
+      city,
+      state,
+      phone,
+      email,
+      teacherFirstName,
+      teacherLastName,
+      studentFirstName,
+      studentLastName,
+      studentGender,
+      solos,
+    } = info;
+    setSubmittable(
+      studio &&
+        city &&
+        state &&
+        phone &&
+        email &&
+        teacherFirstName &&
+        teacherLastName &&
+        studentFirstName &&
+        studentLastName &&
+        studentGender &&
+        (info.entries.length > 0 || solos)
+    );
+  }, [info]);
+
   const handleChange = ({ target: { name, value } }) => {
     setInfo({ ...info, [name]: value });
+  };
+
+  const handleSolos = ({ target: { value } }) => {
+    setInfo({ ...info, solos: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setToastMsg("");
+    setMsg("");
   };
 
   return (
@@ -97,10 +139,13 @@ const ProAmMulti = () => {
         <form onSubmit={handleSubmit}>
           <FormHeader title1={`${i + 1}.PRO_AM`} title2="MULTI DANSES" />
           <IdSection info={info} handleChange={handleChange} />
-          <ChampsClosed entries={info.entries} />
+          <Championships entries={info.entries} syllabus="fermé" />
+          <Championships entries={info.entries} syllabus="ouvert" />
+          <Scholarships entries={info.entries} />
+          <ProAmSolos solos={info.solos} handleSolos={handleSolos} />
           <FormFooter />
         </form>
-        <FormsControls />
+        <FormsControls submittable={submittable} msg={msg} />
       </div>
       <ConfirmationToast
         show={showToast}

@@ -11,7 +11,7 @@ const FormsControls = ({ submittable, msg }) => {
     <div className="d-flex justify-content-center align-items-center mt-3 d-print-none ">
       {submittable ? (
         <OverlayTrigger
-          placement="bottom"
+          placement="top"
           overlay={
             <Tooltip>
               <strong>formulaire soumissible</strong>
@@ -27,7 +27,7 @@ const FormsControls = ({ submittable, msg }) => {
         </OverlayTrigger>
       ) : (
         <OverlayTrigger
-          placement="bottom"
+          placement="top"
           overlay={
             <Tooltip>
               <strong>formulaire incomplet</strong>

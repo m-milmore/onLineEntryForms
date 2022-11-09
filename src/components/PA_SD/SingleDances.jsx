@@ -1,6 +1,7 @@
 import React from "react";
 import "./SingleDances.css";
 import TableRow from "./TableRow";
+import { paSDDanceStyles } from "../../constants";
 import PropTypes from "prop-types";
 
 const SingleDances = ({ rows, syllabus, handleAddRow }) => {
@@ -17,22 +18,21 @@ const SingleDances = ({ rows, syllabus, handleAddRow }) => {
             <th scope="col" className="ages-class">
               ÂGE
             </th>
-            <th scope="col" colSpan="5" className="dance-division">
-              SMOOTH
-              <br className="br-class" /> {transformSyllabus}
-            </th>
-            <th scope="col" colSpan="15">
-              RHYTHM
-              <br className="br-class" /> {transformSyllabus}
-            </th>
-            <th scope="col" colSpan="5" className="dance-division">
-              BALLROOM
-              <br className="br-class" /> {transformSyllabus}
-            </th>
-            <th scope="col" colSpan="5" className="dance-division">
-              LATIN
-              <br className="br-class" /> {transformSyllabus}
-            </th>
+            {paSDDanceStyles.map((style, i) => (
+              <th
+                key={Object.getOwnPropertyNames(style)[0]}
+                scope="col"
+                colSpan={Object.values(style)[0].length}
+                className={
+                  Object.getOwnPropertyNames(style)[0] !== "rhythm"
+                    ? "dance-division"
+                    : null
+                }
+              >
+                {Object.getOwnPropertyNames(style)[0].toUpperCase()}
+                <br className="br-class" /> {transformSyllabus}
+              </th>
+            ))}
             <th scope="col" style={{ width: "5%" }}>
               TOTAL
             </th>

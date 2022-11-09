@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { isEqual } from "lodash";
 import { appEmitter } from "../../App";
-import "./ClosedChamp.css";
+import "./Champ.css";
 
 const ClosedChamp = ({ age, level, danceDiv, syllabus, entries }) => {
   const [selected, setSelected] = useState(false);
@@ -34,7 +34,7 @@ const ClosedChamp = ({ age, level, danceDiv, syllabus, entries }) => {
       ...entry,
       newSelect,
     };
-    appEmitter.emit("3DChamp", currEntry);
+    appEmitter.emit("paMulti", currEntry);
   };
 
   return (

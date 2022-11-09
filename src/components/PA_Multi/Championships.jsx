@@ -1,24 +1,29 @@
 import React from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import "./ChampsClosed.css";
-import ClosedChamp from "./ClosedChamp";
-import { paChampClosedData } from "../../constants";
+import "./Championships.css";
+import Champ from "./Champ";
+import {
+  paChampAgeGroups,
+  paChampDances,
+  paChampClosedLevels,
+  paChampOpenLevels,
+  paChampMultiDances,
+} from "../../constants";
 
-const ChampClosed = ({ entries }) => {
-  const {
-    paChampAgeGroups,
-    paChampDances,
-    paChampClosedLevels,
-    paChampMultiDances,
-  } = paChampClosedData;
+const Championships = ({ entries, syllabus }) => {
+  const paChampLevels =
+    syllabus === "fermé" ? paChampClosedLevels : paChampOpenLevels;
 
   return (
     <div>
       <div className="text-uppercase fs-5 fw-bold text-start">
         <u>Championnats fermés</u>
       </div>
-      <table className="table table-sm table-bordered">
+      <table
+        className="table table-sm table-bordered"
+        style={{ tableLayout: syllabus !== "fermé" ? "fixed" : null }}
+      >
         <tbody className="tbody-pa3d">
           <tr>
             <td></td>
@@ -32,27 +37,27 @@ const ChampClosed = ({ entries }) => {
                   </Tooltip>
                 }
               >
-                <td colSpan="2">{dance}</td>
+                <td colSpan={syllabus === "fermé" ? "2" : "3"}>{dance}</td>
               </OverlayTrigger>
             ))}
           </tr>
           <tr>
             <td></td>
             {paChampDances.map((dance) =>
-              paChampClosedLevels.map((level) => <td key={level}>{level}</td>)
+              paChampLevels.map((level) => <td key={level}>{level}</td>)
             )}
           </tr>
           {paChampAgeGroups.map((age) => (
             <tr key={age}>
               <td>{age}</td>
               {paChampDances.map((dance) =>
-                paChampClosedLevels.map((level) => (
-                  <ClosedChamp
+                paChampLevels.map((level) => (
+                  <Champ
                     key={age + level + dance}
                     age={age}
                     level={level}
                     danceDiv={dance}
-                    syllabus="closed"
+                    syllabus={syllabus}
                     entries={entries}
                   />
                 ))
@@ -65,4 +70,4 @@ const ChampClosed = ({ entries }) => {
   );
 };
 
-export default ChampClosed;
+export default Championships;

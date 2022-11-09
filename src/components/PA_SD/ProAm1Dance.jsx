@@ -152,7 +152,7 @@ const ProAm1Dance = () => {
     };
   }, [info]);
 
-  // to disable or enable the save button
+  // to show a "submittable-form" icon or an "incomplete-form" icon
   useEffect(() => {
     const {
       studio,

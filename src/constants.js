@@ -28,7 +28,67 @@ Les organisateurs se réservent le droit d'annuler ou de refuser l'inscription d
 de respect envers les officiels ou le personnel travaillant pour le Championnat Canadien National, et 
 ne se conformant pas au présent règlement.`;
 
-// for tooltips
+// pro-am single dance data
+export const paSDAgesReg = [
+  "(JV 11-)",
+  "(JR 12-15)",
+  "(JE 16-18)",
+  "(A 19+)",
+  "(B 30+)",
+  "(C 40+)",
+  "(D 50+)",
+  "(E 60+)",
+  "(F 70+)",
+];
+
+export const paSDAgesAbbr = ["JV", "JR", "JE", "A", "B", "C", "D", "E", "F"];
+
+export const paSDLevelsClosed = [
+  "Débutant",
+  "Bronze 1",
+  "Bronze",
+  "Argent 1",
+  "Argent",
+  "Or",
+  "Or 1",
+];
+
+export const paSDLevelsOpen = [
+  "Débutant",
+  "Bronze 1",
+  "Bronze",
+  "Argent 1",
+  "Argent",
+  "Or",
+  "Or 1",
+  "Or Avancé",
+];
+
+export const paSDDanceStyles = [
+  { smooth: ["W", "T", "F", "VW", "PB"] },
+  {
+    rhythm: [
+      "C",
+      "R",
+      "SW",
+      "B",
+      "M",
+      "SAL",
+      "ME",
+      "BA",
+      "H",
+      "WCS",
+      "SAM",
+      "PD",
+      "TA",
+      "MI",
+      "TV",
+    ],
+  },
+  { ballroom: ["W", "T", "VW", "F", "Q"] },
+  { latin: ["C", "S", "R", "PD", "J"] },
+];
+
 export const danceNames = {
   w: "waltz",
   t: "tango",
@@ -55,32 +115,59 @@ export const danceNames = {
   j: "jive",
 };
 
-export const paChampClosedData = {
-  paChampAgeGroups: [
-    "JV 11 & -",
-    "JR 12-15",
-    "JE 16-18",
-    "A 19+",
-    "B 36+",
-    "C 51+",
-    "D 51+",
-    "D 61+",
-    "E 71+",
-  ],
-  paChampDances: [
-    "Smooth (W/T/F)",
-    "Rhythm (C/R/Sw)",
-    "Ballroom (W/T/F)",
-    "Latin (C/R/S)",
-  ],
-  paChampClosedLevels: ["Déb. à Bronze", "Argent & Or"],
-  paChampMultiDances: [
-    "Waltz/Tango/Foxtrot",
-    "Chacha/Rumba/Swing",
-    "Waltz/Tango/Foxtrot",
-    "Chacha/Rumba/Samba",
-  ],
-};
+// pro-am 3-dance data
+export const paChampAgeGroups = [
+  "JV 11 & -",
+  "JR 12-15",
+  "JE 16-18",
+  "A 19+",
+  "B 36+",
+  "C 51+",
+  "D 61+",
+  "E 71+",
+];
+
+export const paChampClosedLevels = ["Déb. à Bronze", "Argent & Or"];
+
+export const paChampOpenLevels = ["Bronze", "Argent", "Or"];
+
+export const paChampDances = [
+  "Smooth (W/T/F)",
+  "Rhythm (C/R/Sw)",
+  "Ballroom (W/T/F)",
+  "Latin (C/R/S)",
+];
+
+export const paChampMultiDances = [
+  "Waltz/Tango/Foxtrot",
+  "Chacha/Rumba/Swing",
+  "Waltz/Tango/Foxtrot",
+  "Chacha/Rumba/Samba",
+];
+
+// pro-am scholarships data
+export const paScholAgeGroups = [
+  "JR 15-",
+  "JE 16-18",
+  "A 19+",
+  "B 36+",
+  "C 51+",
+  "D 61+",
+];
+
+export const paScholDances = [
+  "Smooth (W/T/F/VW)",
+  "Rhythm (C/R/Sw/B/M)",
+  "Ballroom (W/T/VW/F/Q)",
+  "Latin (C/S/R/P/J)",
+];
+
+export const paScholMultiDances = [
+  "Waltz/Tango/Foxtrot/Viennese Waltz",
+  "Chacha/Rumba/Swing/Bolero/Mambo",
+  "Waltz/Tango/Viennese Waltz/Foxtrot/Quickstep",
+  "Chacha/Samba/Rumba/Paso Doble/Jive",
+];
 
 export const countries = [
   "Afghanistan",
