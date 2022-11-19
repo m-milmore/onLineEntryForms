@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { isEqual } from "lodash";
 import { appEmitter } from "../../App";
-import "./Champ.css";
+import "./Multi.css";
 
-const ClosedChamp = ({ age, level, danceDiv, syllabus, entries }) => {
+const Multi = ({ age, level, danceDiv, syllabus, category, entries }) => {
   const [selected, setSelected] = useState(false);
   const dance = danceDiv.split(" ")[1];
   const division = danceDiv.split(" ")[0];
@@ -14,8 +14,9 @@ const ClosedChamp = ({ age, level, danceDiv, syllabus, entries }) => {
       dance,
       division,
       syllabus,
+      category,
     }),
-    [age, level, dance, division, syllabus]
+    [age, level, dance, division, syllabus, category]
   );
 
   useEffect(() => {
@@ -44,4 +45,4 @@ const ClosedChamp = ({ age, level, danceDiv, syllabus, entries }) => {
   );
 };
 
-export default ClosedChamp;
+export default Multi;

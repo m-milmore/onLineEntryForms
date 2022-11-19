@@ -64,6 +64,7 @@ const ProAmMulti = () => {
       dance,
       division,
       syllabus,
+      category,
       newSelect: select,
     }) => {
       const entry = {
@@ -72,6 +73,7 @@ const ProAmMulti = () => {
         dance,
         division,
         syllabus,
+        category,
       };
 
       setInfo((prevState) => ({

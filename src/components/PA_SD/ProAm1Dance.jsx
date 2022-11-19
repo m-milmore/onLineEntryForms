@@ -24,19 +24,21 @@ const INIT_INFO = {
   studentFirstName: "Faith",
   studentLastName: "Flash",
   studentGender: "F",
-  rows: [
+  entries: [
     {
-      rowId: nanoid(),
+      entryId: nanoid(),
       level: "",
       age: "",
       syllabus: "fermé",
+      category: "single",
       categories: [],
     },
     {
-      rowId: nanoid(),
+      entryId: nanoid(),
       level: "",
       age: "",
       syllabus: "ouvert",
+      category: "single",
       categories: [],
     },
   ],
@@ -87,11 +89,11 @@ const ProAm1Dance = () => {
 
   // data sent from RegSelect component for level and age
   useEffect(() => {
-    const onUpdateSelect = ({ rowId, name, value }) => {
+    const onUpdateSelect = ({ entryId, name, value }) => {
       setInfo((prevState) => ({
         ...prevState,
-        rows: prevState.rows.map((row) =>
-          row.rowId === rowId ? { ...row, [name]: value } : row
+        entries: prevState.entries.map((entry) =>
+          entry.entryId === entryId ? { ...entry, [name]: value } : entry
         ),
       }));
     };
@@ -105,7 +107,7 @@ const ProAm1Dance = () => {
 
   // data sent from Dance component, add or remove a dance: select is a true/false toggle
   useEffect(() => {
-    const onUpdateComps = ({ dance, danceStyle, rowId, newSelect: select }) => {
+    const onUpdateComps = ({ dance, danceStyle, entryId, newSelect: select }) => {
       const comp = {
         dance,
         danceStyle,
@@ -113,19 +115,19 @@ const ProAm1Dance = () => {
 
       setInfo((prevState) => ({
         ...prevState,
-        rows: prevState.rows.map((row) => {
-          if (row.rowId === rowId) {
+        entries: prevState.entries.map((entry) => {
+          if (entry.entryId === entryId) {
             const categories = select
-              ? [...row.categories, comp]
-              : row.categories.filter(
+              ? [...entry.categories, comp]
+              : entry.categories.filter(
                   (obj) =>
                     !(
                       obj.dance === comp.dance &&
                       obj.danceStyle === comp.danceStyle
                     )
                 );
-            return { ...row, categories };
-          } else return row;
+            return { ...entry, categories };
+          } else return entry;
         }),
       }));
     };
@@ -138,14 +140,14 @@ const ProAm1Dance = () => {
   }, [info]);
 
   useEffect(() => {
-    const onDeleteRow = ({ rowId }) => {
+    const onDeleteEntry = ({ entryId }) => {
       setInfo((prevState) => ({
         ...prevState,
-        rows: prevState.rows.filter((row) => row.rowId !== rowId),
+        entries: prevState.entries.filter((entry) => entry.entryId !== entryId),
       }));
     };
 
-    const deleteListener = appEmitter.addListener("deleteRow", onDeleteRow);
+    const deleteListener = appEmitter.addListener("deleteEntry", onDeleteEntry);
 
     return () => {
       deleteListener.remove();
@@ -166,16 +168,16 @@ const ProAm1Dance = () => {
       studentLastName,
       studentGender,
     } = info;
-    let missingInRows = false;
-    info.rows.forEach((row) => {
+    let missingInEntries = false;
+    info.entries.forEach((entry) => {
       if (
-        !row.level ||
-        !row.age ||
-        row.level === "--" ||
-        row.age === "--" ||
-        row.categories.length === 0
+        !entry.level ||
+        !entry.age ||
+        entry.level === "--" ||
+        entry.age === "--" ||
+        entry.categories.length === 0
       )
-        missingInRows = true;
+        missingInEntries = true;
     });
     setSubmittable(
       studio &&
@@ -188,8 +190,8 @@ const ProAm1Dance = () => {
         studentFirstName &&
         studentLastName &&
         studentGender &&
-        info.rows.length > 0 &&
-        !missingInRows
+        info.entries.length > 0 &&
+        !missingInEntries
     );
   }, [info]);
 
@@ -197,17 +199,18 @@ const ProAm1Dance = () => {
     setInfo({ ...info, [name]: value });
   };
 
-  const handleAddRow = (syllabus) => {
-    const newRow = {
-      rowId: nanoid(),
+  const handleAddEntry = (syllabus) => {
+    const newEntry = {
+      entryId: nanoid(),
       level: "",
       age: "",
       syllabus: syllabus,
+      category: "single",
       categories: [],
     };
     setInfo((prevState) => ({
       ...prevState,
-      rows: [...prevState.rows, newRow],
+      entries: [...prevState.entries, newEntry],
     }));
   };
 
@@ -219,9 +222,9 @@ const ProAm1Dance = () => {
       return;
     }
     const entries = [];
-    info.rows.forEach((row) => {
-      row.categories.forEach((category) => {
-        const { level, age, syllabus } = row;
+    info.entries.forEach((entry) => {
+      entry.categories.forEach((category) => {
+        const { level, age, syllabus } = entry;
         const syllabusTranslated = syllabus === "ouvert" ? "open" : "closed";
         entries.push({
           level,
@@ -261,14 +264,14 @@ const ProAm1Dance = () => {
           <IdSection info={info} handleChange={handleChange} />
           <AgeSection />
           <SingleDances
-            rows={info.rows}
+            entries={info.entries}
             syllabus="fermé"
-            handleAddRow={handleAddRow}
+            handleAddEntry={handleAddEntry}
           />
           <SingleDances
-            rows={info.rows}
+            entries={info.entries}
             syllabus="ouvert"
-            handleAddRow={handleAddRow}
+            handleAddEntry={handleAddEntry}
           />
           <FormFooter />
         </form>

@@ -1,69 +1,51 @@
 import React from "react";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import "./Championships.css";
-import Champ from "./Champ";
+import ChampHeader from "./ChampHeader";
+import Multi from "./Multi";
 import {
-  paChampAgeGroups,
   paChampDances,
   paChampClosedLevels,
   paChampOpenLevels,
-  paChampMultiDances,
+  ageGroups,
 } from "../../constants";
 
 const Championships = ({ entries, syllabus }) => {
+  const { paChampAgeGroups } = ageGroups;
   const paChampLevels =
     syllabus === "fermé" ? paChampClosedLevels : paChampOpenLevels;
 
   return (
     <div>
       <div className="text-uppercase fs-5 fw-bold text-start">
-        <u>Championnats fermés</u>
+        <u>Championnats {syllabus}</u>
       </div>
       <table
         className="table table-sm table-bordered"
         style={{ tableLayout: syllabus !== "fermé" ? "fixed" : null }}
       >
         <tbody className="tbody-pa3d">
-          <tr>
-            <td></td>
-            {paChampDances.map((dance, i) => (
-              <OverlayTrigger
-                key={dance}
-                placement="bottom"
-                overlay={
-                  <Tooltip>
-                    <strong>{paChampMultiDances[i]}</strong>
-                  </Tooltip>
-                }
-              >
-                <td colSpan={syllabus === "fermé" ? "2" : "3"}>{dance}</td>
-              </OverlayTrigger>
-            ))}
-          </tr>
-          <tr>
-            <td></td>
-            {paChampDances.map((dance) =>
-              paChampLevels.map((level) => <td key={level}>{level}</td>)
-            )}
-          </tr>
-          {paChampAgeGroups.map((age) => (
-            <tr key={age}>
-              <td>{age}</td>
-              {paChampDances.map((dance) =>
-                paChampLevels.map((level) => (
-                  <Champ
-                    key={age + level + dance}
-                    age={age}
-                    level={level}
-                    danceDiv={dance}
-                    syllabus={syllabus}
-                    entries={entries}
-                  />
-                ))
-              )}
-            </tr>
-          ))}
+          <ChampHeader syllabus={syllabus} />
+          {paChampAgeGroups.map((age) => {
+            const ageStr = age.split("|")[0];
+            return (
+              <tr key={ageStr}>
+                <td>{ageStr}</td>
+                {paChampDances.map((dance) =>
+                  paChampLevels.map((level) => (
+                    <Multi
+                      key={ageStr + level + dance}
+                      age={ageStr}
+                      level={level}
+                      danceDiv={dance}
+                      syllabus={syllabus}
+                      category="champ"
+                      entries={entries}
+                    />
+                  ))
+                )}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

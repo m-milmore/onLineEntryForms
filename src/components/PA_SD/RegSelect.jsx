@@ -1,17 +1,17 @@
 import React from "react";
-import "./RegSelect.css"
+import "./RegSelect.css";
 import { appEmitter } from "../../App";
 import PropTypes from "prop-types";
 
-const RegSelect = ({ options, name, value, rowId}) => {
-	const handleSelect = ({target: {value}}) => {
-		const selected = {
-			rowId,
-			name,
-			value,
-		}
-		appEmitter.emit("select", selected);
-	}
+const RegSelect = ({ options, name, value, entryId }) => {
+  const handleSelect = ({ target: { value } }) => {
+    const selected = {
+      entryId,
+      name,
+      value,
+    };
+    appEmitter.emit("select", selected);
+  };
 
   return (
     <select
@@ -23,8 +23,8 @@ const RegSelect = ({ options, name, value, rowId}) => {
     >
       <option>--</option>
       {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
+        <option key={option.split("|")[0]} value={option.split("|")[0]}>
+          {option.split("|")[0]}
         </option>
       ))}
     </select>
@@ -35,14 +35,14 @@ RegSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string),
   name: PropTypes.string,
   value: PropTypes.string,
-	rowId: PropTypes.string
+  rowId: PropTypes.string,
 };
 
 RegSelect.defaultProps = {
   options: [],
   name: "",
   value: "",
-	rowId: "",
+  rowId: "",
 };
 
 export default RegSelect;

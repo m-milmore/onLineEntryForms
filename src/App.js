@@ -17,6 +17,7 @@ import ForgotPassword from "./components/AuthService/ForgotPassword";
 import ResetPassword from "./components/AuthService/ResetPassword";
 import ProAm1Dance from "./components/PA_SD/ProAm1Dance";
 import ProAmMulti from "./components/PA_Multi/ProAmMulti";
+import Summary from "./components/Summary/Summary";
 import Page404 from "./components/Page404";
 import AppMsg from "./components/Utils/AppMsg";
 import { INIT_MSG } from "./constants";
@@ -24,6 +25,7 @@ import { INIT_MSG } from "./constants";
 const authService = new AuthService();
 const entriesService = new EntriesService(authService.getBearerHeader);
 export const UserContext = createContext();
+export const FormsContext = createContext();
 export const appEmitter = new EventEmitter();
 
 const AuthProvider = ({ children }) => {
@@ -37,10 +39,6 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-const PrivateRoute = ({ children, isLoggedIn, ...props }) => {
-  return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
-};
-
 const FORMS_INIT = [
   {
     formId: nanoid(),
@@ -52,13 +50,59 @@ const FORMS_INIT = [
     formName: "Pro/Am Multi Danse",
     navigate: "/pamulti",
   },
+  {
+    formId: nanoid(),
+    formName: "Sommaire",
+    navigate: "/summary",
+  },
 ];
+
+const FormsProvider = ({ children }) => {
+  const [forms, setForms] = useState(FORMS_INIT);
+
+  useEffect(() => {
+    const onAddForm = ({ formName, navigate }) => {
+      const newForm = {
+        formId: nanoid(),
+        formName,
+        navigate,
+      };
+      const arrSumm = forms.filter((form) => form.formName === "Sommaire");
+      const arrWoSumm = forms.filter((form) => form.formName !== "Sommaire");
+      setForms([...arrWoSumm, newForm, ...arrSumm]);
+    };
+
+    const onDeleteForm = (formId) => {
+      localStorage.removeItem(formId);
+      setForms((prev) => prev.filter((form) => form.formId !== formId));
+    };
+
+    const addFormListener = appEmitter.addListener("addForm", onAddForm);
+
+    const deleteFormListener = appEmitter.addListener(
+      "deleteForm",
+      onDeleteForm
+    );
+
+    return () => {
+      addFormListener.remove();
+      deleteFormListener.remove();
+    };
+  }, [forms]);
+
+  return (
+    <FormsContext.Provider value={forms}>{children}</FormsContext.Provider>
+  );
+};
+
+const PrivateRoute = ({ children, isLoggedIn, ...props }) => {
+  return isLoggedIn ? <Outlet /> : <Navigate to="/login" />;
+};
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [email, setEmail] = useState(""); // to pass email of forgotpassword to login page via listener
   const [msg, setMsg] = useState(INIT_MSG);
-  const [forms, setForms] = useState(FORMS_INIT);
 
   // fetches form constants
   useEffect(() => {
@@ -105,51 +149,29 @@ const App = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const onAddForm = ({formName, navigate}) => {
-      const newForm = {
-        formId: nanoid(),
-        formName,
-        navigate,
-      };
-      setForms([...forms, newForm]);
-    };
-
-    const onDeleteForm = (formId) => {
-      localStorage.removeItem(formId);
-      setForms((prev) => prev.filter((form) => form.formId !== formId));
-    };
-
-    const addFormListener = appEmitter.addListener("addForm", onAddForm);
-
-    const deleteFormListener = appEmitter.addListener(
-      "deleteForm",
-      onDeleteForm
-    );
-
-    return () => {
-      addFormListener.remove();
-      deleteFormListener.remove();
-    };
-  }, [forms]);
-
   return (
     <div className="App">
       <AppMsg msg={msg} />
       <AuthProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<PrivateRoute isLoggedIn={isLoggedIn} />}>
-              <Route path="/" element={<MainPage forms={forms} />} />
-              <Route path="/pa1d" element={<ProAm1Dance />} />
-              <Route path="/pamulti" element={<ProAmMulti />} />
-            </Route>
-            <Route path="/login" element={<LoginPage initEmail={email} />} />
-            <Route path="/forgotpassword" element={<ForgotPassword />} />
-            <Route path="/resetpassword/:token" element={<ResetPassword />} />
-            <Route path="/*" element={<Page404 />} />
-          </Routes>
-        </Router>
+        <FormsProvider>
+          <Router>
+            <Routes>
+              <Route
+                path="/"
+                element={<PrivateRoute isLoggedIn={isLoggedIn} />}
+              >
+                <Route path="/" element={<MainPage />} />
+                <Route path="/pa1d" element={<ProAm1Dance />} />
+                <Route path="/pamulti" element={<ProAmMulti />} />
+                <Route path="/summary" element={<Summary />} />
+              </Route>
+              <Route path="/login" element={<LoginPage initEmail={email} />} />
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
+              <Route path="/resetpassword/:token" element={<ResetPassword />} />
+              <Route path="/*" element={<Page404 />} />
+            </Routes>
+          </Router>
+        </FormsProvider>
       </AuthProvider>
     </div>
   );

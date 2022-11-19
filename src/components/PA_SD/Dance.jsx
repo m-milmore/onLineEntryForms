@@ -7,7 +7,7 @@ import { appEmitter } from "../../App";
 import { danceNames } from "../../constants";
 import PropTypes from "prop-types";
 
-const Dance = ({ dance, danceStyle, rowId, eol, categories }) => {
+const Dance = ({ dance, danceStyle, entryId, eol, categories }) => {
   const [select, setSelect] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Dance = ({ dance, danceStyle, rowId, eol, categories }) => {
     const comp = {
       dance,
       danceStyle,
-      rowId,
+      entryId,
       newSelect,
     };
     appEmitter.emit("comp", comp);

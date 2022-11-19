@@ -6,22 +6,23 @@ import RegSelect from "./RegSelect";
 import Division from "./Division";
 import {
   paSDDanceStyles,
-  paSDAgesAbbr,
   paSDLevelsClosed,
   paSDLevelsOpen,
+  ageGroups,
 } from "../../constants";
 import "./TableRow.css";
 import PropTypes from "prop-types";
 
-const TableRow = ({ row }) => {
-  const levels = row.syllabus === "fermé" ? paSDLevelsClosed : paSDLevelsOpen;
-  const dances = row.categories.length;
+const TableRow = ({ entry }) => {
+  const { paSDAges } = ageGroups;
+  const levels = entry.syllabus === "fermé" ? paSDLevelsClosed : paSDLevelsOpen;
+  const dances = entry.categories.length;
 
-  const handleDeleteRow = (rowId) => {
-    const rowToDelete = {
-      rowId,
+  const handleDeleteEntry = (entryId) => {
+    const entryToDelete = {
+      entryId,
     };
-    appEmitter.emit("deleteRow", rowToDelete);
+    appEmitter.emit("deleteEntry", entryToDelete);
   };
 
   return (
@@ -30,16 +31,16 @@ const TableRow = ({ row }) => {
         <RegSelect
           options={levels}
           name="level"
-          value={row.level}
-          rowId={row.rowId}
+          value={entry.level}
+          entryId={entry.entryId}
         />
       </td>
       <td style={{ border: "1px solid black" }}>
         <RegSelect
-          options={paSDAgesAbbr}
+          options={paSDAges}
           name="age"
-          value={row.age}
-          rowId={row.rowId}
+          value={entry.age}
+          entryId={entry.entryId}
         />
       </td>
       {paSDDanceStyles.map((danceStyle) => (
@@ -47,8 +48,8 @@ const TableRow = ({ row }) => {
           key={Object.getOwnPropertyNames(danceStyle)[0]}
           division={Object.values(danceStyle)[0]}
           danceStyle={Object.getOwnPropertyNames(danceStyle)[0]}
-          rowId={row.rowId}
-          categories={row.categories}
+          entryId={entry.entryId}
+          categories={entry.categories}
         />
       ))}
       <td
@@ -66,7 +67,7 @@ const TableRow = ({ row }) => {
         >
           <div
             type="button"
-            onClick={() => handleDeleteRow(row.rowId)}
+            onClick={() => handleDeleteEntry(entry.entryId)}
             className="position-absolute top-0 end-0 delete-btn d-print-none"
           >
             <span>x</span>

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { FormsContext } from "../App";
 import Card from "react-bootstrap/Card";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -7,13 +8,15 @@ import ConfirmationModal from "./Utils/ConfirmationModal";
 import { appEmitter } from "../App";
 import "./FormDisplay.css";
 
-const FormDisplay = ({ forms }) => {
+const FormDisplay = () => {
+  const forms = useContext(FormsContext);
   const navigate = useNavigate();
 
   const [showConfModal, setShowConfModal] = useState(false);
   const [formId, setFormId] = useState("");
 
-  const handleDelete = (formId) => {
+  const handleDelete = (event, formId) => {
+    event.stopPropagation();
     setFormId(formId);
     setShowConfModal(true);
   };
@@ -34,48 +37,48 @@ const FormDisplay = ({ forms }) => {
   return (
     <>
       <div className="fs-6 fw-bolder d-flex justify-content-start">
-        {forms
-          ? forms.length
-            ? forms.map((form, i) => (
-                <div key={form.formId} className="card-class" role="button">
-                  <Card
-                    bg="info"
-                    text="white"
-                    style={{ width: "10rem", height: "7.5rem" }}
+        {forms.map((form, i) => {
+          const sommaire = form.formName === "Sommaire" ? true : false;
+          return (
+            <div key={form.formId} className="card-class" role="button">
+              <Card
+                bg={sommaire ? "success" : "info"}
+                text="white"
+                style={{ width: "10rem", height: "7.5rem" }}
+                onClick={() => clickToNavigate(form.navigate, form.formId, i)}
+              >
+                <Card.Body style={{ cursor: "pointer" }}>
+                  <Card.Title>{i + 1 + ". " + form.formName}</Card.Title>
+                </Card.Body>
+                <Card.Footer>
+                  <OverlayTrigger
+                    placement="bottom"
+                    overlay={
+                      sommaire ? (
+                        <></>
+                      ) : (
+                        <Tooltip>
+                          <strong>supprimer ce formulaire</strong>
+                        </Tooltip>
+                      )
+                    }
                   >
-                    <Card.Body
-                      style={{ cursor: "pointer" }}
-                      onClick={() =>
-                        clickToNavigate(form.navigate, form.formId, i)
-                      }
-                    >
-                      <Card.Title>{(i+1)+ ". "+form.formName}</Card.Title>
-                    </Card.Body>
-                    <Card.Footer>
-                      <OverlayTrigger
-                        placement="bottom"
-                        overlay={
-                          <Tooltip>
-                            <strong>supprimer ce formulaire</strong>
-                          </Tooltip>
-                        }
-                      >
-                        <i
-                          className="m-1 fa-solid fa-circle-xmark"
-                          style={{
-                            cursor: "pointer",
-                            color: "black",
-                            float: "right",
-                          }}
-                          onClick={() => handleDelete(form.formId)}
-                        ></i>
-                      </OverlayTrigger>
-                    </Card.Footer>
-                  </Card>
-                </div>
-              ))
-            : null
-          : null}
+                    <i
+                      className="m-1 fa-solid fa-circle-xmark"
+                      style={{
+                        cursor: "pointer",
+                        color: sommaire ? "gray" : "black",
+                        float: "right",
+                        pointerEvents: sommaire ? "none" : "auto",
+                      }}
+                      onClick={(event) => handleDelete(event, form.formId)}
+                    ></i>
+                  </OverlayTrigger>
+                </Card.Footer>
+              </Card>
+            </div>
+          );
+        })}
       </div>
       <ConfirmationModal
         show={showConfModal}

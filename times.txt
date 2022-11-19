@@ -192,8 +192,32 @@ lundi le 7 novembre 2022					2hrs (estimate)	cumul 331hrs
 mardi le 8 novembre 2022					4hrs (estimate)	cumul 335hrs
 	work on factoring paSD/paMulti forms
 
-mercredi le 9 novembre 2022				
+mercredi le 9 novembre 2022					6hrs (estimate)	cumul 341hrs			
 	work on factoring paSD, paMulti forms
+
+jeudi le 10 novembre 2022					4hrs (estimate)	cumul 345hrs
+	work on summary
+
+vendredi le 11 novembre 2022				2hrs (estimate)	cumul 347hrs
+	work on summary
+
+samedi le 12 novembre 2022					4hrs (estimate)	cumul 351hrs
+	work on summary
+
+dimanche le 13 novembre 2022				4hrs (estimate)	cumul 355hrs
+	work on summary
+
+lundi le 14 novembre 2022					1hr		cumul 356hrs
+	work on summary
+
+mardi le 15 novembre 2022					4hrs (estimate)	cumul 360hrs
+	work on summary
+
+mercredi le 16 novembre 2022				4hrs (estimate)	cumul 364hrs
+	work on summary
+
+vendredi le 18 novembre 2022
+	work on summary
 
 
 

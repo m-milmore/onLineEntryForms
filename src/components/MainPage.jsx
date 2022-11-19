@@ -2,11 +2,11 @@ import React from "react";
 import NavigationBar from "./NavigationBar";
 import FormDisplay from "./FormDisplay";
 
-const MainPage = ({ forms }) => {
+const MainPage = () => {
   return (
     <div className="container text-center">
       <NavigationBar />
-      <FormDisplay forms={forms} />
+      <FormDisplay />
     </div>
   );
 };

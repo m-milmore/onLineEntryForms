@@ -28,21 +28,40 @@ Les organisateurs se réservent le droit d'annuler ou de refuser l'inscription d
 de respect envers les officiels ou le personnel travaillant pour le Championnat Canadien National, et 
 ne se conformant pas au présent règlement.`;
 
+export const ageGroups = {
+  paSDAges: [
+    "JV|(JV 11-)|0",
+    "JR|(JR 12-15)|0",
+    "JE|(JE 16-18)|1",
+    "A|(A 19+)|1",
+    "B|(B 30+)|1",
+    "C|(C 40+)|1",
+    "D|(D 50+)|1",
+    "E|(E 60+)|1",
+    "F|(F 70+)|1",
+  ],
+  paChampAgeGroups: [
+    "JV 11 & -| |0",
+    "JR 12-15| |0",
+    "JE 16-18| |1",
+    "A 19+| |1",
+    "B 36+| |1",
+    "C 51+| |1",
+    "D 61+| |1",
+    "E 71+| |1",
+  ],
+  paScholAgeGroups: [
+    "JR 15-| |0",
+    "JE 16-18| |1",
+    "A 19+| |1",
+    "B 36+| |1",
+    "C 51+| |1",
+    "D 61+| |1",
+  ],
+  paSolosAgeGroups: ["All| |1"],
+};
+
 // pro-am single dance data
-export const paSDAgesReg = [
-  "(JV 11-)",
-  "(JR 12-15)",
-  "(JE 16-18)",
-  "(A 19+)",
-  "(B 30+)",
-  "(C 40+)",
-  "(D 50+)",
-  "(E 60+)",
-  "(F 70+)",
-];
-
-export const paSDAgesAbbr = ["JV", "JR", "JE", "A", "B", "C", "D", "E", "F"];
-
 export const paSDLevelsClosed = [
   "Débutant",
   "Bronze 1",
@@ -89,6 +108,27 @@ export const paSDDanceStyles = [
   { latin: ["C", "S", "R", "PD", "J"] },
 ];
 
+// pro-am 3-dance data
+export const paChampClosedLevels = ["Déb. à Bronze", "Argent & Or"];
+
+export const paChampOpenLevels = ["Bronze", "Argent", "Or"];
+
+export const paChampDances = [
+  "Smooth (W/T/F)",
+  "Rhythm (C/R/Sw)",
+  "Ballroom (W/T/F)",
+  "Latin (C/R/S)",
+];
+
+// pro-am scholarships data
+export const paScholDances = [
+  "Smooth (W/T/F/VW)",
+  "Rhythm (C/R/Sw/B/M)",
+  "Ballroom (W/T/VW/F/Q)",
+  "Latin (C/S/R/P/J)",
+];
+
+// dance names for tooltips
 export const danceNames = {
   w: "waltz",
   t: "tango",
@@ -113,61 +153,41 @@ export const danceNames = {
   q: "quickstep",
   s: "samba",
   j: "jive",
+  wtf: "waltz/tango/foxtrot",
+  crsw: "chacha/rumba/swing",
+  crs: "chacha/rumba/samba",
+  wtfvw: "Waltz/Tango/Foxtrot/Viennese Waltz",
+  crswbm: "Chacha/Rumba/Swing/Bolero/Mambo",
+  wtvwfq: "Waltz/Tango/Viennese Waltz/Foxtrot/Quickstep",
+  csrpj: "Chacha/Samba/Rumba/Paso Doble/Jive",
 };
 
-// pro-am 3-dance data
-export const paChampAgeGroups = [
-  "JV 11 & -",
-  "JR 12-15",
-  "JE 16-18",
-  "A 19+",
-  "B 36+",
-  "C 51+",
-  "D 61+",
-  "E 71+",
+// summary data
+export const summaryDeadlines = [
+  "avant le 6 août",
+  "à partir du 6 août",
+  "2023, 08, 6",
 ];
 
-export const paChampClosedLevels = ["Déb. à Bronze", "Argent & Or"];
+export const early = () => {
+  const today = new Date();
+  const deadline = new Date(summaryDeadlines[2]);
+  return today <= deadline ? true : false;
+};
 
-export const paChampOpenLevels = ["Bronze", "Argent", "Or"];
-
-export const paChampDances = [
-  "Smooth (W/T/F)",
-  "Rhythm (C/R/Sw)",
-  "Ballroom (W/T/F)",
-  "Latin (C/R/S)",
+// data 1-2-3 for UI, data 4 for main state (forms), data 5 for jr/ad age group for prices, data 6 for sub-form types
+export const summaryPACategories = [
+  "Adulte(16+) Danse Individuelle| x 35 $can = | x 40 $can = |Pro/Am 1 Danse|1|single|paSDAges",
+  "Adulte(16+) Démonstration en solo| x 50 $can = | x 55 $can = |Pro/Am Multi Danse|1|solo|paSolosAgeGroups",
+  "Adulte(16+) Multi 3 danses| x 45 $can = | x 50 $can = |Pro/Am Multi Danse|1|champ|paChampAgeGroups",
+  "Adulte(16+) Bourse d'étude| x 65 $can = | x 70 $can = |Pro/Am Multi Danse|1|schol|paScholAgeGroups",
+  "Junior(15-) Danse Individuelle| x 15 $can = | x 20 $can = |Pro/Am 1 Danse|0|single|paSDAges",
+  "Junior(15-) Démonstration en solo| x 25 $can = | x 35 $can = |Pro/Am Multi Danse|0|solo|paSolosAgeGroups",
+  "Junior(15-) Multi 3 danses| x 20 $can = | x 25 $can = |Pro/Am Multi Danse|0|champ|paChampAgeGroups",
+  "Junior(15-) Bourse d'étude| x 30 $can = | x 35 $can = |Pro/Am Multi Danse|0|schol|paScholAgeGroups",
 ];
 
-export const paChampMultiDances = [
-  "Waltz/Tango/Foxtrot",
-  "Chacha/Rumba/Swing",
-  "Waltz/Tango/Foxtrot",
-  "Chacha/Rumba/Samba",
-];
-
-// pro-am scholarships data
-export const paScholAgeGroups = [
-  "JR 15-",
-  "JE 16-18",
-  "A 19+",
-  "B 36+",
-  "C 51+",
-  "D 61+",
-];
-
-export const paScholDances = [
-  "Smooth (W/T/F/VW)",
-  "Rhythm (C/R/Sw/B/M)",
-  "Ballroom (W/T/VW/F/Q)",
-  "Latin (C/S/R/P/J)",
-];
-
-export const paScholMultiDances = [
-  "Waltz/Tango/Foxtrot/Viennese Waltz",
-  "Chacha/Rumba/Swing/Bolero/Mambo",
-  "Waltz/Tango/Viennese Waltz/Foxtrot/Quickstep",
-  "Chacha/Samba/Rumba/Paso Doble/Jive",
-];
+// countries, states & provinces
 
 export const countries = [
   "Afghanistan",
