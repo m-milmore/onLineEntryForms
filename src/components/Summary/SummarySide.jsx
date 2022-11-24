@@ -1,20 +1,32 @@
 import React from "react";
 
-const SummarySide = ({ section, rowsHeight }) => {
+const SummarySide = ({ data }) => {
+  const bigSide = data.split("|")[0] === "bigSide";
+  const section = data.split("|")[1];
+  const rowsHeight = data.split("|")[2];
+
   return (
     <tr>
       <td
-        className="text-uppercase bg-dark text-white text-nowrap"
+        className={`text-uppercase text-nowrap ${
+          bigSide ? "bg-white text-black" : "bg-dark text-white"
+        }`}
         rowSpan={rowsHeight}
-        style={{ width: "3%" }}
+        style={{
+          width: "3%",
+          border: bigSide ? "1px solid white" : null,
+          paddingTop: bigSide ? "5rem" : null,
+        }}
       >
         <div
           style={{
             writingMode: "vertical-rl",
             transform: "rotate(180deg)",
-            fontSize: "1.5rem",
+            fontSize: bigSide ? "3rem" : "1.5rem",
             fontWeight: "900",
             float: "right",
+            textDecoration: bigSide ? "underline" : null,
+            letterSpacing: bigSide ? "5px" : null,
           }}
         >
           {section}

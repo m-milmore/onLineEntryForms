@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import FormHeader from "../Commons/FormHeader";
 import SummaryTable from "./SummaryTable";
 import FormsControls from "../Commons/FormsControls";
@@ -7,18 +7,12 @@ import "./Summary.css";
 import { INIT_MSG } from "../../constants";
 
 const Summary = () => {
-  const [submittable, setSubmittable] = useState(false);
-
   const [msg, setMsg] = useState(INIT_MSG);
   const [showToast, setShowToast] = useState(false);
   const toggleToast = useCallback(() => {
     setShowToast(!showToast);
   }, [showToast]);
   const [toastMsg, setToastMsg] = useState("");
-
-  useEffect(() => {
-    setSubmittable(false);
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,10 +24,8 @@ const Summary = () => {
     <>
       <div className="container text-center py-3">
         <FormHeader title1="bon de commande" />
-        <form onSubmit={handleSubmit}>
-          <SummaryTable />
-        </form>
-        <FormsControls submittable={submittable} msg={msg} hideBtn={true}/>
+        <SummaryTable handleSubmit={handleSubmit} />
+        <FormsControls msg={msg} hideBtn={true} />
       </div>
       <ConfirmationToast
         show={showToast}
