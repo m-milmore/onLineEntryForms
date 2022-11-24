@@ -1,52 +1,45 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import { FormsContext } from "../../App";
+import SubmittableIcons from "./SubmittableIcons";
 import AppMsg from "../Utils/AppMsg";
 
-const FormsControls = ({ submittable, msg }) => {
+const FormsControls = ({ submittable, msg, hideBtn }) => {
   const navigate = useNavigate();
+  const { forms } = useContext(FormsContext);
+
+  const [disableCheckout, setDisableCheckout] = useState(true);
+
+  useEffect(() => {
+    setDisableCheckout(!forms.every((form) => form.formSubmittable === true));
+  }, [forms]);
+
+  const handleCheckout = () => {
+    console.log("Handle Checkout");
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3 d-print-none ">
-      {submittable ? (
-        <OverlayTrigger
-          placement="top"
-          overlay={
-            <Tooltip>
-              <strong>formulaire soumissible</strong>
-            </Tooltip>
-          }
-        >
-          <div style={{ paddingBottom: "2px" }}>
-            <i
-              className="fa-solid fa-square-check fa-xl"
-              style={{ color: "blue", cursor: "pointer" }}
-            ></i>
-          </div>
-        </OverlayTrigger>
-      ) : (
-        <OverlayTrigger
-          placement="top"
-          overlay={
-            <Tooltip>
-              <strong>formulaire incomplet</strong>
-            </Tooltip>
-          }
-        >
-          <div style={{ paddingBottom: "2px" }}>
-            <i
-              className="fa-solid fa-square-xmark fa-xl"
-              style={{ color: "red", cursor: "pointer" }}
-            ></i>
-          </div>
-        </OverlayTrigger>
-      )}
+      {!hideBtn ? <SubmittableIcons submittable={submittable} /> : null}
       <input
-        className="btn btn-primary mx-2"
+        className="btn btn-primary me-2"
         type="button"
         value="Formulaires"
         onClick={() => navigate("/")}
+      />
+      {!hideBtn ? (
+        <input
+          className="btn btn-info me-2"
+          type="button"
+          value="Sommaire"
+          onClick={() => navigate("/summary")}
+        />
+      ) : null}
+      <input
+        className={`btn btn-success me-2 ${disableCheckout ? "disabled" : ""}`}
+        type="button"
+        value="Payer"
+        onClick={handleCheckout}
       />
       <AppMsg msg={msg} />
     </div>

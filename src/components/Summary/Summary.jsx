@@ -29,11 +29,11 @@ const Summary = () => {
   return (
     <>
       <div className="container text-center py-3">
+        <FormHeader title1="bon de commande" />
         <form onSubmit={handleSubmit}>
-          <FormHeader title1="bon de commande" />
           <SummaryTable />
         </form>
-        <FormsControls submittable={submittable} msg={msg} />
+        <FormsControls submittable={submittable} msg={msg} hideBtn={true}/>
       </div>
       <ConfirmationToast
         show={showToast}

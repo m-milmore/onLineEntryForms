@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { isEqual } from "lodash";
-import { appEmitter } from "../../App";
+import { nanoid } from "nanoid";
+import { appEmitter, FormsContext } from "../../App";
 import FormHeader from "../Commons/FormHeader";
 import IdSection from "../Commons/IdSection";
 import Championships from "./Championships";
@@ -26,15 +27,24 @@ const INIT_INFO = {
   studentFirstName: "Gail",
   studentLastName: "Wind",
   studentGender: "F",
-  entries: [],
-  solos: "",
+  entries: [
+    {
+      entryId: nanoid(),
+      level: "",
+      age: "All",
+      syllabus: "ouvert",
+      category: "solo",
+      dance: "",
+      division: "",
+    },
+  ],
 };
 
 const ProAmMulti = () => {
   const {
     state: { formId, i },
   } = useLocation();
-
+  const { setForms } = useContext(FormsContext);
   const [info, setInfo] = useState(INIT_INFO);
 
   const [submittable, setSubmittable] = useState(false);
@@ -91,6 +101,61 @@ const ProAmMulti = () => {
     };
   }, [info]);
 
+  // data sent from RegSelect component for solo level & division
+  // data sent from SoloRow component for solo dance
+  useEffect(() => {
+    const onUpdateSelect = ({ entryId, name, value }) => {
+      setInfo((prevState) => ({
+        ...prevState,
+        entries: prevState.entries.map((entry) =>
+          entry.entryId === entryId ? { ...entry, [name]: value } : entry
+        ),
+      }));
+    };
+
+    const selectListener = appEmitter.addListener(
+      "paSoloSelect",
+      onUpdateSelect
+    );
+
+    return () => {
+      selectListener.remove();
+    };
+  }, [info]);
+
+  useEffect(() => {
+    const onDeleteSolo = ({ entryId }) => {
+      setInfo((prevState) => ({
+        ...prevState,
+        entries: prevState.entries.filter((entry) => entry.entryId !== entryId),
+      }));
+    };
+
+    const deleteSoloListener = appEmitter.addListener(
+      "deleteSolo",
+      onDeleteSolo
+    );
+
+    return () => {
+      deleteSoloListener.remove();
+    };
+  }, [info]);
+
+  useEffect(() => {
+    const onAddSolo = (newEntry) => {
+      setInfo((prevState) => ({
+        ...prevState,
+        entries: [...prevState.entries, newEntry],
+      }));
+    };
+
+    const addSoloListener = appEmitter.addListener("addSolo", onAddSolo);
+
+    return () => {
+      addSoloListener.remove();
+    };
+  }, [info]);
+
   // to show a "submittable-form" icon or an "incomplete-form" icon
   useEffect(() => {
     const {
@@ -104,8 +169,20 @@ const ProAmMulti = () => {
       studentFirstName,
       studentLastName,
       studentGender,
-      solos,
     } = info;
+    let missingInEntries = false;
+    info.entries.forEach((entry) => {
+      if (entry.category === "solo") {
+        if (
+          !entry.level ||
+          !entry.division ||
+          entry.level === "--" ||
+          entry.division === "--" ||
+          !entry.dance
+        )
+          missingInEntries = true;
+      }
+    });
     setSubmittable(
       studio &&
         city &&
@@ -117,16 +194,23 @@ const ProAmMulti = () => {
         studentFirstName &&
         studentLastName &&
         studentGender &&
-        (info.entries.length > 0 || solos)
+        info.entries.length > 0 &&
+        !missingInEntries
     );
-  }, [info]);
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              formSubmittable: submittable,
+            }
+          : form
+      )
+    );
+  }, [info, formId, setForms, submittable]);
 
   const handleChange = ({ target: { name, value } }) => {
     setInfo({ ...info, [name]: value });
-  };
-
-  const handleSolos = ({ target: { value } }) => {
-    setInfo({ ...info, solos: value });
   };
 
   const handleSubmit = (e) => {
@@ -144,7 +228,7 @@ const ProAmMulti = () => {
           <Championships entries={info.entries} syllabus="fermé" />
           <Championships entries={info.entries} syllabus="ouvert" />
           <Scholarships entries={info.entries} />
-          <ProAmSolos solos={info.solos} handleSolos={handleSolos} />
+          <ProAmSolos entries={info.entries} />
           <FormFooter />
         </form>
         <FormsControls submittable={submittable} msg={msg} />

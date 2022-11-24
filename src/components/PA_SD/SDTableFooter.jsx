@@ -1,6 +1,6 @@
 import React from "react"
 
-const SDTableFooter = ({ syllabus, handleAddRow }) => {
+const SDTableFooter = ({ syllabus, handleAddEntry }) => {
   return (
     <tfoot>
       <tr style={{ border: "1px solid white", textAlign: "left" }}>
@@ -8,7 +8,7 @@ const SDTableFooter = ({ syllabus, handleAddRow }) => {
           <button
             type="button"
             className="btn btn-secondary py-0 px-1 m-0 d-print-none"
-            onClick={() => handleAddRow(syllabus)}
+            onClick={() => handleAddEntry(syllabus)}
           >
             {syllabus} (+)
           </button>

@@ -5,7 +5,7 @@ import { logo } from "../../constants";
 const FormHeader = ({ title1, title2 }) => {
   return (
     <div
-      className="d-flex flex-column flex-lg-row mb-5 flex-wrap flex-lg-nowrap
+      className="d-flex flex-column flex-lg-row mb-3 flex-wrap flex-lg-nowrap
     justify-content-center justify-content-md-between print-header"
     >
       <div

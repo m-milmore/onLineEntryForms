@@ -3,8 +3,8 @@ import { FormsContext } from "../../App";
 import { early, ageGroups } from "../../constants";
 import Formatter from "../Utils/Formatter";
 
-const PASummaryCalculate = ({ data }) => {
-  const forms = useContext(FormsContext);
+const SummaryCalculate = ({ data }) => {
+  const { forms } = useContext(FormsContext);
   const dataObj = useMemo(
     () => ({
       mainLine: data.split("|")[0],
@@ -14,6 +14,7 @@ const PASummaryCalculate = ({ data }) => {
       ageCategory: data.split("|")[4],
       subForm: data.split("|")[5],
       agesGroups: data.split("|")[6],
+      section: data.split("|")[7],
     }),
     [data]
   );
@@ -21,6 +22,7 @@ const PASummaryCalculate = ({ data }) => {
   const earlyPrice = parseInt(dataObj.earlyPriceStr.split(" ")[2]);
   const regPrice = parseInt(dataObj.regPriceStr.split(" ")[2]);
   const [noEntries, setNoEntries] = useState(0);
+  const tickets = dataObj.section === "BILLETS";
 
   useEffect(() => {
     const { formName, agesGroups, ageCategory, subForm } = dataObj;
@@ -44,7 +46,7 @@ const PASummaryCalculate = ({ data }) => {
                   const sameAgeGroup = str[0].split("|")[2] === ageCategory;
                   const sameDanceGroup = entry.category === subForm;
                   if (sameAgeGroup && sameDanceGroup) {
-                    entryCount =
+                    entryCount +=
                       subForm === "single" ? entry.categories.length : 1;
                   }
                 }
@@ -61,17 +63,39 @@ const PASummaryCalculate = ({ data }) => {
 
   const { mainLine, earlyPriceStr, regPriceStr } = dataObj;
 
+  const ticketSection = () => {
+    return (
+      <div className="d-flex">
+        <div style={{ width: "33%" }}>{mainLine.split("%")[0]}</div>
+        <div style={{ width: "33%", textAlign: "right" }}>
+          {mainLine.split("%")[1]}
+        </div>
+        <div>&nbsp;</div>
+      </div>
+    );
+  };
+
   return (
-    <tr key={data}>
+    <tr>
       <td
         className="text-start"
         style={{ borderRight: "1px solid black", width: "55%" }}
       >
-        {mainLine}
+        {tickets ? ticketSection() : mainLine}
       </td>
-      <td style={{ width: "5%" }}>{early() ? noEntries : null}</td>
-      <td style={{ width: "8%" }}>{earlyPriceStr}</td>
-      <td style={{ borderRight: "1px solid black", width: "7%" }}>
+      <td style={{ background: "rgba(0, 0, 0, .1", width: "5%" }}>
+        {early() ? noEntries : null}
+      </td>
+      <td style={{ background: "rgba(0, 0, 0, .1", width: "8%" }}>
+        {earlyPriceStr}
+      </td>
+      <td
+        style={{
+          background: "rgba(0, 0, 0, .1",
+          borderRight: "1px solid black",
+          width: "7%",
+        }}
+      >
         {early() ? Formatter.format(noEntries * earlyPrice) : null}
       </td>
       <td style={{ width: "5%" }}>{!early() ? noEntries : null}</td>
@@ -83,4 +107,4 @@ const PASummaryCalculate = ({ data }) => {
   );
 };
 
-export default PASummaryCalculate;
+export default SummaryCalculate;

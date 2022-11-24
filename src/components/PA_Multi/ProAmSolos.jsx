@@ -1,20 +1,29 @@
 import React from "react";
+import SoloTableHeader from "./SoloTableHeader";
+import SoloRow from "./SoloRow";
+import SoloTableFooter from "./SoloTableFooter";
 
-const ProAmSolos = ({ solos, handleSolos }) => {
+const ProAmSolos = ({ entries }) => {
   return (
     <>
       <div className="text-start">
-        <span className="text-uppercase fs-4 fw-bold text-decoration-underline">
+        <span className="text-uppercase fs-5 fw-bold text-decoration-underline">
           démonstration solo
         </span>
-        <span className="fs-5"> - Indiquez le niveau et la danse</span>
       </div>
-      <textarea
-        className="fs-6"
-        value={solos}
-        onChange={handleSolos}
-        style={{ width: "100%", resize: "none" }}
-      />
+      <div className="table-responsive">
+        <table className="table table-sm fs-6 mb-1 table-print">
+          <SoloTableHeader />
+          <tbody>
+            {entries.map((entry) =>
+              entry.entryId ? (
+                <SoloRow key={entry.entryId} entry={entry} />
+              ) : null
+            )}
+          </tbody>
+          <SoloTableFooter />
+        </table>
+      </div>
     </>
   );
 };

@@ -3,14 +3,16 @@ import "./RegSelect.css";
 import { appEmitter } from "../../App";
 import PropTypes from "prop-types";
 
-const RegSelect = ({ options, name, value, entryId }) => {
+const RegSelect = ({ options, name, value, entryId, form }) => {
   const handleSelect = ({ target: { value } }) => {
     const selected = {
       entryId,
       name,
       value,
     };
-    appEmitter.emit("select", selected);
+    form === "pa1D"
+      ? appEmitter.emit("pa1DSelect", selected)
+      : appEmitter.emit("paSoloSelect", selected);
   };
 
   return (

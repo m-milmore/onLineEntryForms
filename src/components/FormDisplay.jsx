@@ -9,7 +9,7 @@ import { appEmitter } from "../App";
 import "./FormDisplay.css";
 
 const FormDisplay = () => {
-  const forms = useContext(FormsContext);
+  const {forms} = useContext(FormsContext);
   const navigate = useNavigate();
 
   const [showConfModal, setShowConfModal] = useState(false);
@@ -42,7 +42,7 @@ const FormDisplay = () => {
           return (
             <div key={form.formId} className="card-class" role="button">
               <Card
-                bg={sommaire ? "success" : "info"}
+                bg={sommaire ? "info" : "primary"}
                 text="white"
                 style={{ width: "10rem", height: "7.5rem" }}
                 onClick={() => clickToNavigate(form.navigate, form.formId, i)}

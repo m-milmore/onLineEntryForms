@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { nanoid } from "nanoid";
-import { appEmitter, UserContext } from "../../App";
+import { appEmitter, UserContext, FormsContext } from "../../App";
 import FormHeader from "../Commons/FormHeader";
 import IdSection from "../Commons/IdSection";
 import AgeSection from "./AgeSection";
@@ -49,6 +49,7 @@ const ProAm1Dance = () => {
     state: { formId, i },
   } = useLocation();
   const { entriesService } = useContext(UserContext);
+  const { setForms } = useContext(FormsContext);
   const [info, setInfo] = useState(INIT_INFO);
 
   const [submittable, setSubmittable] = useState(false);
@@ -87,7 +88,7 @@ const ProAm1Dance = () => {
     };
   }, [info]);
 
-  // data sent from RegSelect component for level and age
+  // data sent from RegSelect component for single dance level & age
   useEffect(() => {
     const onUpdateSelect = ({ entryId, name, value }) => {
       setInfo((prevState) => ({
@@ -98,7 +99,7 @@ const ProAm1Dance = () => {
       }));
     };
 
-    const selectListener = appEmitter.addListener("select", onUpdateSelect);
+    const selectListener = appEmitter.addListener("pa1DSelect", onUpdateSelect);
 
     return () => {
       selectListener.remove();
@@ -107,7 +108,12 @@ const ProAm1Dance = () => {
 
   // data sent from Dance component, add or remove a dance: select is a true/false toggle
   useEffect(() => {
-    const onUpdateComps = ({ dance, danceStyle, entryId, newSelect: select }) => {
+    const onUpdateComps = ({
+      dance,
+      danceStyle,
+      entryId,
+      newSelect: select,
+    }) => {
       const comp = {
         dance,
         danceStyle,
@@ -154,7 +160,7 @@ const ProAm1Dance = () => {
     };
   }, [info]);
 
-  // to show a "submittable-form" icon or an "incomplete-form" icon
+  // to show a "submittable_form" icon (checkmark) or an "incomplete_form" icon (xmark)
   useEffect(() => {
     const {
       studio,
@@ -193,7 +199,17 @@ const ProAm1Dance = () => {
         info.entries.length > 0 &&
         !missingInEntries
     );
-  }, [info]);
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              formSubmittable: submittable,
+            }
+          : form
+      )
+    );
+  }, [info, formId, setForms, submittable]);
 
   const handleChange = ({ target: { name, value } }) => {
     setInfo({ ...info, [name]: value });

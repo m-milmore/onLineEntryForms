@@ -1,5 +1,5 @@
 import React from "react";
-import { paSDDanceStyles } from "../../constants";
+import { paSDDanceDivision } from "../../constants";
 
 const SDTableHeader = ({ syllabus }) => {
   const transformSyllabus = syllabus.toUpperCase();
@@ -13,18 +13,14 @@ const SDTableHeader = ({ syllabus }) => {
         <th scope="col" className="ages-class">
           ÂGE
         </th>
-        {paSDDanceStyles.map((style, i) => (
+        {paSDDanceDivision.map((style) => (
           <th
-            key={Object.getOwnPropertyNames(style)[0]}
+            key={style[0]}
             scope="col"
-            colSpan={Object.values(style)[0].length}
-            className={
-              Object.getOwnPropertyNames(style)[0] !== "rhythm"
-                ? "dance-division"
-                : null
-            }
+            colSpan={style[1].length}
+            className={style[0] !== "rhythm" ? "dance-division" : null}
           >
-            {Object.getOwnPropertyNames(style)[0].toUpperCase()}
+            {style[0].toUpperCase()}
             <br className="br-class" /> {transformSyllabus}
           </th>
         ))}

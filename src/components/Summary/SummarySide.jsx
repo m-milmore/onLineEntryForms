@@ -1,11 +1,11 @@
 import React from "react";
 
-const SummarySide = ({section}) => {
+const SummarySide = ({ section, rowsHeight }) => {
   return (
     <tr>
       <td
-        className="text-uppercase bg-dark text-white"
-        rowSpan="0"
+        className="text-uppercase bg-dark text-white text-nowrap"
+        rowSpan={rowsHeight}
         style={{ width: "3%" }}
       >
         <div
@@ -21,7 +21,7 @@ const SummarySide = ({section}) => {
         </div>
       </td>
       <td
-        rowSpan="0"
+        rowSpan={rowsHeight}
         style={{
           with: "2%",
           fontSize: "1px",

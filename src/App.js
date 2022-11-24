@@ -44,16 +44,19 @@ const FORMS_INIT = [
     formId: nanoid(),
     formName: "Pro/Am 1 Danse",
     navigate: "/pa1d",
+    formSubmittable: false,
   },
   {
     formId: nanoid(),
     formName: "Pro/Am Multi Danse",
     navigate: "/pamulti",
+    formSubmittable: false,
   },
   {
     formId: nanoid(),
     formName: "Sommaire",
     navigate: "/summary",
+    formSubmittable: true,
   },
 ];
 
@@ -66,6 +69,7 @@ const FormsProvider = ({ children }) => {
         formId: nanoid(),
         formName,
         navigate,
+        formSubmittable: false,
       };
       const arrSumm = forms.filter((form) => form.formName === "Sommaire");
       const arrWoSumm = forms.filter((form) => form.formName !== "Sommaire");
@@ -91,7 +95,7 @@ const FormsProvider = ({ children }) => {
   }, [forms]);
 
   return (
-    <FormsContext.Provider value={forms}>{children}</FormsContext.Provider>
+    <FormsContext.Provider value={{forms, setForms}}>{children}</FormsContext.Provider>
   );
 };
 

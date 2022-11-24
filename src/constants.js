@@ -29,7 +29,7 @@ de respect envers les officiels ou le personnel travaillant pour le Championnat 
 ne se conformant pas au présent règlement.`;
 
 export const ageGroups = {
-  paSDAges: [
+  paSDAgeGroups: [
     "JV|(JV 11-)|0",
     "JR|(JR 12-15)|0",
     "JE|(JE 16-18)|1",
@@ -83,10 +83,11 @@ export const paSDLevelsOpen = [
   "Or Avancé",
 ];
 
-export const paSDDanceStyles = [
-  { smooth: ["W", "T", "F", "VW", "PB"] },
-  {
-    rhythm: [
+export const paSDDanceDivision = [
+  ["smooth", ["W", "T", "F", "VW", "PB"]],
+  [
+    "rhythm",
+    [
       "C",
       "R",
       "SW",
@@ -103,9 +104,9 @@ export const paSDDanceStyles = [
       "MI",
       "TV",
     ],
-  },
-  { ballroom: ["W", "T", "VW", "F", "Q"] },
-  { latin: ["C", "S", "R", "PD", "J"] },
+  ],
+  ["ballroom", ["W", "T", "VW", "F", "Q"]],
+  ["latin", ["C", "S", "R", "PD", "J"]],
 ];
 
 // pro-am 3-dance data
@@ -127,6 +128,9 @@ export const paScholDances = [
   "Ballroom (W/T/VW/F/Q)",
   "Latin (C/S/R/P/J)",
 ];
+
+// pro-am solo data
+export const divisions = ["smooth", "rhythm", "ballroom", "latin"];
 
 // dance names for tooltips
 export const danceNames = {
@@ -175,20 +179,53 @@ export const early = () => {
   return today <= deadline ? true : false;
 };
 
-// data 1-2-3 for UI, data 4 for main state (forms), data 5 for jr/ad age group for prices, data 6 for sub-form types
-export const summaryPACategories = [
-  "Adulte(16+) Danse Individuelle| x 35 $can = | x 40 $can = |Pro/Am 1 Danse|1|single|paSDAges",
-  "Adulte(16+) Démonstration en solo| x 50 $can = | x 55 $can = |Pro/Am Multi Danse|1|solo|paSolosAgeGroups",
-  "Adulte(16+) Multi 3 danses| x 45 $can = | x 50 $can = |Pro/Am Multi Danse|1|champ|paChampAgeGroups",
-  "Adulte(16+) Bourse d'étude| x 65 $can = | x 70 $can = |Pro/Am Multi Danse|1|schol|paScholAgeGroups",
-  "Junior(15-) Danse Individuelle| x 15 $can = | x 20 $can = |Pro/Am 1 Danse|0|single|paSDAges",
-  "Junior(15-) Démonstration en solo| x 25 $can = | x 35 $can = |Pro/Am Multi Danse|0|solo|paSolosAgeGroups",
-  "Junior(15-) Multi 3 danses| x 20 $can = | x 25 $can = |Pro/Am Multi Danse|0|champ|paChampAgeGroups",
-  "Junior(15-) Bourse d'étude| x 30 $can = | x 35 $can = |Pro/Am Multi Danse|0|schol|paScholAgeGroups",
+export const summaryCategories = [
+  [
+    "Adulte(16+) Danse Individuelle| x 35 $can = | x 40 $can = |Pro/Am 1 Danse|1|single|paSDAgeGroups|PRO-AM",
+    "Adulte(16+) Multi 3 danses| x 45 $can = | x 50 $can = |Pro/Am Multi Danse|1|champ|paChampAgeGroups|PRO-AM",
+    "Adulte(16+) Bourse d'étude| x 65 $can = | x 70 $can = |Pro/Am Multi Danse|1|schol|paScholAgeGroups|PRO-AM",
+    "Junior(15-) Danse Individuelle| x 15 $can = | x 20 $can = |Pro/Am 1 Danse|0|single|paSDAgeGroups|PRO-AM",
+    "Junior(15-) Multi 3 danses| x 20 $can = | x 25 $can = |Pro/Am Multi Danse|0|champ|paChampAgeGroups|PRO-AM",
+    "Junior(15-) Bourse d'étude| x 30 $can = | x 35 $can = |Pro/Am Multi Danse|0|schol|paScholAgeGroups|PRO-AM",
+    "Démonstration en solo (Adulte & Junior)| x 50 $can = | x 55 $can = |Pro/Am Multi Danse|1|solo|paSolosAgeGroups|PRO-AM",
+  ],
+  [
+    "Adulte(16+) Couple / chaque catégorie| x 35 $can = | x 40 $can = |Amateur Couple|1|amCpl|amCplAges|AMATEUR",
+    "Adulte(16+) Cabaret| x 35 $can = | x 40 $can = |Amateur Couple|1|cabaret|amCplAges|AMATEUR",
+    "Adulte(19+) Amateur Mixte Danse Individuelle| x 35 $can = | x 40 $can = |Amateur Mix|1|mix1D|mixAges|AMATEUR",
+    "Adulte(19+) Amateur Mixte Multi 3 danses| x 45 $can = | x 50 $can = |Amateur Mix|1|mix3D|mixAges|AMATEUR",
+    "Adulte(19+) Amateur Mixte Multi 5 danses| x 65 $can = | x 70 $can = |Amateur Mix|1|mix5D|mixAges|AMATEUR",
+    "Adulte(19+) Amateur Solo / Chaque danse| x 10 $can = | x 15 $can = |Amateur Solo|1|solo1D|solo1DAges|AMATEUR",
+    "Adulte(19+) Amateur Solo / Multi danses| x 20 $can = | x 25 $can = |Amateur Solo|1|soloMulti|soloMultiAges|AMATEUR",
+    "Juvénile & Junior Couple / chaque catégorie| x 20 $can = | x 25 $can = |Amateur Couple|0|amCpl|amCplAges|AMATEUR",
+    "Juvénile, Junior & Jeunesse Amateur Mixte Danse Individuelle| x 10 $can = | x 10 $can = |Amateur Mix|0|mix1D|mixAges|AMATEUR",
+    "Juvénile, Junior & Jeunesse Amateur Mixte Multi| x 20 $can = | x 20 $can = |Amateur Mix|0|mixMulti|mixAges|AMATEUR",
+    "Juvénile, Junior & Jeunesse Amateur Solo / Chaque danse| x 10 $can = | x 15 $can = |Amateur Solo|0|solo1D|solo1DAges|AMATEUR",
+    "Juvénile, Junior & Jeunesse Amateur Solo / Multi 3 danses| x 20 $can = | x 25 $can = |Amateur Solo|0|soloMulti|soloMultiAges|AMATEUR",
+    "Juvénile & Junior Amateur pré-compétitif / Couple| x 20 $can = | x 20 $can = |Amateur Pré-Compétitif|0|preComp1DCpl|preComp1DAges|AMATEUR",
+    "Juvénile & Junior Amateur pré-compétitif / Simple| x 10 $can = | x 10 $can = |Amateur Pré-Compétitif|0|preComp1DSolo|preCompMultiAges|AMATEUR",
+    "Formation d'équipe| x 65 $can = | x 75 $can = |Formation|1|formation|formAges|AMATEUR",
+  ],
+  [
+    "Chaque catégorie| x 110 $can = | x 125 $can = |Pro|1|pro|proAges|PRO",
+    "Exhibition| x 85 $can = | x 95 $can = |Pro|1|exhibition|proAges|PRO",
+  ],
+  [
+    "BILLETS VENDREDI%1ère RANGÉE TABLE| x 70 $can = | x 75 $can = |Tickets|1|friday|ticketAges|BILLETS",
+    "%2e RANGÉE| x 55 $can = | x 60 $can = |Tickets|1|friday|ticketAges|BILLETS",
+    "%Juvénile + Junior 15 & -| x 25 $can = | x 30 $can = |Tickets|0|friday|ticketAges|BILLETS",
+    "BILLETS SAMEDI%1ère RANGÉE| x 70 $can = | x 75 $can = |Tickets|1|saturday|ticketAges|BILLETS",
+    "%2e RANGÉE| x 55 $can = | x 60 $can = |Tickets|1|saturday|ticketAges|BILLETS",
+    "%Juvénile + Junior 15 & -| x 25 $can = | x 30 $can = |Tickets|0|saturday|ticketAges|BILLETS",
+    "BILLETS DIMANCHE%Adulte| x 25 $can = | x 30 $can = |Tickets|1|sunday|ticketAges|BILLETS",
+    "%Juvénile + Junior 15 & -| x 20 $can = | x 25 $can = |Tickets|0|sunday|ticketAges|BILLETS",
+  ],
 ];
 
-// countries, states & provinces
+export const summaryTableFootNote =
+  "Tous les compétiteurs doivent se procurer un billet d'admission pour avoir accès au ballroom";
 
+// countries, states & provinces
 export const countries = [
   "Afghanistan",
   "Åland Islands",

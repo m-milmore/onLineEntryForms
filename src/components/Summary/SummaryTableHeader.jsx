@@ -8,7 +8,7 @@ const SummaryTableHeader = () => {
       <tr>
         <th
           className="summary-thead"
-          colSpan="3"
+          colSpan="5"
           style={{ border: "1px solid white" }}
         >
           &nbsp;
