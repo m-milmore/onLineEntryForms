@@ -3,7 +3,7 @@ import { FormsContext } from "../../App";
 import { early, ageGroups } from "../../constants";
 import Formatter from "../Utils/Formatter";
 
-const SummaryCalculate = ({ data }) => {
+const SummaryCalculate = ({ data, handleSetTotal }) => {
   const { forms } = useContext(FormsContext);
   const dataObj = useMemo(
     () => ({
@@ -21,8 +21,8 @@ const SummaryCalculate = ({ data }) => {
 
   const earlyPrice = parseInt(dataObj.earlyPriceStr.split(" ")[2]);
   const regPrice = parseInt(dataObj.regPriceStr.split(" ")[2]);
+  const isTicketsSection = dataObj.section === "BILLETS";
   const [noEntries, setNoEntries] = useState(0);
-  const tickets = dataObj.section === "BILLETS";
 
   useEffect(() => {
     const { formName, agesGroups, ageCategory, subForm } = dataObj;
@@ -54,12 +54,13 @@ const SummaryCalculate = ({ data }) => {
             }
           }
           setNoEntries(entryCount);
+          // handleSetTotal(entryCount * earlyPrice);
         });
       }
     };
 
     noEntriesCalc();
-  }, [dataObj, forms]);
+  }, [dataObj, forms, earlyPrice, handleSetTotal]);
 
   const { mainLine, earlyPriceStr, regPriceStr } = dataObj;
 
@@ -81,7 +82,7 @@ const SummaryCalculate = ({ data }) => {
         className="text-start"
         style={{ borderRight: "1px solid black", width: "55%" }}
       >
-        {tickets ? ticketSection() : mainLine}
+        {isTicketsSection ? ticketSection() : mainLine}
       </td>
       <td style={{ background: "rgba(0, 0, 0, .1", width: "5%" }}>
         {early() ? noEntries : null}

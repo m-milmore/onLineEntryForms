@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { nanoid } from "nanoid";
 import SummaryTableHeader from "./SummaryTableHeader";
 import SummarySide from "./SummarySide";
@@ -8,6 +8,12 @@ import SummaryTableFooter from "./SummaryTableFooter";
 import { summaryCategories } from "../../constants";
 
 const SummaryTable = ({ handleSubmit }) => {
+  const [total, setTotal] = useState(0);
+
+  const handleSetTotal = (amount) => {
+    setTotal((prev) => (prev += amount));
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="table-responsive">
@@ -23,11 +29,17 @@ const SummaryTable = ({ handleSubmit }) => {
                 case "summaryEmpty":
                   return <SummaryEmptyLine key={nanoid()} />;
                 default:
-                  return <SummaryCalculate key={nanoid()} data={cat} />;
+                  return (
+                    <SummaryCalculate
+                      key={nanoid()}
+                      data={cat}
+                      handleSetTotal={handleSetTotal}
+                    />
+                  );
               }
             })}
           </tbody>
-          <SummaryTableFooter total={0} />
+          <SummaryTableFooter total={total} />
         </table>
       </div>
     </form>
