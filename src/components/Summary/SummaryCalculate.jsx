@@ -54,7 +54,7 @@ const SummaryCalculate = ({ data, handleSetTotal }) => {
             }
           }
           setNoEntries(entryCount);
-          // handleSetTotal(entryCount * earlyPrice);
+          // handleSetTotal(earlyPrice);
         });
       }
     };
