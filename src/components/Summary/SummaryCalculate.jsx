@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect, useMemo } from "react";
-import { FormsContext } from "../../App";
+import { appEmitter, FormsContext } from "../../App";
 import { early, ageGroups } from "../../constants";
 import Formatter from "../Utils/Formatter";
 
-const SummaryCalculate = ({ data, handleSetTotal }) => {
+const SummaryCalculate = ({ data }) => {
   const { forms } = useContext(FormsContext);
   const dataObj = useMemo(
     () => ({
@@ -25,9 +25,8 @@ const SummaryCalculate = ({ data, handleSetTotal }) => {
   const [noEntries, setNoEntries] = useState(0);
 
   useEffect(() => {
-    const { formName, agesGroups, ageCategory, subForm } = dataObj;
-
     const noEntriesCalc = () => {
+      const { formName, agesGroups, ageCategory, subForm } = dataObj;
       const entryForms = forms.filter((form) => form.formName === formName);
 
       if (entryForms) {
@@ -54,13 +53,17 @@ const SummaryCalculate = ({ data, handleSetTotal }) => {
             }
           }
           setNoEntries(entryCount);
+<<<<<<< HEAD
           // handleSetTotal(earlyPrice);
+=======
+>>>>>>> fixing-calculate
         });
       }
     };
-
     noEntriesCalc();
-  }, [dataObj, forms, earlyPrice, handleSetTotal]);
+    const amount = early() ? noEntries * earlyPrice : noEntries * regPrice;
+    appEmitter.emit("entryCount", { amount });
+  }, [dataObj, forms, noEntries, earlyPrice, regPrice]);
 
   const { mainLine, earlyPriceStr, regPriceStr } = dataObj;
 

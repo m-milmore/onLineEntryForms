@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { appEmitter } from "../../App";
 import { summaryTableFootNote } from "../../constants";
+import Formatter from "../Utils/Formatter";
 
-const SummaryTableFooter = ({ total }) => {
+const SummaryTableFooter = () => {
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    const onEntryCount = ({ amount }) => {
+      setTotal((prev) => (prev += amount));
+    };
+
+    const entryCountListener = appEmitter.addListener(
+      "entryCount",
+      onEntryCount
+    );
+
+    return () => {
+      entryCountListener.remove();
+    };
+  }, []);
+
   return (
     <tfoot>
       <tr style={{ border: "1px solid white" }}>
@@ -21,7 +40,7 @@ const SummaryTableFooter = ({ total }) => {
               fontSize: "1.2rem",
             }}
           >
-            TOTAL: {total}
+            TOTAL: {Formatter.format(total)} CAN
           </div>
         </td>
       </tr>
