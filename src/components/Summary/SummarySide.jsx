@@ -38,7 +38,7 @@ const SummarySide = ({ data }) => {
           with: "2%",
           fontSize: "1px",
           border: "1px solid white",
-          borderRight: "1px solid black",
+          borderRight: bigSide ? "1px solid white" : "1px solid black",
         }}
       >
         &nbsp;
