@@ -53,10 +53,6 @@ const SummaryCalculate = ({ data }) => {
             }
           }
           setNoEntries(entryCount);
-<<<<<<< HEAD
-          // handleSetTotal(earlyPrice);
-=======
->>>>>>> fixing-calculate
         });
       }
     };
