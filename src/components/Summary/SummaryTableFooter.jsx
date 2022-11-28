@@ -8,6 +8,7 @@ const SummaryTableFooter = () => {
 
   useEffect(() => {
     const onEntryCount = ({ amount }) => {
+      console.log("listener");
       setTotal((prev) => (prev += amount));
     };
 

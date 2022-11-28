@@ -57,6 +57,16 @@ const FORMS_INIT = [
     formName: "Sommaire",
     navigate: "/summary",
     formSubmittable: true,
+    tickets: {
+      friday1: nanoid(),
+      friday2: nanoid(),
+      friday0: nanoid(),
+      saturday1: nanoid(),
+      saturday2: nanoid(),
+      saturday0: nanoid(),
+      sunday1: nanoid(),
+      sunday0: nanoid(),
+    },
   },
 ];
 
@@ -95,7 +105,9 @@ const FormsProvider = ({ children }) => {
   }, [forms]);
 
   return (
-    <FormsContext.Provider value={{forms, setForms}}>{children}</FormsContext.Provider>
+    <FormsContext.Provider value={{ forms, setForms }}>
+      {children}
+    </FormsContext.Provider>
   );
 };
 
