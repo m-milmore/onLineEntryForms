@@ -627,6 +627,11 @@ A listener indicated an asynchronous response by returning true, but the message
                           state: { formId: form.formId },
                         })
                       }
+
+************************************************************************
+
+What is Memoization?
+Memoization is a fancy word for caching. It says “Remember the result of calling this function, and next time it’s called with the same argument(s), just return the old result instead of recomputing it.” The function is basically memorizing the answers. It’s still called “memoization,” though. Without the “r”.
 	
 
 
