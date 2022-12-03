@@ -18,7 +18,7 @@ const INIT_INFO = {
   studio: "One Studio",
   city: "Rochester",
   state: "New York",
-  stateAbrr: "NY",
+  stateAbbrev: "NY",
   phone: "323-987-6541",
   email: "y@y.com",
   teacherFirstName: "Fred",
@@ -66,6 +66,22 @@ const ProAmMulti = () => {
   useEffect(() => {
     localStorage.setItem(formId, JSON.stringify(info));
   }, [info, formId]);
+
+  // data sent from BaseSelect component
+  useEffect(() => {
+    const onUpdateTerritory = ({ territory, stateAbbrev }) => {
+      setInfo({ ...info, state: territory, stateAbbrev });
+    };
+
+    const territoryListener = appEmitter.addListener(
+      "territory",
+      onUpdateTerritory
+    );
+
+    return () => {
+      territoryListener.remove();
+    };
+  }, [info]);
 
   useEffect(() => {
     const onUpdateEntries = ({

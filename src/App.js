@@ -116,7 +116,7 @@ const PrivateRoute = ({ children, isLoggedIn, ...props }) => {
 };
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [email, setEmail] = useState(""); // to pass email of forgotpassword to login page via listener
   const [msg, setMsg] = useState(INIT_MSG);
 

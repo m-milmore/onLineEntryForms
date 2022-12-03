@@ -1,12 +1,19 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { appEmitter } from "../../App";
+import { provinces, states, provAbbr, statesAbbr } from "../../constants";
 import PropTypes from "prop-types";
 
 const BaseSelect = ({ label, value, options, dividers }) => {
   const handleClick = ({ target: { value } }) => {
+    const countriesDivisions = provinces.concat(states);
+    const countriesDivisionsAbbr = provAbbr.concat(statesAbbr);
+    const stateAbbrev = countriesDivisions.includes(value)
+      ? countriesDivisionsAbbr[countriesDivisions.indexOf(value)]
+      : value;
     const territory = {
       territory: value,
+      stateAbbrev,
     };
     appEmitter.emit("territory", territory);
   };

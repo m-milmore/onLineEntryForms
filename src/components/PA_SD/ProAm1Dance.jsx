@@ -16,6 +16,7 @@ const INIT_INFO = {
   studio: "Wow!",
   city: "Heckville",
   state: "Maine",
+  stateAbbrev: "ME",
   phone: "212-321-6547",
   email: "z@z.com",
   teacherFirstName: "Ed",
@@ -74,8 +75,8 @@ const ProAm1Dance = () => {
 
   // data sent from BaseSelect component
   useEffect(() => {
-    const onUpdateTerritory = ({ territory }) => {
-      setInfo({ ...info, state: territory });
+    const onUpdateTerritory = ({ territory, stateAbbrev }) => {
+      setInfo({ ...info, state: territory, stateAbbrev });
     };
 
     const territoryListener = appEmitter.addListener(
