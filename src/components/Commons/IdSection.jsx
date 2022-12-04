@@ -3,13 +3,32 @@ import "./IdSection.css";
 import BaseText from "./BaseText";
 import BaseSelect from "./BaseSelect";
 import BaseRadio from "./BaseRadio";
-import { countries, states, provinces } from "../../constants";
+import {
+  countries,
+  states,
+  provinces,
+  statesAbbr,
+  provAbbr,
+} from "../../constants";
 
-const IdSection = ({ info, handleChange }) => {
+const IdSection = ({ info, setInfo }) => {
   const territories = provinces.concat(states.concat(countries));
   const dividers = [provinces.length - 1, provinces.length + states.length - 1];
+  const countriesDivisions = provinces.concat(states);
+  const countriesDivisionsAbbr = provAbbr.concat(statesAbbr);
   const rowClass =
     "row border-bottom border-dark m-0 p-0 d-flex align-items-start";
+
+  const handleChange = ({ target: { name, value } }) => {
+    setInfo({ ...info, [name]: value });
+  };
+
+  const handleClick = ({ target: { value } }) => {
+    const stateAbbrev = countriesDivisions.includes(value)
+      ? countriesDivisionsAbbr[countriesDivisions.indexOf(value)]
+      : value;
+    setInfo({ ...info, state: value, stateAbbrev });
+  };
 
   return (
     <div className="text-start fs-6 p-0 section-container">
@@ -38,6 +57,7 @@ const IdSection = ({ info, handleChange }) => {
             value={info.state}
             options={territories}
             dividers={dividers}
+            handleClick={handleClick}
           />
         </div>
       </div>

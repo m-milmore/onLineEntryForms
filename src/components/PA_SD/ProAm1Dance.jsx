@@ -73,23 +73,7 @@ const ProAm1Dance = () => {
     localStorage.setItem(formId, JSON.stringify(info));
   }, [info, formId]);
 
-  // data sent from BaseSelect component
-  useEffect(() => {
-    const onUpdateTerritory = ({ territory, stateAbbrev }) => {
-      setInfo({ ...info, state: territory, stateAbbrev });
-    };
-
-    const territoryListener = appEmitter.addListener(
-      "territory",
-      onUpdateTerritory
-    );
-
-    return () => {
-      territoryListener.remove();
-    };
-  }, [info]);
-
-  // data sent from RegSelect component for single dance level & age
+  // data sent from RegSelect component for single level & age
   useEffect(() => {
     const onUpdateSelect = ({ entryId, name, value }) => {
       setInfo((prevState) => ({
@@ -212,10 +196,6 @@ const ProAm1Dance = () => {
     );
   }, [info, formId, setForms, submittable]);
 
-  const handleChange = ({ target: { name, value } }) => {
-    setInfo({ ...info, [name]: value });
-  };
-
   const handleAddEntry = (syllabus) => {
     const newEntry = {
       entryId: nanoid(),
@@ -278,7 +258,7 @@ const ProAm1Dance = () => {
             title1={`${i + 1}.PRO_AM`}
             title2="DANSES INDIVIDUELLES"
           />
-          <IdSection info={info} handleChange={handleChange} />
+          <IdSection info={info} setInfo={setInfo} />
           <AgeSection />
           <SingleDances
             entries={info.entries}

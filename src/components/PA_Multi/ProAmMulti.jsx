@@ -67,22 +67,6 @@ const ProAmMulti = () => {
     localStorage.setItem(formId, JSON.stringify(info));
   }, [info, formId]);
 
-  // data sent from BaseSelect component
-  useEffect(() => {
-    const onUpdateTerritory = ({ territory, stateAbbrev }) => {
-      setInfo({ ...info, state: territory, stateAbbrev });
-    };
-
-    const territoryListener = appEmitter.addListener(
-      "territory",
-      onUpdateTerritory
-    );
-
-    return () => {
-      territoryListener.remove();
-    };
-  }, [info]);
-
   useEffect(() => {
     const onUpdateEntries = ({
       age,
@@ -225,10 +209,6 @@ const ProAmMulti = () => {
     );
   }, [info, formId, setForms, submittable]);
 
-  const handleChange = ({ target: { name, value } }) => {
-    setInfo({ ...info, [name]: value });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setToastMsg("");
@@ -240,7 +220,7 @@ const ProAmMulti = () => {
       <div className="container text-center py-3">
         <form onSubmit={handleSubmit}>
           <FormHeader title1={`${i + 1}.PRO_AM`} title2="MULTI DANSES" />
-          <IdSection info={info} handleChange={handleChange} />
+          <IdSection info={info} setInfo={setInfo} />
           <Championships entries={info.entries} syllabus="fermé" />
           <Championships entries={info.entries} syllabus="ouvert" />
           <Scholarships entries={info.entries} />
