@@ -7,6 +7,7 @@ import "./Summary.css";
 import { INIT_MSG } from "../../constants";
 
 const Summary = () => {
+  const [submittable, setSubmittable] = useState(false);
   const [msg, setMsg] = useState(INIT_MSG);
   const [showToast, setShowToast] = useState(false);
   const toggleToast = useCallback(() => {
@@ -24,8 +25,8 @@ const Summary = () => {
     <>
       <div className="container text-center py-3">
         <FormHeader title1="bon de commande" />
-        <SummaryTable handleSubmit={handleSubmit} />
-        <FormsControls msg={msg} hideBtn={true} />
+        <SummaryTable handleSubmit={handleSubmit}/>
+        <FormsControls submittable={submittable} msg={msg} hideBtn={true} />
       </div>
       <ConfirmationToast
         show={showToast}

@@ -56,7 +56,7 @@ const FORMS_INIT = [
     formId: nanoid(),
     formName: "Sommaire",
     navigate: "/summary",
-    formSubmittable: true,
+    formSubmittable: false,
     tickets: {
       friday1: nanoid(),
       friday2: nanoid(),
@@ -116,7 +116,7 @@ const PrivateRoute = ({ children, isLoggedIn, ...props }) => {
 };
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [email, setEmail] = useState(""); // to pass email of forgotpassword to login page via listener
   const [msg, setMsg] = useState(INIT_MSG);
 

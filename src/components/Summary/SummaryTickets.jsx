@@ -60,8 +60,16 @@ const SummaryTickets = ({ data }) => {
   };
 
   const handleTicketChange = ({ target: { value } }) => {
-    setCurrValue(value - noEntries);
-    setNoEntries(value);
+    let trimmedValue = value.replace(/\D/g, "");
+    trimmedValue = trimmedValue.replace(/^0+/, "");
+    trimmedValue = !trimmedValue ? 0 : trimmedValue;
+    if (trimmedValue > 20) {
+      setCurrValue(0 - noEntries);
+      setNoEntries(0);
+    } else {
+      setCurrValue(trimmedValue - noEntries);
+      setNoEntries(trimmedValue);
+    }
   };
 
   const ticketInput = () => {

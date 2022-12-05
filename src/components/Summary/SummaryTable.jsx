@@ -24,7 +24,9 @@ const SummaryTable = ({ handleSubmit }) => {
                 case "summaryEmpty":
                   return <SummaryEmptyLine key={nanoid()} />;
                 case "billets":
-                  return <SummaryTickets key={nanoid()} data={cat} />;
+                  return (
+                    <SummaryTickets key={nanoid()} data={cat} />
+                  );
                 default:
                   return <SummaryCalculate key={nanoid()} data={cat} />;
               }

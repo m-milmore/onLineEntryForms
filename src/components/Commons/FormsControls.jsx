@@ -16,6 +16,8 @@ const FormsControls = ({ submittable, msg, hideBtn }) => {
 
   const handleCheckout = () => {
     console.log("Handle Checkout");
+    console.log("Liste de toutes les inscriptions:")
+    console.log("Liste de la commande des billets:")
   };
 
   return (
