@@ -1,5 +1,5 @@
-import React from "react";
-import { appEmitter } from "../../App";
+import React, { useContext } from "react";
+import { FormsContext } from "../../App";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import RegSelect from "../Commons/RegSelect";
@@ -13,16 +13,25 @@ import {
 import "./TableRow.css";
 import PropTypes from "prop-types";
 
-const TableRow = ({ entry }) => {
+const TableRow = ({ entry, formId }) => {
+  const { setForms } = useContext(FormsContext);
   const { paSDAgeGroups } = ageGroups;
   const levels = entry.syllabus === "fermé" ? paSDLevelsClosed : paSDLevelsOpen;
   const dances = entry.categories.length;
 
-  const handleDeleteEntry = (entryId) => {
-    const entryToDelete = {
-      entryId,
-    };
-    appEmitter.emit("deleteEntry", entryToDelete);
+  const handleDeleteEntry = () => {
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              entries: form.entries.filter(
+                (data) => data.entryId !== entry.entryId
+              ),
+            }
+          : form
+      )
+    );
   };
 
   return (
@@ -33,7 +42,7 @@ const TableRow = ({ entry }) => {
           name="level"
           value={entry.level}
           entryId={entry.entryId}
-          form="pa1D"
+          formId={formId}
         />
       </td>
       <td style={{ border: "1px solid black" }}>
@@ -42,7 +51,7 @@ const TableRow = ({ entry }) => {
           name="age"
           value={entry.age}
           entryId={entry.entryId}
-          form="pa1D"
+          formId={formId}
         />
       </td>
       {paSDDanceDivision.map((danceStyle) => (
@@ -52,6 +61,7 @@ const TableRow = ({ entry }) => {
           danceStyle={danceStyle[0]}
           entryId={entry.entryId}
           categories={entry.categories}
+          formId={formId}
         />
       ))}
       <td
@@ -69,7 +79,7 @@ const TableRow = ({ entry }) => {
         >
           <div
             type="button"
-            onClick={() => handleDeleteEntry(entry.entryId)}
+            onClick={handleDeleteEntry}
             className="position-absolute top-0 end-0 delete-btn d-print-none"
           >
             <span>x</span>

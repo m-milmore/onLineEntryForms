@@ -1,5 +1,5 @@
-import React from "react";
-import "./IdSection.css";
+import React, { useContext } from "react";
+import { FormsContext } from "../../App";
 import BaseText from "./BaseText";
 import BaseSelect from "./BaseSelect";
 import BaseRadio from "./BaseRadio";
@@ -10,8 +10,24 @@ import {
   statesAbbr,
   provAbbr,
 } from "../../constants";
+import "./IdSection.css";
 
-const IdSection = ({ info, setInfo }) => {
+const IdSection = ({ formId }) => {
+  const { forms, setForms } = useContext(FormsContext);
+  const currFormData = forms.filter((form) => form.formId === formId);
+  const {
+    studio,
+    city,
+    state,
+    phone,
+    email,
+    teacherFirstName,
+    teacherLastName,
+    member,
+    studentFirstName,
+    studentLastName,
+    studentGender,
+  } = currFormData[0].idSection;
   const territories = provinces.concat(states.concat(countries));
   const dividers = [provinces.length - 1, provinces.length + states.length - 1];
   const countriesDivisions = provinces.concat(states);
@@ -20,14 +36,39 @@ const IdSection = ({ info, setInfo }) => {
     "row border-bottom border-dark m-0 p-0 d-flex align-items-start";
 
   const handleChange = ({ target: { name, value } }) => {
-    setInfo({ ...info, [name]: value });
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              idSection: {
+                ...form.idSection,
+                [name]: value,
+              },
+            }
+          : form
+      )
+    );
   };
 
   const handleClick = ({ target: { value } }) => {
     const stateAbbrev = countriesDivisions.includes(value)
       ? countriesDivisionsAbbr[countriesDivisions.indexOf(value)]
-      : value;
-    setInfo({ ...info, state: value, stateAbbrev });
+      : "";
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              idSection: {
+                ...form.idSection,
+                state: value,
+                stateAbbrev,
+              },
+            }
+          : form
+      )
+    );
   };
 
   return (
@@ -37,7 +78,7 @@ const IdSection = ({ info, setInfo }) => {
           <BaseText
             inputType="text"
             commonInfo="studio"
-            inputValue={info.studio}
+            inputValue={studio}
             handleChange={handleChange}
             label="Studio"
           />
@@ -46,7 +87,7 @@ const IdSection = ({ info, setInfo }) => {
           <BaseText
             inputType="text"
             commonInfo="city"
-            inputValue={info.city}
+            inputValue={city}
             handleChange={handleChange}
             label="Ville"
           />
@@ -54,7 +95,7 @@ const IdSection = ({ info, setInfo }) => {
         <div className="col-6 col-sm-4 d-flex align-items-center ps-0 pe-1">
           <BaseSelect
             label="Territoire"
-            value={info.state}
+            value={state}
             options={territories}
             dividers={dividers}
             handleClick={handleClick}
@@ -66,7 +107,7 @@ const IdSection = ({ info, setInfo }) => {
           <BaseText
             inputType="text"
             commonInfo="phone"
-            inputValue={info.phone}
+            inputValue={phone}
             handleChange={handleChange}
             label="Téléphone"
           />
@@ -75,7 +116,7 @@ const IdSection = ({ info, setInfo }) => {
           <BaseText
             inputType="email"
             commonInfo="email"
-            inputValue={info.email}
+            inputValue={email}
             handleChange={handleChange}
             label="Courriel"
           />
@@ -86,7 +127,7 @@ const IdSection = ({ info, setInfo }) => {
           <BaseText
             inputType="text"
             commonInfo="teacherFirstName"
-            inputValue={info.teacherFirstName}
+            inputValue={teacherFirstName}
             handleChange={handleChange}
             label="Prénom du professeur"
           />
@@ -95,7 +136,7 @@ const IdSection = ({ info, setInfo }) => {
           <BaseText
             inputType="text"
             commonInfo="teacherLastName"
-            inputValue={info.teacherLastName}
+            inputValue={teacherLastName}
             handleChange={handleChange}
             label="Nom du professeur"
           />
@@ -104,7 +145,7 @@ const IdSection = ({ info, setInfo }) => {
           <BaseText
             inputType="text"
             commonInfo="member"
-            inputValue={info.member}
+            inputValue={member}
             handleChange={handleChange}
             label="Membre #"
           />
@@ -128,7 +169,7 @@ const IdSection = ({ info, setInfo }) => {
           <BaseText
             inputType="text"
             commonInfo="studentFirstName"
-            inputValue={info.studentFirstName}
+            inputValue={studentFirstName}
             handleChange={handleChange}
             label="Prénom de l'élève"
           />
@@ -137,7 +178,7 @@ const IdSection = ({ info, setInfo }) => {
           <BaseText
             inputType="text"
             commonInfo="studentLastName"
-            inputValue={info.studentLastName}
+            inputValue={studentLastName}
             handleChange={handleChange}
             label="Nom de l'élève"
           />
@@ -149,7 +190,7 @@ const IdSection = ({ info, setInfo }) => {
               name="studentGender"
               handleChange={handleChange}
               label="Homme"
-              inputValue={info.studentGender}
+              inputValue={studentGender}
             />
           </div>
           <div className="form-check">
@@ -158,7 +199,7 @@ const IdSection = ({ info, setInfo }) => {
               name="studentGender"
               handleChange={handleChange}
               label="Femme"
-              inputValue={info.studentGender}
+              inputValue={studentGender}
             />
           </div>
         </div>

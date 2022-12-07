@@ -632,6 +632,49 @@ A listener indicated an asynchronous response by returning true, but the message
 
 What is Memoization?
 Memoization is a fancy word for caching. It says “Remember the result of calling this function, and next time it’s called with the same argument(s), just return the old result instead of recomputing it.” The function is basically memorizing the answers. It’s still called “memoization,” though. Without the “r”.
+
+***********************************************************************
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+    if (!info.phone.match(phoneRegex)) {
+      alert("Numéro de téléphone invalide.");
+      return;
+    }
+    const entries = [];
+    info.entries.forEach((entry) => {
+      entry.categories.forEach((category) => {
+        const { level, age, syllabus } = entry;
+        const syllabusTranslated = syllabus === "ouvert" ? "open" : "closed";
+        entries.push({
+          level,
+          age,
+          syllabus: syllabusTranslated,
+          ...category,
+          ...info,
+        });
+      });
+    });
+    setMsg("processing entries...");
+    try {
+      await entriesService.createEntries(entries);
+      setMsg(INIT_MSG);
+      setShowToast(true);
+      setToastMsg("Entries successfully send!");
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 400) {
+        setMsg(error.response.data.error);
+      } else if (error.response.status === 403) {
+        setMsg("Unauthorized");
+      } else {
+        setMsg(error.message);
+      }
+    }
+  };
+
+************************************************************************
 	
 
 

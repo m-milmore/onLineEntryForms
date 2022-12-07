@@ -1,25 +1,43 @@
-import React from "react";
-import { appEmitter } from "../../App";
+import React, { useContext } from "react";
+import { FormsContext } from "../../App";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import RegSelect from "../Commons/RegSelect";
 import { paSDLevelsOpen, divisions } from "../../constants";
 
-const SoloRow = ({ entry }) => {
+const SoloRow = ({ entry, formId }) => {
+  const { setForms } = useContext(FormsContext);
+
   const handleSoloChange = ({ target: { value } }) => {
-    const soloToChange = {
-      entryId: entry.entryId,
-      name: "dance",
-      value,
-    };
-    appEmitter.emit("paSoloSelect", soloToChange);
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              entries: form.entries.map((data) =>
+                data.entryId === entry.entryId
+                  ? { ...entry, dance: value }
+                  : entry
+              ),
+            }
+          : form
+      )
+    );
   };
 
   const handleDeleteSolo = () => {
-    const soloToDelete = {
-      entryId: entry.entryId,
-    };
-    appEmitter.emit("deleteSolo", soloToDelete);
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              entries: form.entries.filter(
+                (data) => data.entryId !== entry.entryId
+              ),
+            }
+          : form
+      )
+    );
   };
 
   return (
@@ -30,16 +48,16 @@ const SoloRow = ({ entry }) => {
           name="level"
           value={entry.level}
           entryId={entry.entryId}
-          form="paMulti"
+          formId={formId}
         />
       </td>
       <td style={{ border: "1px solid black" }}>
         <RegSelect
           options={divisions}
-          name="division"
-          value={entry.division}
+          name="danceStyle"
+          value={entry.danceStyle}
           entryId={entry.entryId}
-          form="paMulti"
+          formId={formId}
         />
       </td>
       <td>

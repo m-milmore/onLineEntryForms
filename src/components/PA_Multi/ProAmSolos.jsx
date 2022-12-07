@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FormsContext } from "../../App";
 import SoloTableHeader from "./SoloTableHeader";
 import SoloRow from "./SoloRow";
 import SoloTableFooter from "./SoloTableFooter";
 
-const ProAmSolos = ({ entries }) => {
+const ProAmSolos = ({ formId }) => {
+  const { forms } = useContext(FormsContext);
+  const currForm = forms.filter((form) => form.formId === formId);
+  const entries = currForm[0].entries;
+
   return (
     <>
       <div className="text-start">
@@ -17,11 +22,11 @@ const ProAmSolos = ({ entries }) => {
           <tbody>
             {entries.map((entry) =>
               entry.entryId ? (
-                <SoloRow key={entry.entryId} entry={entry} />
+                <SoloRow key={entry.entryId} entry={entry} formId={formId} />
               ) : null
             )}
           </tbody>
-          <SoloTableFooter />
+          <SoloTableFooter formId={formId} />
         </table>
       </div>
     </>

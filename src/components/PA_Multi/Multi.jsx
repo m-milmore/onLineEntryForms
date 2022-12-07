@@ -1,22 +1,32 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
+import { FormsContext } from "../../App";
 import { isEqual } from "lodash";
-import { appEmitter } from "../../App";
 import "./Multi.css";
 
-const Multi = ({ age, level, danceDiv, syllabus, category, entries }) => {
+const Multi = ({
+  age,
+  level,
+  danceDiv,
+  syllabus,
+  category,
+  entries,
+  formId,
+}) => {
+  const { setForms } = useContext(FormsContext);
   const [selected, setSelected] = useState(false);
+  const danceStyle = danceDiv.split(" ")[0];
   const dance = danceDiv.split(" ")[1];
-  const division = danceDiv.split(" ")[0];
+
   const entry = useMemo(
     () => ({
       age,
       level,
       dance,
-      division,
+      danceStyle,
       syllabus,
       category,
     }),
-    [age, level, dance, division, syllabus, category]
+    [age, level, dance, danceStyle, syllabus, category]
   );
 
   useEffect(() => {
@@ -31,11 +41,19 @@ const Multi = ({ age, level, danceDiv, syllabus, category, entries }) => {
   const handleClick = () => {
     const newSelect = !selected;
     setSelected(newSelect);
-    const currEntry = {
-      ...entry,
-      newSelect,
-    };
-    appEmitter.emit("paMulti", currEntry);
+
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              entries: newSelect
+                ? [...form.entries, entry]
+                : form.entries.filter((obj) => !isEqual(obj, entry)),
+            }
+          : form
+      )
+    );
   };
 
   return (

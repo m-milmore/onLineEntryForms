@@ -1,11 +1,16 @@
-import React from "react";
-import "./SingleDances.css";
+import React, { useContext } from "react";
+import { FormsContext } from "../../App";
 import SDTableHeader from "./SDTableHeader";
 import TableRow from "./TableRow";
 import SDTableFooter from "./SDTableFooter";
+import "./SingleDances.css";
 import PropTypes from "prop-types";
 
-const SingleDances = ({ entries, syllabus, handleAddEntry }) => {
+const SingleDances = ({ syllabus, formId }) => {
+  const { forms } = useContext(FormsContext);
+  const currForm = forms.filter((form) => form.formId === formId);
+  const entries = currForm[0].entries;
+
   return (
     <div className="table-responsive">
       <table className="table table-sm fs-6 mb-1 table-print">
@@ -13,11 +18,11 @@ const SingleDances = ({ entries, syllabus, handleAddEntry }) => {
         <tbody>
           {entries.map((entry) =>
             entry.syllabus === syllabus ? (
-              <TableRow key={entry.entryId} entry={entry} />
+              <TableRow key={entry.entryId} entry={entry} formId={formId}/>
             ) : null
           )}
         </tbody>
-        <SDTableFooter syllabus={syllabus} handleAddEntry={handleAddEntry} />
+        <SDTableFooter syllabus={syllabus} formId={formId} />
       </table>
     </div>
   );

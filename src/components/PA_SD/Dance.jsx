@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import { isEqual } from "lodash";
-import "./Dance.css";
-import { appEmitter } from "../../App";
+import { FormsContext } from "../../App";
 import { danceNames } from "../../constants";
+import "./Dance.css";
 import PropTypes from "prop-types";
 
-const Dance = ({ dance, danceStyle, entryId, eol, categories }) => {
+const Dance = ({ dance, danceStyle, entryId, eol, categories, formId }) => {
+  const { setForms } = useContext(FormsContext);
   const [select, setSelect] = useState(false);
 
   useEffect(() => {
@@ -29,10 +30,30 @@ const Dance = ({ dance, danceStyle, entryId, eol, categories }) => {
     const comp = {
       dance,
       danceStyle,
-      entryId,
-      newSelect,
     };
-    appEmitter.emit("comp", comp);
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              entries: form.entries.map((entry) => {
+                if (entry.entryId === entryId) {
+                  const categories = newSelect
+                    ? [...entry.categories, comp]
+                    : entry.categories.filter(
+                        (obj) =>
+                          !(
+                            obj.dance === comp.dance &&
+                            obj.danceStyle === comp.danceStyle
+                          )
+                      );
+                  return { ...entry, categories };
+                } else return entry;
+              }),
+            }
+          : form
+      )
+    );
   };
 
   return (

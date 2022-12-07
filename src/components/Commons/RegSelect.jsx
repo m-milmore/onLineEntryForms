@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FormsContext } from "../../App";
 import "./RegSelect.css";
-import { appEmitter } from "../../App";
 import PropTypes from "prop-types";
 
-const RegSelect = ({ options, name, value, entryId, form }) => {
+const RegSelect = ({ options, name, value, entryId, formId }) => {
+  const { setForms } = useContext(FormsContext);
+
   const handleSelect = ({ target: { value } }) => {
-    const selected = {
-      entryId,
-      name,
-      value,
-    };
-    form === "pa1D"
-      ? appEmitter.emit("pa1DSelect", selected)
-      : appEmitter.emit("paSoloSelect", selected);
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              entries: form.entries.map((entry) =>
+                entry.entryId === entryId ? { ...entry, [name]: value } : entry
+              ),
+            }
+          : form
+      )
+    );
   };
 
   return (

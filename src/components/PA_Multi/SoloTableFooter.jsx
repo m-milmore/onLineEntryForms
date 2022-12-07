@@ -1,8 +1,10 @@
-import React from "react";
-import { appEmitter } from "../../App";
+import React, { useContext } from "react";
+import { FormsContext } from "../../App";
 import { nanoid } from "nanoid";
 
-const SoloTableFooter = () => {
+const SoloTableFooter = ({ formId }) => {
+  const { setForms } = useContext(FormsContext);
+
   const handleAddSolo = () => {
     const newEntry = {
       entryId: nanoid(),
@@ -11,9 +13,18 @@ const SoloTableFooter = () => {
       syllabus: "open",
       category: "solo",
       dance: "",
-      division: "",
+      danceStyle: "",
     };
-    appEmitter.emit("addSolo", newEntry);
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formId === formId
+          ? {
+              ...form,
+              entries: [...form.entries, newEntry],
+            }
+          : form
+      )
+    );
   };
 
   return (

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { FormsContext } from "../../App";
 import ScholTitle from "./ScholTitle";
 import ScholHeader from "./ScholHeader";
 import Multi from "./Multi";
 import { paScholDances, ageGroups } from "../../constants";
 
-const Scholarships = ({ entries }) => {
+const Scholarships = ({ formId }) => {
+  const { forms } = useContext(FormsContext);
+  const currForm = forms.filter((form) => form.formId === formId);
+  const entries = currForm[0].entries;
   const { paScholAgeGroups } = ageGroups;
 
   return (
@@ -30,6 +34,7 @@ const Scholarships = ({ entries }) => {
                     syllabus="open"
                     category="schol"
                     entries={entries}
+                    formId={formId}
                   />
                 ))}
               </tr>

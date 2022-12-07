@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useContext, useCallback } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { isEqual } from "lodash";
-import { nanoid } from "nanoid";
-import { appEmitter, FormsContext } from "../../App";
+import { FormsContext } from "../../App";
 import FormHeader from "../Commons/FormHeader";
 import IdSection from "../Commons/IdSection";
 import Championships from "./Championships";
@@ -10,191 +8,43 @@ import Scholarships from "./Scholarships";
 import ProAmSolos from "./ProAmSolos";
 import FormFooter from "../Commons/FormFooter";
 import FormsControls from "../Commons/FormsControls";
-import ConfirmationToast from "../Utils/ConfirmationToast";
-import { INIT_MSG } from "../../constants";
-
-const INIT_INFO = {
-  form: "paMD",
-  studio: "One Studio",
-  city: "Rochester",
-  state: "New York",
-  stateAbbrev: "NY",
-  phone: "323-987-6541",
-  email: "y@y.com",
-  teacherFirstName: "Fred",
-  teacherLastName: "Frickle",
-  member: "222333",
-  studentFirstName: "Gail",
-  studentLastName: "Wind",
-  studentGender: "F",
-  entries: [
-    {
-      entryId: nanoid(),
-      level: "",
-      age: "All",
-      syllabus: "ouvert",
-      category: "solo",
-      dance: "",
-      division: "",
-    },
-  ],
-};
 
 const ProAmMulti = () => {
   const {
     state: { formId, i },
   } = useLocation();
-  const { setForms } = useContext(FormsContext);
-  const [info, setInfo] = useState(INIT_INFO);
-
+  const { forms, setForms } = useContext(FormsContext);
+  const currForm = forms.filter((form) => form.formId === formId);
+  const idSection = currForm[0].idSection;
+  const entries = currForm[0].entries;
   const [submittable, setSubmittable] = useState(false);
-  const [msg, setMsg] = useState(INIT_MSG);
-
-  const [showToast, setShowToast] = useState(false);
-  const toggleToast = useCallback(() => {
-    setShowToast(!showToast);
-  }, [showToast]);
-  const [toastMsg, setToastMsg] = useState("");
 
   useEffect(() => {
-    const data = localStorage.getItem(formId);
-    if (data) {
-      setInfo(JSON.parse(data));
-    }
-  }, [formId]);
-
-  useEffect(() => {
-    localStorage.setItem(formId, JSON.stringify(info));
-  }, [info, formId]);
-
-  useEffect(() => {
-    const onUpdateEntries = ({
-      age,
-      level,
-      dance,
-      division,
-      syllabus,
-      category,
-      newSelect: select,
-    }) => {
-      const entry = {
-        age,
-        level,
-        dance,
-        division,
-        syllabus,
-        category,
-      };
-
-      setInfo((prevState) => ({
-        ...prevState,
-        entries: select
-          ? [...prevState.entries, entry]
-          : prevState.entries.filter((obj) => !isEqual(obj, entry)),
-      }));
-    };
-
-    const entryListener = appEmitter.addListener("paMulti", onUpdateEntries);
-
-    return () => {
-      entryListener.remove();
-    };
-  }, [info]);
-
-  // data sent from RegSelect component for solo level & division
-  // data sent from SoloRow component for solo dance
-  useEffect(() => {
-    const onUpdateSelect = ({ entryId, name, value }) => {
-      setInfo((prevState) => ({
-        ...prevState,
-        entries: prevState.entries.map((entry) =>
-          entry.entryId === entryId ? { ...entry, [name]: value } : entry
-        ),
-      }));
-    };
-
-    const selectListener = appEmitter.addListener(
-      "paSoloSelect",
-      onUpdateSelect
-    );
-
-    return () => {
-      selectListener.remove();
-    };
-  }, [info]);
-
-  useEffect(() => {
-    const onDeleteSolo = ({ entryId }) => {
-      setInfo((prevState) => ({
-        ...prevState,
-        entries: prevState.entries.filter((entry) => entry.entryId !== entryId),
-      }));
-    };
-
-    const deleteSoloListener = appEmitter.addListener(
-      "deleteSolo",
-      onDeleteSolo
-    );
-
-    return () => {
-      deleteSoloListener.remove();
-    };
-  }, [info]);
-
-  useEffect(() => {
-    const onAddSolo = (newEntry) => {
-      setInfo((prevState) => ({
-        ...prevState,
-        entries: [...prevState.entries, newEntry],
-      }));
-    };
-
-    const addSoloListener = appEmitter.addListener("addSolo", onAddSolo);
-
-    return () => {
-      addSoloListener.remove();
-    };
-  }, [info]);
-
-  // to show a "submittable-form" icon or an "incomplete-form" icon
-  useEffect(() => {
-    const {
-      studio,
-      city,
-      state,
-      phone,
-      email,
-      teacherFirstName,
-      teacherLastName,
-      studentFirstName,
-      studentLastName,
-      studentGender,
-    } = info;
     let missingInEntries = false;
-    info.entries.forEach((entry) => {
+    entries.forEach((entry) => {
       if (entry.category === "solo") {
         if (
           !entry.level ||
-          !entry.division ||
+          !entry.danceStyle ||
           entry.level === "--" ||
-          entry.division === "--" ||
+          entry.danceStyle === "--" ||
           !entry.dance
         )
           missingInEntries = true;
       }
     });
     setSubmittable(
-      studio &&
-        city &&
-        state &&
-        phone &&
-        email &&
-        teacherFirstName &&
-        teacherLastName &&
-        studentFirstName &&
-        studentLastName &&
-        studentGender &&
-        info.entries.length > 0 &&
+      idSection.studio &&
+        idSection.city &&
+        idSection.state &&
+        idSection.phone &&
+        idSection.email &&
+        idSection.teacherFirstName &&
+        idSection.teacherLastName &&
+        idSection.studentFirstName &&
+        idSection.studentLastName &&
+        idSection.studentGender &&
+        entries.length > 0 &&
         !missingInEntries
     );
     setForms((prev) =>
@@ -207,34 +57,19 @@ const ProAmMulti = () => {
           : form
       )
     );
-  }, [info, formId, setForms, submittable]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setToastMsg("");
-    setMsg("");
-  };
+  }, [entries, formId, idSection, setForms, submittable]);
 
   return (
-    <>
-      <div className="container text-center py-3">
-        <form onSubmit={handleSubmit}>
-          <FormHeader title1={`${i + 1}.PRO_AM`} title2="MULTI DANSES" />
-          <IdSection info={info} setInfo={setInfo} />
-          <Championships entries={info.entries} syllabus="fermé" />
-          <Championships entries={info.entries} syllabus="ouvert" />
-          <Scholarships entries={info.entries} />
-          <ProAmSolos entries={info.entries} />
-          <FormFooter />
-        </form>
-        <FormsControls submittable={submittable} msg={msg} />
-      </div>
-      <ConfirmationToast
-        show={showToast}
-        onClose={toggleToast}
-        toastMsg={toastMsg}
-      />
-    </>
+    <div className="container text-center py-3">
+      <FormHeader title1={`${i + 1}.PRO_AM`} title2="MULTI DANSES" />
+      <IdSection formId={formId} />
+      <Championships formId={formId} syllabus="fermé" />
+      <Championships formId={formId} syllabus="ouvert" />
+      <Scholarships formId={formId} />
+      <ProAmSolos formId={formId} />
+      <FormFooter />
+      <FormsControls submittable={submittable} />
+    </div>
   );
 };
 

@@ -1,7 +1,8 @@
-import React from "react";
-import "./Championships.css";
+import React, { useContext } from "react";
+import { FormsContext } from "../../App";
 import ChampHeader from "./ChampHeader";
 import Multi from "./Multi";
+import "./Championships.css";
 import {
   paChampDances,
   paChampClosedLevels,
@@ -9,7 +10,10 @@ import {
   ageGroups,
 } from "../../constants";
 
-const Championships = ({ entries, syllabus }) => {
+const Championships = ({ formId, syllabus }) => {
+  const { forms } = useContext(FormsContext);
+  const currForm = forms.filter((form) => form.formId === formId);
+  const entries = currForm[0].entries;
   const { paChampAgeGroups } = ageGroups;
   const paChampLevels =
     syllabus === "fermé" ? paChampClosedLevels : paChampOpenLevels;
@@ -40,6 +44,7 @@ const Championships = ({ entries, syllabus }) => {
                       syllabus={syllabus}
                       category="champ"
                       entries={entries}
+                      formId={formId}
                     />
                   ))
                 )}

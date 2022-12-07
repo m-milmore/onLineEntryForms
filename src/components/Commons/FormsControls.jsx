@@ -7,7 +7,6 @@ import AppMsg from "../Utils/AppMsg";
 const FormsControls = ({ submittable, msg, hideBtn }) => {
   const navigate = useNavigate();
   const { forms } = useContext(FormsContext);
-
   const [disableCheckout, setDisableCheckout] = useState(true);
 
   useEffect(() => {
@@ -16,8 +15,8 @@ const FormsControls = ({ submittable, msg, hideBtn }) => {
 
   const handleCheckout = () => {
     console.log("Handle Checkout");
-    console.log("Liste de toutes les inscriptions:")
-    console.log("Liste de la commande des billets:")
+    console.log("Liste de toutes les inscriptions:");
+    console.log("Liste de la commande des billets:");
   };
 
   return (
