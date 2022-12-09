@@ -5,11 +5,10 @@ import Card from "react-bootstrap/Card";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import ConfirmationModal from "./Utils/ConfirmationModal";
-import { appEmitter } from "../App";
 import "./FormDisplay.css";
 
 const FormDisplay = () => {
-  const {forms} = useContext(FormsContext);
+  const { forms, setForms } = useContext(FormsContext);
   const navigate = useNavigate();
 
   const [showConfModal, setShowConfModal] = useState(false);
@@ -23,7 +22,7 @@ const FormDisplay = () => {
 
   const handleConfOk = (formId) => {
     setShowConfModal(false);
-    appEmitter.emit("deleteForm", formId);
+    setForms((prev) => prev.filter((form) => form.formId !== formId));
   };
 
   const clickToNavigate = (navigateTo, formId, i) => {

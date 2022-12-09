@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
-import { appEmitter } from "../App";
+import { nanoid } from "nanoid";
+import { FormsContext } from "../App";
 import { logo, formList } from "../constants";
 
 const NavigationBar = () => {
+  const { forms, setForms } = useContext(FormsContext);
+
   const handleAddForm = (formName, navigate) => {
-    const form = {
+    const newForm = {
+      formId: nanoid(),
       formName,
       navigate,
+      formSubmittable: false,
+      idSection: {},
+      entries: [],
     };
-    appEmitter.emit("addForm", form);
+    const arrSumm = forms.filter((form) => form.formName === "Sommaire");
+    const arrWoSumm = forms.filter((form) => form.formName !== "Sommaire");
+    setForms([...arrWoSumm, newForm, ...arrSumm]);
   };
 
   return (
@@ -28,23 +37,19 @@ const NavigationBar = () => {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="fw-bold fs-4">
             <NavDropdown title="Formulaires" id="basic-nav-dropdown">
-              {formList &&
-                formList.length &&
-                formList.map((form) => {
-                  return (
-                    <NavDropdown.Item
-                      key={form.formName}
-                      as="button"
-                      type="button"
-                      value={form.formName}
-                      onClick={() =>
-                        handleAddForm(form.formName, form.navigate)
-                      }
-                    >
-                      {form.formName}
-                    </NavDropdown.Item>
-                  );
-                })}
+              {formList.map((form) => {
+                return (
+                  <NavDropdown.Item
+                    key={form.formName}
+                    as="button"
+                    type="button"
+                    value={form.formName}
+                    onClick={() => handleAddForm(form.formName, form.navigate)}
+                  >
+                    {form.formName}
+                  </NavDropdown.Item>
+                );
+              })}
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

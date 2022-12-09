@@ -130,39 +130,6 @@ const FORMS_INIT = [
 const FormsProvider = ({ children }) => {
   const [forms, setForms] = useState(FORMS_INIT);
 
-  useEffect(() => {
-    const onAddForm = ({ formName, navigate }) => {
-      const newForm = {
-        formId: nanoid(),
-        formName,
-        navigate,
-        formSubmittable: false,
-        idSection: {},
-        entries: [],
-      };
-      const arrSumm = forms.filter((form) => form.formName === "Sommaire");
-      const arrWoSumm = forms.filter((form) => form.formName !== "Sommaire");
-      setForms([...arrWoSumm, newForm, ...arrSumm]);
-    };
-
-    const onDeleteForm = (formId) => {
-      localStorage.removeItem(formId);
-      setForms((prev) => prev.filter((form) => form.formId !== formId));
-    };
-
-    const addFormListener = appEmitter.addListener("addForm", onAddForm);
-
-    const deleteFormListener = appEmitter.addListener(
-      "deleteForm",
-      onDeleteForm
-    );
-
-    return () => {
-      addFormListener.remove();
-      deleteFormListener.remove();
-    };
-  }, [forms]);
-
   return (
     <FormsContext.Provider value={{ forms, setForms }}>
       {children}
