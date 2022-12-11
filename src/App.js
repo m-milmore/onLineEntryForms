@@ -146,6 +146,10 @@ const App = () => {
   const [email, setEmail] = useState(""); // to pass email of forgotpassword to login page via listener
   const [msg, setMsg] = useState(INIT_MSG);
 
+  useEffect(() => {
+
+  }, [])
+
   // fetches form constants
   useEffect(() => {
     setMsg("loading data...");

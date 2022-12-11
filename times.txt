@@ -264,7 +264,11 @@ lundi le 5 décembre 2022					6hrs (estimate)	cumul 440hrs
 mardi le 6 décembre 2022					6hrs (estimate)	cumul 446hrs
 	work on refactoring [forms, setFomrs]
 
+vendredi le 9 décembre 2022					2hrs (estimate) 	cumul 448hrs
+	work on refresh page
 
+samedi le 10 décembre 2022
+	work on refresh page
 
 
 
