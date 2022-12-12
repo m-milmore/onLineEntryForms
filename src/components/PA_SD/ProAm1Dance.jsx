@@ -54,7 +54,7 @@ const ProAm1Dance = () => {
           : form
       )
     );
-  }, [entries, formId, idSection, setForms, submittable]);
+  }, [formId, setForms, submittable, entries, idSection]);
 
   return (
     <div className="container text-center py-3">

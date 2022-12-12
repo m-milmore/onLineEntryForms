@@ -675,6 +675,27 @@ Memoization is a fancy word for caching. It says “Remember the result of calling
   };
 
 ************************************************************************
+
+  useEffect(() => {
+
+    const data = localStorage.getItem(formId);
+
+    if (data) {
+ 
+     setInfo(JSON.parse(data));
+
+    }
+
+  }, [formId]);
+
+
+  useEffect(() => {
+
+    localStorage.setItem(formId, JSON.stringify(info));
+
+  }, [info, formId]);
+
+************************************************************************
 	
 
 

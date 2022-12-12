@@ -128,7 +128,15 @@ const FORMS_INIT = [
 ];
 
 const FormsProvider = ({ children }) => {
-  const [forms, setForms] = useState(FORMS_INIT);
+  const [forms, setForms] = useState(() => {
+    const data = localStorage.getItem("forms");
+    if (data) return JSON.parse(data);
+    return FORMS_INIT;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("forms", JSON.stringify(forms));
+  }, [forms]);
 
   return (
     <FormsContext.Provider value={{ forms, setForms }}>
@@ -145,10 +153,6 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [email, setEmail] = useState(""); // to pass email of forgotpassword to login page via listener
   const [msg, setMsg] = useState(INIT_MSG);
-
-  useEffect(() => {
-
-  }, [])
 
   // fetches form constants
   useEffect(() => {
