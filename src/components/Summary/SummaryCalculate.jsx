@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useMemo } from "react";
-import { appEmitter, FormsContext } from "../../App";
+import { FormsContext } from "../../App";
 import { early, ageGroups } from "../../constants";
 import Formatter from "../Utils/Formatter";
 
@@ -29,35 +29,44 @@ const SummaryCalculate = ({ data }) => {
 
       if (entryForms) {
         entryForms.forEach((form) => {
-          let formData = localStorage.getItem(form.formId);
-          if (formData) {
-            formData = JSON.parse(formData);
-            if (formData.entries) {
-              formData.entries.forEach((entry) => {
-                const ageGroup = ageGroups[agesGroups];
-                const str = ageGroup.filter(
-                  (ageStr) => ageStr.split("|")[0] === entry.age
-                );
-                if (str.length) {
-                  const sameAgeGroup = str[0].split("|")[2] === ageCategory;
-                  const sameDanceGroup = entry.category === subForm;
-                  if (sameAgeGroup && sameDanceGroup) {
-                    entryCount +=
-                      subForm === "single" ? entry.categories.length : 1;
-                  }
+          if (form.entries) {
+            form.entries.forEach((entry) => {
+              const ageGroup = ageGroups[agesGroups];
+              const str = ageGroup.filter(
+                (ageStr) => ageStr.split("|")[0] === entry.age
+              );
+              if (str.length) {
+                const sameAgeGroup = str[0].split("|")[2] === ageCategory;
+                const sameDanceGroup = entry.category === subForm;
+                if (sameAgeGroup && sameDanceGroup) {
+                  const noSolo =
+                    subForm === "solo" &&
+                    (!entry.level ||
+                      !entry.dance ||
+                      !entry.danceStyle ||
+                      entry.level === "--" ||
+                      entry.danceStyle === "--");
+                  entryCount +=
+                    subForm === "single"
+                      ? entry.categories.length
+                      : noSolo
+                      ? 0
+                      : 1;
                 }
-              });
-            }
+              }
+            });
           }
           setNoEntries(entryCount);
         });
       }
     };
-
     noEntriesCalc();
-    const amount = early() ? noEntries * earlyPrice : noEntries * regPrice;
-    appEmitter.emit("entryCount", { amount });
-  }, [dataObj, forms, noEntries, earlyPrice, regPrice]);
+  }, [dataObj, forms]);
+
+  // useEffect(() => {
+  //   const amount = early() ? noEntries * earlyPrice : noEntries * regPrice;
+  //   setTotal((prev) => (prev += amount));
+  // }, [noEntries, earlyPrice, regPrice, setTotal]);
 
   const { mainLine, earlyPriceStr, regPriceStr } = dataObj;
 

@@ -179,6 +179,16 @@ export const early = () => {
   return today <= deadline ? true : false;
 };
 
+export const priceList = [
+  "single|1|35|40",
+  "champ|1|45|50",
+  "schol|1|65|70",
+  "single|0|15|20",
+  "champ|0|20|25",
+  "schol|0|30|35",
+  "solo|1|50|55",
+];
+
 export const summaryCategories = [
   "bigSide|FRAIS D'INCRIPTION|0",
   "summarySide|PRO-AM|8",

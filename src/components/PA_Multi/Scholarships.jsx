@@ -22,6 +22,7 @@ const Scholarships = ({ formId }) => {
           <ScholHeader />
           {paScholAgeGroups.map((age) => {
             const ageStr = age.split("|")[0];
+            const ageTypeStr = age.split("|")[2];
             return (
               <tr key={ageStr}>
                 <td>{ageStr}</td>
@@ -29,6 +30,7 @@ const Scholarships = ({ formId }) => {
                   <Multi
                     key={age + "open" + dance}
                     age={ageStr}
+                    ageType={ageTypeStr}
                     level="open"
                     danceDiv={dance}
                     syllabus="open"

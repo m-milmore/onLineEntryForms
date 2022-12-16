@@ -1,25 +1,44 @@
-import React, { useState, useEffect } from "react";
-import { appEmitter } from "../../App";
-import { summaryTableFootNote } from "../../constants";
+import React, { useEffect, useContext } from "react";
+import { FormsContext } from "../../App";
+import { summaryTableFootNote, priceList, early } from "../../constants";
 import Formatter from "../Utils/Formatter";
 
-const SummaryTableFooter = () => {
-  const [total, setTotal] = useState(0);
+const SummaryTableFooter = ({total, setTotal}) => {
+  const { forms } = useContext(FormsContext);
 
   useEffect(() => {
-    const onEntryCount = ({ amount }) => {
-      setTotal((prev) => (prev += amount));
-    };
-
-    const entryCountListener = appEmitter.addListener(
-      "entryCount",
-      onEntryCount
-    );
-
-    return () => {
-      entryCountListener.remove();
-    };
-  }, []);
+    forms.forEach((form) => {
+      if (form.entries) {
+        form.entries.forEach((entry) => {
+          if (entry.ageType) {
+            const list = priceList.filter((item) =>
+              item.includes(entry.category + "|" + entry.ageType)
+            );
+            if (list.length) {
+              const price = early()
+                ? list[0].split("|")[2]
+                : list[0].split("|")[3];
+              const noSolo =
+                entry.category === "solo" &&
+                (!entry.level ||
+                  !entry.dance ||
+                  !entry.danceStyle ||
+                  entry.level === "--" ||
+                  entry.danceStyle === "--");
+              const entryCount =
+                entry.category === "single"
+                  ? entry.categories.length
+                  : noSolo
+                  ? 0
+                  : 1;
+              const amount = price * entryCount;
+              setTotal((prev) => (prev += amount));
+            }
+          }
+        });
+      }
+    });
+  }, [forms, setTotal]);
 
   return (
     <tfoot>

@@ -21,7 +21,7 @@ const ProAmSolos = ({ formId }) => {
           <SoloTableHeader />
           <tbody>
             {entries.map((entry) =>
-              entry.entryId ? (
+              entry.category === "solo" ? (
                 <SoloRow key={entry.entryId} entry={entry} formId={formId} />
               ) : null
             )}

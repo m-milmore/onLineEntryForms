@@ -7,13 +7,20 @@ const RegSelect = ({ options, name, value, entryId, formId }) => {
   const { setForms } = useContext(FormsContext);
 
   const handleSelect = ({ target: { value } }) => {
+    const isAge = name === "age";
     setForms((prev) =>
       prev.map((form) =>
         form.formId === formId
           ? {
               ...form,
               entries: form.entries.map((entry) =>
-                entry.entryId === entryId ? { ...entry, [name]: value } : entry
+                entry.entryId === entryId
+                  ? {
+                      ...entry,
+                      [name]: value.split("|")[0],
+                      ageType: isAge ? value.split("|")[2] : entry.ageType,
+                    }
+                  : entry
               ),
             }
           : form
@@ -31,7 +38,7 @@ const RegSelect = ({ options, name, value, entryId, formId }) => {
     >
       <option>--</option>
       {options.map((option) => (
-        <option key={option.split("|")[0]} value={option.split("|")[0]}>
+        <option key={option.split("|")[0]} value={option}>
           {option.split("|")[0]}
         </option>
       ))}

@@ -5,6 +5,7 @@ import "./Multi.css";
 
 const Multi = ({
   age,
+  ageType,
   level,
   danceDiv,
   syllabus,
@@ -20,13 +21,14 @@ const Multi = ({
   const entry = useMemo(
     () => ({
       age,
+      ageType,
       level,
       dance,
       danceStyle,
       syllabus,
       category,
     }),
-    [age, level, dance, danceStyle, syllabus, category]
+    [age, ageType, level, dance, danceStyle, syllabus, category]
   );
 
   useEffect(() => {

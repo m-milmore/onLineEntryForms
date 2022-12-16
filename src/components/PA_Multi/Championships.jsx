@@ -31,6 +31,7 @@ const Championships = ({ formId, syllabus }) => {
           <ChampHeader syllabus={syllabus} />
           {paChampAgeGroups.map((age) => {
             const ageStr = age.split("|")[0];
+            const ageTypeStr = age.split("|")[2];
             return (
               <tr key={ageStr}>
                 <td>{ageStr}</td>
@@ -39,6 +40,7 @@ const Championships = ({ formId, syllabus }) => {
                     <Multi
                       key={ageStr + level + dance}
                       age={ageStr}
+                      ageType={ageTypeStr}
                       level={level}
                       danceDiv={dance}
                       syllabus={syllabus}

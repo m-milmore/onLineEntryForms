@@ -10,6 +10,7 @@ const SDTableFooter = ({ syllabus, formId }) => {
       entryId: nanoid(),
       level: "",
       age: "",
+      ageType: "",
       syllabus: syllabus,
       category: "single",
       categories: [],
