@@ -63,11 +63,6 @@ const SummaryCalculate = ({ data }) => {
     noEntriesCalc();
   }, [dataObj, forms]);
 
-  // useEffect(() => {
-  //   const amount = early() ? noEntries * earlyPrice : noEntries * regPrice;
-  //   setTotal((prev) => (prev += amount));
-  // }, [noEntries, earlyPrice, regPrice, setTotal]);
-
   const { mainLine, earlyPriceStr, regPriceStr } = dataObj;
 
   return (

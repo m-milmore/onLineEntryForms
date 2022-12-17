@@ -33,6 +33,16 @@ const SummaryTickets = ({ data }) => {
           : form
       )
     );
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formName === "Sommaire"
+          ? {
+              ...form,
+              formSubmittable: form.entries.some((entry) => entry.number > 0),
+            }
+          : form
+      )
+    );
   }, [setForms, tickets, category]);
 
   const ticketMainLine = () => {
@@ -54,7 +64,7 @@ const SummaryTickets = ({ data }) => {
     if (trimmedValue > 20) {
       setTickets(0);
     } else {
-      setTickets(trimmedValue);
+      setTickets(parseInt(trimmedValue));
     }
   };
 
