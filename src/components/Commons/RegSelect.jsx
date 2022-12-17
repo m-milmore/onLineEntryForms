@@ -8,6 +8,9 @@ const RegSelect = ({ options, name, value, entryId, formId }) => {
 
   const handleSelect = ({ target: { value } }) => {
     const isAge = name === "age";
+    const ageTypeFound = options
+      .filter((option) => option.split("|")[0] === value)[0]
+      .split("|")[2];
     setForms((prev) =>
       prev.map((form) =>
         form.formId === formId
@@ -17,8 +20,8 @@ const RegSelect = ({ options, name, value, entryId, formId }) => {
                 entry.entryId === entryId
                   ? {
                       ...entry,
-                      [name]: value.split("|")[0],
-                      ageType: isAge ? value.split("|")[2] : entry.ageType,
+                      [name]: value,
+                      ageType: isAge ? ageTypeFound : entry.ageType,
                     }
                   : entry
               ),
@@ -38,7 +41,7 @@ const RegSelect = ({ options, name, value, entryId, formId }) => {
     >
       <option>--</option>
       {options.map((option) => (
-        <option key={option.split("|")[0]} value={option}>
+        <option key={option.split("|")[0]} value={option.split("|")[0]}>
           {option.split("|")[0]}
         </option>
       ))}

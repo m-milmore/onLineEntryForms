@@ -1,43 +1,42 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { FormsContext } from "../../App";
 import { summaryTableFootNote, priceList, early } from "../../constants";
 import Formatter from "../Utils/Formatter";
 
-const SummaryTableFooter = ({total, setTotal}) => {
+const SummaryTableFooter = () => {
   const { forms } = useContext(FormsContext);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
+    let cumul = 0;
     forms.forEach((form) => {
-      if (form.entries) {
-        form.entries.forEach((entry) => {
-          if (entry.ageType) {
-            const list = priceList.filter((item) =>
-              item.includes(entry.category + "|" + entry.ageType)
-            );
-            if (list.length) {
-              const price = early()
-                ? list[0].split("|")[2]
-                : list[0].split("|")[3];
-              const noSolo =
-                entry.category === "solo" &&
-                (!entry.level ||
-                  !entry.dance ||
-                  !entry.danceStyle ||
-                  entry.level === "--" ||
-                  entry.danceStyle === "--");
-              const entryCount =
-                entry.category === "single"
-                  ? entry.categories.length
-                  : noSolo
-                  ? 0
-                  : 1;
-              const amount = price * entryCount;
-              setTotal((prev) => (prev += amount));
-            }
-          }
-        });
-      }
+      form.entries.forEach((entry) => {
+        const list = priceList.filter((item) =>
+          item.includes(entry.category + "|" + entry.ageType)
+        );
+        if (list.length) {
+          const price = early() ? list[0].split("|")[2] : list[0].split("|")[3];
+          const noSolo =
+            entry.category === "solo" &&
+            (!entry.level ||
+              !entry.dance ||
+              !entry.danceStyle ||
+              entry.level === "--" ||
+              entry.danceStyle === "--");
+          const entryCount =
+            entry.category === "single"
+              ? entry.categories.length
+              : noSolo
+              ? 0
+              : "number" in entry
+              ? entry.number
+              : 1;
+          const amount = price * entryCount;
+          cumul += amount;
+        }
+      });
     });
+    setTotal(cumul);
   }, [forms, setTotal]);
 
   return (

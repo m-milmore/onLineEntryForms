@@ -187,6 +187,14 @@ export const priceList = [
   "champ|0|20|25",
   "schol|0|30|35",
   "solo|1|50|55",
+  "friday1|1|70|75",
+  "friday2|1|55|60",
+  "friday0|0|25|30",
+  "saturday1|1|70|75",
+  "saturday2|1|55|60",
+  "saturday0|0|25|30",
+  "sunday1|1|25|30",
+  "sunday0|0|20|25",
 ];
 
 export const summaryCategories = [
@@ -222,14 +230,14 @@ export const summaryCategories = [
   "Exhibition| x 85 $can = | x 95 $can = |Pro|1|exhibition|proAges|PRO",
   "summaryEmpty",
   "summarySide|BILLETS|9",
-  "billets|BILLETS VENDREDI%1ère RANGÉE TABLE| x 70 $can = | x 75 $can = |Tickets|1|friday|ticketAges|BILLETS",
-  "billets|%2e RANGÉE| x 55 $can = | x 60 $can = |Tickets|2|friday|ticketAges|BILLETS",
-  "billets|%Juvénile + Junior 15 & -| x 25 $can = | x 30 $can = |Tickets|0|friday|ticketAges|BILLETS",
-  "billets|BILLETS SAMEDI%1ère RANGÉE| x 70 $can = | x 75 $can = |Tickets|1|saturday|ticketAges|BILLETS",
-  "billets|%2e RANGÉE| x 55 $can = | x 60 $can = |Tickets|2|saturday|ticketAges|BILLETS",
-  "billets|%Juvénile + Junior 15 & -| x 25 $can = | x 30 $can = |Tickets|0|saturday|ticketAges|BILLETS",
-  "billets|BILLETS DIMANCHE%Adulte| x 25 $can = | x 30 $can = |Tickets|1|sunday|ticketAges|BILLETS",
-  "billets|%Juvénile + Junior 15 & -| x 20 $can = | x 25 $can = |Tickets|0|sunday|ticketAges|BILLETS",
+  "billets|BILLETS VENDREDI%1ère RANGÉE TABLE| x 70 $can = | x 75 $can = |Tickets|1|friday1|ticketAges|BILLETS",
+  "billets|%2e RANGÉE| x 55 $can = | x 60 $can = |Tickets|2|friday2|ticketAges|BILLETS",
+  "billets|%Juvénile + Junior 15 & -| x 25 $can = | x 30 $can = |Tickets|0|friday0|ticketAges|BILLETS",
+  "billets|BILLETS SAMEDI%1ère RANGÉE| x 70 $can = | x 75 $can = |Tickets|1|saturday1|ticketAges|BILLETS",
+  "billets|%2e RANGÉE| x 55 $can = | x 60 $can = |Tickets|2|saturday2|ticketAges|BILLETS",
+  "billets|%Juvénile + Junior 15 & -| x 25 $can = | x 30 $can = |Tickets|0|saturday0|ticketAges|BILLETS",
+  "billets|BILLETS DIMANCHE%Adulte| x 25 $can = | x 30 $can = |Tickets|1|sunday1|ticketAges|BILLETS",
+  "billets|%Juvénile + Junior 15 & -| x 20 $can = | x 25 $can = |Tickets|0|sunday0|ticketAges|BILLETS",
   "summaryEmpty",
 ];
 

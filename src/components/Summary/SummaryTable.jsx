@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { nanoid } from "nanoid";
 import SummaryTableHeader from "./SummaryTableHeader";
 import SummarySide from "./SummarySide";
@@ -9,8 +9,6 @@ import SummaryTableFooter from "./SummaryTableFooter";
 import { summaryCategories } from "../../constants";
 
 const SummaryTable = () => {
-  const [total, setTotal] = useState(0);
-
   return (
     <div className="table-responsive">
       <table className="table table-sm fs-6 mb-1 table-print">
@@ -31,7 +29,7 @@ const SummaryTable = () => {
             }
           })}
         </tbody>
-        <SummaryTableFooter total={total} setTotal={setTotal} />
+        <SummaryTableFooter />
       </table>
     </div>
   );

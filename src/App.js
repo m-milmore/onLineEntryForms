@@ -64,7 +64,7 @@ const FORMS_INIT = [
         entryId: nanoid(),
         level: "",
         age: "",
-        ageType: "",
+        ageType: -1,
         syllabus: "fermé",
         category: "single",
         categories: [],
@@ -73,7 +73,7 @@ const FORMS_INIT = [
         entryId: nanoid(),
         level: "",
         age: "",
-        ageType: "",
+        ageType: -1,
         syllabus: "ouvert",
         category: "single",
         categories: [],
@@ -117,16 +117,48 @@ const FORMS_INIT = [
     formName: "Sommaire",
     navigate: "/summary",
     formSubmittable: false,
-    tickets: {
-      friday1: nanoid(),
-      friday2: nanoid(),
-      friday0: nanoid(),
-      saturday1: nanoid(),
-      saturday2: nanoid(),
-      saturday0: nanoid(),
-      sunday1: nanoid(),
-      sunday0: nanoid(),
-    },
+    entries: [
+      {
+        category: "friday1",
+        ageType: 1,
+        number: 0,
+      },
+      {
+        category: "friday2",
+        ageType: 1,
+        number: 0,
+      },
+      {
+        category: "friday0",
+        ageType: 0,
+        number: 0,
+      },
+      {
+        category: "saturday1",
+        ageType: 1,
+        number: 0,
+      },
+      {
+        category: "saturday2",
+        ageType: 1,
+        number: 0,
+      },
+      {
+        category: "saturday0",
+        ageType: 0,
+        number: 0,
+      },
+      {
+        category: "sunday1",
+        ageType: 1,
+        number: 0,
+      },
+      {
+        category: "sunday0",
+        ageType: 0,
+        number: 0,
+      },
+    ],
   },
 ];
 
