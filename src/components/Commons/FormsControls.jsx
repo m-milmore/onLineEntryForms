@@ -10,7 +10,16 @@ const FormsControls = ({ submittable, msg, hideBtn }) => {
   const [disableCheckout, setDisableCheckout] = useState(true);
 
   useEffect(() => {
-    setDisableCheckout(!forms.every((form) => form.formSubmittable === true));
+    const formsWoSummary = forms.filter((form) => form.formName !== "Sommaire");
+    const summaryForm = forms.filter((form) => form.formName === "Sommaire");
+
+    forms.length > 1
+      ? setDisableCheckout(
+          formsWoSummary.some((form) => form.formSubmittable === false)
+        )
+      : setDisableCheckout(
+          summaryForm.some((form) => form.formSubmittable === false)
+        );
   }, [forms]);
 
   const handleCheckout = () => {
