@@ -28,8 +28,8 @@ const SummaryTableFooter = () => {
               ? entry.categories.length
               : noSolo
               ? 0
-              : "number" in entry
-              ? entry.number
+              : "quantity" in entry
+              ? entry.quantity
               : 1;
           const amount = price * entryCount;
           cumul += amount;

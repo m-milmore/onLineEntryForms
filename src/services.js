@@ -9,6 +9,7 @@ const URL_FORGOT_PASSWORD = `${URL_AUTH}/forgotpassword`;
 const URL_RESET_PASSWORD = `${URL_AUTH}/resetpassword/`;
 
 const URL_GET_FORM_CONSTANTS = `${URL_ENTRIES}/formconstants`;
+const URL_CREATE_CHECKOUT_SESSION = `${URL_ENTRIES}/create-checkout-session`;
 
 // for APIs that don't need a token in the header
 const headers = { "Content-Type": "application/json" };
@@ -144,6 +145,17 @@ export class EntriesService {
     try {
       const response = await axios.get(URL_GET_FORM_CONSTANTS);
       this.setFormConstants(response.data.data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStripeURL(entries) {
+    const body = { entries };
+
+    try {
+      const response = await axios.post(URL_CREATE_CHECKOUT_SESSION, body);
+      return response.data.url
     } catch (error) {
       throw error;
     }

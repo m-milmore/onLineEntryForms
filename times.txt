@@ -291,10 +291,20 @@ vendredi le 16 décembre 2022				6hrs (estimate)	cumul 475hrs
 samedi le 17 décembre 2022					4hrs (estimate)	cumul 479hrs
 	summary form completed
 
-dimanche le 18 décembre 2022
+dimanche le 18 décembre 2022				4hrs (estimate)	cumul 483hrs
 	sending data to the server
 
+mardi le 20 décembre 2022					1hr		cumul 484hrs
+	working on Stripe
 
+mercredi le 21 décembre 2022				4 hrs (estimate)	cumul 488hrs
+	working on Stripe
+
+jeudi le 22 décembre 2022					6hrs (estimate)	cumul 494hrs
+	working on Stripe
+
+vendredi le 23 décembre 2022
+	work on summary form (to send for payment)
 
 
 

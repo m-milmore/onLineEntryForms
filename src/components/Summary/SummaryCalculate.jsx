@@ -11,8 +11,8 @@ const SummaryCalculate = ({ data }) => {
       earlyPriceStr: data.split("|")[1],
       regPriceStr: data.split("|")[2],
       formName: data.split("|")[3],
-      ageCategory: data.split("|")[4],
-      subForm: data.split("|")[5],
+      ageType: data.split("|")[4],
+      category: data.split("|")[5],
       agesGroups: data.split("|")[6],
     }),
     [data]
@@ -23,7 +23,7 @@ const SummaryCalculate = ({ data }) => {
 
   useEffect(() => {
     const noEntriesCalc = () => {
-      const { formName, agesGroups, ageCategory, subForm } = dataObj;
+      const { formName, agesGroups, ageType, category } = dataObj;
       const entryForms = forms.filter((form) => form.formName === formName);
       let entryCount = 0;
 
@@ -36,18 +36,18 @@ const SummaryCalculate = ({ data }) => {
                 (ageStr) => ageStr.split("|")[0] === entry.age
               );
               if (str.length) {
-                const sameAgeGroup = str[0].split("|")[2] === ageCategory;
-                const sameDanceGroup = entry.category === subForm;
+                const sameAgeGroup = str[0].split("|")[2] === ageType;
+                const sameDanceGroup = entry.category === category;
                 if (sameAgeGroup && sameDanceGroup) {
                   const noSolo =
-                    subForm === "solo" &&
+                    category === "solo" &&
                     (!entry.level ||
                       !entry.dance ||
                       !entry.danceStyle ||
                       entry.level === "--" ||
                       entry.danceStyle === "--");
                   entryCount +=
-                    subForm === "single"
+                    category === "single"
                       ? entry.categories.length
                       : noSolo
                       ? 0

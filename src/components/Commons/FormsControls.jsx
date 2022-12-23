@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { FormsContext } from "../../App";
+import { FormsContext, UserContext } from "../../App";
 import SubmittableIcons from "./SubmittableIcons";
 import AppMsg from "../Utils/AppMsg";
 
 const FormsControls = ({ submittable, msg, hideBtn }) => {
   const navigate = useNavigate();
   const { forms } = useContext(FormsContext);
+  const { entriesService } = useContext(UserContext);
   const [disableCheckout, setDisableCheckout] = useState(true);
 
   useEffect(() => {
@@ -22,10 +23,15 @@ const FormsControls = ({ submittable, msg, hideBtn }) => {
         );
   }, [forms]);
 
-  const handleCheckout = () => {
-    console.log("Handle Checkout");
-    console.log("Liste de toutes les inscriptions:");
-    console.log("Liste de la commande des billets:");
+  const handleCheckout = async () => {
+    const summaryForm = forms.filter((form) => form.formName === "Sommaire");
+    const entries = summaryForm[0].entries;
+    try {
+      const response = await entriesService.getStripeURL(entries);
+      window.location.href = response;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

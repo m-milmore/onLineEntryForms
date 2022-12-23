@@ -14,11 +14,11 @@ const SummaryTickets = ({ data }) => {
   const regPrice = parseInt(regPriceStr.split(" ")[2]);
   const category = data.split("|")[6];
 
-  const number = summaryForm[0].entries.filter(
+  const quantity = summaryForm[0].entries.filter(
     (item) => item.category === category
-  )[0].number;
+  )[0].quantity;
 
-  const [tickets, setTickets] = useState(number);
+  const [tickets, setTickets] = useState(quantity);
 
   useEffect(() => {
     setForms((prev) =>
@@ -27,7 +27,7 @@ const SummaryTickets = ({ data }) => {
           ? {
               ...form,
               entries: form.entries.map((data) =>
-                data.category === category ? { ...data, number: tickets } : data
+                data.category === category ? { ...data, quantity: tickets } : data
               ),
             }
           : form
@@ -38,7 +38,7 @@ const SummaryTickets = ({ data }) => {
         form.formName === "Sommaire"
           ? {
               ...form,
-              formSubmittable: form.entries.some((entry) => entry.number > 0),
+              formSubmittable: form.entries.some((entry) => entry.quantity > 0),
             }
           : form
       )

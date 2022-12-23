@@ -697,7 +697,9 @@ Memoization is a fancy word for caching. It says “Remember the result of calling
 
 ************************************************************************
 	
+Note: Unfortunately, it's impossible to open an external URL in the same tab using React Router. If you don't provide the target property, the router will append the URL to your current website URL (e.g., https://my-website.com/https://herewecode.io/). In the next section, I'll show you how to open an external link in the current tab.
 
+********************************************************************
 
 
 
