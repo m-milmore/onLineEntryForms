@@ -18,6 +18,7 @@ import ResetPassword from "./components/AuthService/ResetPassword";
 import ProAm1Dance from "./components/PA_SD/ProAm1Dance";
 import ProAmMulti from "./components/PA_Multi/ProAmMulti";
 import Summary from "./components/Summary/Summary";
+import Success from "./components/Success/Success";
 import Page404 from "./components/Page404";
 import AppMsg from "./components/Utils/AppMsg";
 import { INIT_MSG } from "./constants";
@@ -117,47 +118,22 @@ const FORMS_INIT = [
     formName: "Sommaire",
     navigate: "/summary",
     formSubmittable: false,
-    entries: [
-      {
-        category: "friday1",
-        ageType: 1,
-        quantity: 0,
-      },
-      {
-        category: "friday2",
-        ageType: 1,
-        quantity: 0,
-      },
-      {
-        category: "friday0",
-        ageType: 0,
-        quantity: 0,
-      },
-      {
-        category: "saturday1",
-        ageType: 1,
-        quantity: 0,
-      },
-      {
-        category: "saturday2",
-        ageType: 1,
-        quantity: 0,
-      },
-      {
-        category: "saturday0",
-        ageType: 0,
-        quantity: 0,
-      },
-      {
-        category: "sunday1",
-        ageType: 1,
-        quantity: 0,
-      },
-      {
-        category: "sunday0",
-        ageType: 0,
-        quantity: 0,
-      },
+    items: [
+      { name: "single1", quantity: 0 },
+      { name: "champ1", quantity: 0 },
+      { name: "schol1", quantity: 0 },
+      { name: "single0", quantity: 0 },
+      { name: "champ0", quantity: 0 },
+      { name: "schol0", quantity: 0 },
+      { name: "solo1", quantity: 0 },
+      { name: "friday1", quantity: 0 },
+      { name: "friday2", quantity: 0 },
+      { name: "friday0", quantity: 0 },
+      { name: "saturday1", quantity: 0 },
+      { name: "saturday2", quantity: 0 },
+      { name: "saturday0", quantity: 0 },
+      { name: "sunday1", quantity: 0 },
+      { name: "sunday0", quantity: 0 },
     ],
   },
 ];
@@ -249,6 +225,7 @@ const App = () => {
                 <Route path="/pa1d" element={<ProAm1Dance />} />
                 <Route path="/pamulti" element={<ProAmMulti />} />
                 <Route path="/summary" element={<Summary />} />
+                <Route path="/success" element={<Success />} />
               </Route>
               <Route path="/login" element={<LoginPage initEmail={email} />} />
               <Route path="/forgotpassword" element={<ForgotPassword />} />

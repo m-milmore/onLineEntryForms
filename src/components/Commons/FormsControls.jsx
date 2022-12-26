@@ -25,9 +25,9 @@ const FormsControls = ({ submittable, msg, hideBtn }) => {
 
   const handleCheckout = async () => {
     const summaryForm = forms.filter((form) => form.formName === "Sommaire");
-    const entries = summaryForm[0].entries;
+    const items = summaryForm[0].items;
     try {
-      const response = await entriesService.getStripeURL(entries);
+      const response = await entriesService.getStripeURL(items);
       window.location.href = response;
     } catch (error) {
       console.error(error);

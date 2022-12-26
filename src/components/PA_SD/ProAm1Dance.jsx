@@ -31,19 +31,22 @@ const ProAm1Dance = () => {
         missingInEntries = true;
     });
     setSubmittable(
-      idSection.studio &&
-        idSection.city &&
-        idSection.state &&
-        idSection.phone &&
-        idSection.email &&
-        idSection.teacherFirstName &&
-        idSection.teacherLastName &&
-        idSection.studentFirstName &&
-        idSection.studentLastName &&
-        idSection.studentGender &&
+      idSection.studio !== "" &&
+        idSection.city !== "" &&
+        idSection.state !== "" &&
+        idSection.phone !== "" &&
+        idSection.email !== "" &&
+        idSection.teacherFirstName !== "" &&
+        idSection.teacherLastName !== "" &&
+        idSection.studentFirstName !== "" &&
+        idSection.studentLastName !== "" &&
+        idSection.studentGender !== "" &&
         entries.length > 0 &&
         !missingInEntries
     );
+  }, [idSection, entries, submittable]);
+
+  useEffect(() => {
     setForms((prev) =>
       prev.map((form) =>
         form.formId === formId
@@ -54,7 +57,7 @@ const ProAm1Dance = () => {
           : form
       )
     );
-  }, [formId, setForms, submittable, entries, idSection]);
+  }, [formId, setForms, submittable]);
 
   return (
     <div className="container text-center py-3">

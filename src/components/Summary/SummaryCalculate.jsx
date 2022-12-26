@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useContext, useMemo } from "react";
 import { FormsContext } from "../../App";
-import { early, ageGroups } from "../../constants";
+import { early } from "../../constants";
 import Formatter from "../Utils/Formatter";
 
 const SummaryCalculate = ({ data }) => {
-  const { forms } = useContext(FormsContext);
+  const { forms, setForms } = useContext(FormsContext);
   const dataObj = useMemo(
     () => ({
       mainLine: data.split("|")[0],
       earlyPriceStr: data.split("|")[1],
       regPriceStr: data.split("|")[2],
-      formName: data.split("|")[3],
-      ageType: data.split("|")[4],
-      category: data.split("|")[5],
-      agesGroups: data.split("|")[6],
+      ageType: data.split("|")[3],
+      category: data.split("|")[4],
     }),
     [data]
   );
@@ -23,45 +21,56 @@ const SummaryCalculate = ({ data }) => {
 
   useEffect(() => {
     const noEntriesCalc = () => {
-      const { formName, agesGroups, ageType, category } = dataObj;
-      const entryForms = forms.filter((form) => form.formName === formName);
+      const { ageType, category } = dataObj;
+      const entryForms = forms.filter((form) => form.formName !== "Sommaire");
       let entryCount = 0;
 
       if (entryForms) {
         entryForms.forEach((form) => {
-          if (form.entries) {
-            form.entries.forEach((entry) => {
-              const ageGroup = ageGroups[agesGroups];
-              const str = ageGroup.filter(
-                (ageStr) => ageStr.split("|")[0] === entry.age
-              );
-              if (str.length) {
-                const sameAgeGroup = str[0].split("|")[2] === ageType;
-                const sameDanceGroup = entry.category === category;
-                if (sameAgeGroup && sameDanceGroup) {
-                  const noSolo =
-                    category === "solo" &&
-                    (!entry.level ||
-                      !entry.dance ||
-                      !entry.danceStyle ||
-                      entry.level === "--" ||
-                      entry.danceStyle === "--");
-                  entryCount +=
-                    category === "single"
-                      ? entry.categories.length
-                      : noSolo
-                      ? 0
-                      : 1;
-                }
-              }
-            });
-          }
+          form.entries.forEach((entry) => {
+            const sameAgeType = entry.ageType === ageType;
+            const sameCategory = entry.category === category;
+            if (sameAgeType && sameCategory) {
+              const noSolo =
+                category === "solo" &&
+                (!entry.level ||
+                  !entry.dance ||
+                  !entry.danceStyle ||
+                  entry.level === "--" ||
+                  entry.danceStyle === "--");
+              entryCount +=
+                category === "single"
+                  ? entry.categories.length
+                  : noSolo
+                  ? 0
+                  : 1;
+            }
+          });
           setNoEntries(entryCount);
         });
       }
     };
     noEntriesCalc();
   }, [dataObj, forms]);
+
+  useEffect(() => {
+    const { ageType, category } = dataObj;
+    const currCategory = category + ageType;
+    setForms((prev) =>
+      prev.map((form) =>
+        form.formName === "Sommaire"
+          ? {
+              ...form,
+              items: form.items.map((item) =>
+                item.name === currCategory
+                  ? { ...item, quantity: noEntries }
+                  : item
+              ),
+            }
+          : form
+      )
+    );
+  }, [dataObj, noEntries, setForms]);
 
   const { mainLine, earlyPriceStr, regPriceStr } = dataObj;
 

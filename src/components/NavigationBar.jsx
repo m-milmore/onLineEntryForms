@@ -16,7 +16,20 @@ const NavigationBar = () => {
       formName,
       navigate,
       formSubmittable: false,
-      idSection: {},
+      idSection: {
+        studio: "",
+        city: "",
+        state: "",
+        stateAbbrev: "",
+        phone: "",
+        email: "",
+        teacherFirstName: "",
+        teacherLastName: "",
+        member: "",
+        studentFirstName: "",
+        studentLastName: "",
+        studentGender: "",
+      },
       entries: [],
     };
     const arrSumm = forms.filter((form) => form.formName === "Sommaire");

@@ -150,12 +150,12 @@ export class EntriesService {
     }
   }
 
-  async getStripeURL(entries) {
-    const body = { entries };
+  async getStripeURL(items) {
+    const body = { items };
 
     try {
       const response = await axios.post(URL_CREATE_CHECKOUT_SESSION, body);
-      return response.data.url
+      return response.data.url;
     } catch (error) {
       throw error;
     }

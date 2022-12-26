@@ -34,19 +34,22 @@ const ProAmMulti = () => {
       }
     });
     setSubmittable(
-      idSection.studio &&
-        idSection.city &&
-        idSection.state &&
-        idSection.phone &&
-        idSection.email &&
-        idSection.teacherFirstName &&
-        idSection.teacherLastName &&
-        idSection.studentFirstName &&
-        idSection.studentLastName &&
-        idSection.studentGender &&
+      idSection.studio !== "" &&
+        idSection.city !== "" &&
+        idSection.state !== "" &&
+        idSection.phone !== "" &&
+        idSection.email !== "" &&
+        idSection.teacherFirstName !== "" &&
+        idSection.teacherLastName !== "" &&
+        idSection.studentFirstName !== "" &&
+        idSection.studentLastName !== "" &&
+        idSection.studentGender !== "" &&
         entries.length > 0 &&
         !missingInEntries
     );
+  }, [entries, idSection]);
+
+  useEffect(() => {
     setForms((prev) =>
       prev.map((form) =>
         form.formId === formId
@@ -57,7 +60,7 @@ const ProAmMulti = () => {
           : form
       )
     );
-  }, [entries, formId, idSection, setForms, submittable]);
+  }, [formId, setForms, submittable]);
 
   return (
     <div className="container text-center py-3">

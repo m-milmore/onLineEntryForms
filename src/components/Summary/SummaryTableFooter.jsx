@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FormsContext } from "../../App";
-import { summaryTableFootNote, priceList, early } from "../../constants";
+import { summaryTableFootNote, early, priceList } from "../../constants";
 import Formatter from "../Utils/Formatter";
 
 const SummaryTableFooter = () => {
@@ -9,33 +9,15 @@ const SummaryTableFooter = () => {
 
   useEffect(() => {
     let cumul = 0;
-    forms.forEach((form) => {
-      form.entries.forEach((entry) => {
-        const list = priceList.filter((item) =>
-          item.includes(entry.category + "|" + entry.ageType)
-        );
-        if (list.length) {
-          const price = early() ? list[0].split("|")[2] : list[0].split("|")[3];
-          const noSolo =
-            entry.category === "solo" &&
-            (!entry.level ||
-              !entry.dance ||
-              !entry.danceStyle ||
-              entry.level === "--" ||
-              entry.danceStyle === "--");
-          const entryCount =
-            entry.category === "single"
-              ? entry.categories.length
-              : noSolo
-              ? 0
-              : "quantity" in entry
-              ? entry.quantity
-              : 1;
-          const amount = price * entryCount;
-          cumul += amount;
-        }
-      });
+    const priceType = early() ? 1 : 2;
+    const summForm = forms.filter((form) => form.formName === "Sommaire");
+    summForm[0].items.forEach((item) => {
+      const price = priceList
+        .filter((list) => list.includes(item.name))[0]
+        .split("|")[priceType];
+      cumul += item.quantity * price;
     });
+
     setTotal(cumul);
   }, [forms, setTotal]);
 
