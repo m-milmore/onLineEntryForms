@@ -9,7 +9,7 @@ const Summary = () => {
     <div className="container text-center py-3">
       <FormHeader title1="bon de commande" />
       <SummaryTable />
-      <FormsControls hideBtn={true} />
+      <FormsControls hideBtns={true} hidePayBtn={false}/>
     </div>
   );
 };

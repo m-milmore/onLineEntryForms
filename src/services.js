@@ -132,10 +132,11 @@ export class EntriesService {
 
   async createEntries(entries) {
     const body = { entries };
-    const headers = this.getAuthHeader();
+    // const headers = this.getAuthHeader();
 
     try {
-      await axios.post(URL_ENTRIES, body, { headers });
+      // await axios.post(URL_ENTRIES, body, { headers });
+      await axios.post(URL_ENTRIES, body);
     } catch (error) {
       throw error;
     }

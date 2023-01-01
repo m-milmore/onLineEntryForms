@@ -309,9 +309,23 @@ vendredi le 23 décembre 2022				6hrs (estimate)	cumul 500hrs
 samedi le 24 décembre 2022					4hrs (estimate)	cumul 504hrs
 	work on summary/stripe
 
-dimanche le 25 décembre 2022
+dimanche le 25 décembre 2022				4hrs (estimate)	cumul 508hrs
 	work on summary/stripe
 
+lundi le 26 décembre 2022					5hrs (estimate)	cumul 513hrs
+	work on server
+
+mardi le 27 décembre 2022
+	work on server					3hrs (estimate)	cumul 516hrs
+
+mercredi le 28 décembre 2022				3hrs (estimate)	cumul 519hrs
+	work on server
+
+samedi le 31 décembre 2022					6hrs (estimate)	cumul 525hrs
+	work on server
+
+dimanche le 1er janvier 2023
+	work on server
 
 
 

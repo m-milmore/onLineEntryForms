@@ -701,7 +701,67 @@ Note: Unfortunately, it's impossible to open an external URL in the same tab usi
 
 ********************************************************************
 
+      <div>
+        <ul>
+          {formsWoSummary.map((form) =>
+            Object.keys(form).map((key) => {
+              return <li key={key}>{key}</li>;
+            })
+          )}
+        </ul>
+      </div>
 
+****************************************************************
+
+        {formsWoSummary.map((form) => (
+          <div key={nanoid()}>
+            <li>formId : {form.formId}</li>
+            <li>formName : {form.formName}</li>
+            <li>navigate : {form.navigate}</li>
+            <li>formSubmittable : {form.formSubmittable.toString()}</li>
+            <li>
+              idSection :
+              <ol>
+                <li>studio : {form.idSection.studio}</li>
+                <li>city: {form.idSection.city}</li>
+                <li>state: {form.idSection.state}</li>
+                <li>stateAbbrev: {form.idSection.stateAbbrev}</li>
+                <li>member: {form.idSection.member}</li>
+                <li>phone: {form.idSection.phone}</li>
+                <li>teacherFirstName: {form.idSection.teacherFirstName}</li>
+                <li>teacherLastName: {form.idSection.teacherLastName}</li>
+                <li>email: {form.idSection.email}</li>
+                <li>studentFirstName: {form.idSection.studentFirstName}</li>
+                <li>studentLastName: {form.idSection.studentLastName}</li>
+                <li>studentGender: {form.idSection.studentGender}</li>
+              </ol>
+            </li>
+            <li>
+              entries :{" "}
+              {form.entries.map((entry) => (
+                <ol key={nanoid()}>
+                  <li>entryId : {entry.entryId}</li>
+                  <li>age : {entry.age}</li>
+                  <li>level : {entry.level}</li>
+                  <li>ageType: {entry.ageType}</li>
+                  <li>category : {entry.category}</li>
+                  <li>syllabus : {entry.syllabus}</li>
+                  <li>
+                    categories :{" "}
+                    {entry.categories.map((cat) => (
+                      <ol key={nanoid()}>
+                        <li>dance : {cat.dance}</li>
+                        <li>danceStyle : {cat.danceStyle}</li>
+                      </ol>
+                    ))}
+                  </li>
+                </ol>
+              ))}
+            </li>
+          </div>
+        ))}
+
+************************************************
 
 
 

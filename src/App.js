@@ -20,8 +20,8 @@ import ProAmMulti from "./components/PA_Multi/ProAmMulti";
 import Summary from "./components/Summary/Summary";
 import Success from "./components/Success/Success";
 import Page404 from "./components/Page404";
-import AppMsg from "./components/Utils/AppMsg";
-import { INIT_MSG } from "./constants";
+// import AppMsg from "./components/Utils/AppMsg";
+// import { INIT_MSG } from "./constants";
 
 const authService = new AuthService();
 const entriesService = new EntriesService(authService.getBearerHeader);
@@ -163,23 +163,23 @@ const PrivateRoute = ({ children, isLoggedIn, ...props }) => {
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [email, setEmail] = useState(""); // to pass email of forgotpassword to login page via listener
-  const [msg, setMsg] = useState(INIT_MSG);
+  // const [msg, setMsg] = useState(INIT_MSG);
 
   // fetches form constants
-  useEffect(() => {
-    setMsg("loading data...");
+  // useEffect(() => {
+  //   setMsg("loading data...");
 
-    const fetchItems = async () => {
-      try {
-        await entriesService.fetchFormConstants();
-        setMsg(INIT_MSG);
-      } catch (error) {
-        setMsg(error.message);
-      }
-    };
+  //   const fetchItems = async () => {
+  //     try {
+  //       await entriesService.fetchFormConstants();
+  //       setMsg(INIT_MSG);
+  //     } catch (error) {
+  //       setMsg(error.message);
+  //     }
+  //   };
 
-    (async () => await fetchItems())();
-  }, []);
+  //   (async () => await fetchItems())();
+  // }, []);
 
   // 2 tasks:
   // when logging in, the Login Page will send a true value to set the isLoggedIn var
@@ -212,7 +212,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <AppMsg msg={msg} />
+      {/* <AppMsg msg={msg} /> */}
       <AuthProvider>
         <FormsProvider>
           <Router>
