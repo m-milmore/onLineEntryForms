@@ -324,8 +324,48 @@ mercredi le 28 décembre 2022				3hrs (estimate)	cumul 519hrs
 samedi le 31 décembre 2022					6hrs (estimate)	cumul 525hrs
 	work on server
 
-dimanche le 1er janvier 2023
+dimanche le 1er janvier 2023					6hrs (estimate)	cumul 531hrs
 	work on server
+
+lundi le 2 janvier 2023					6hrs (estimate)	cumul 537hrs
+	work on server (stripe, mongoDB)
+
+mardi le 3 janvier 2023					4hrs (estimate)	cumul 541hrs
+	work on tickets
+
+mercredi le 4 janvier 2023
+	work on tickets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

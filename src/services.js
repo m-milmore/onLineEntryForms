@@ -9,7 +9,8 @@ const URL_FORGOT_PASSWORD = `${URL_AUTH}/forgotpassword`;
 const URL_RESET_PASSWORD = `${URL_AUTH}/resetpassword/`;
 
 const URL_GET_FORM_CONSTANTS = `${URL_ENTRIES}/formconstants`;
-const URL_CREATE_CHECKOUT_SESSION = `${URL_ENTRIES}/create-checkout-session`;
+const URL_CREATE_CHECKOUT_SESSION = `${URL_ENTRIES}/createcheckoutsession`;
+const URL_STRIPE_DATA = `${URL_ENTRIES}/getstripedata`;
 
 // for APIs that don't need a token in the header
 const headers = { "Content-Type": "application/json" };
@@ -157,6 +158,15 @@ export class EntriesService {
     try {
       const response = await axios.post(URL_CREATE_CHECKOUT_SESSION, body);
       return response.data.url;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getStripeData(session_id) {
+    try {
+      const response = await axios.get(URL_STRIPE_DATA + `/${session_id}`);
+      return response.data.data.customer_details;
     } catch (error) {
       throw error;
     }

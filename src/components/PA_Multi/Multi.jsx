@@ -23,10 +23,10 @@ const Multi = ({
       age,
       ageType,
       level,
-      dance,
-      danceStyle,
       syllabus,
       category,
+      dance,
+      danceStyle,
     }),
     [age, ageType, level, dance, danceStyle, syllabus, category]
   );

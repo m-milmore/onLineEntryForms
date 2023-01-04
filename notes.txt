@@ -763,6 +763,18 @@ Note: Unfortunately, it's impossible to open an external URL in the same tab usi
 
 ************************************************
 
+npm morgan
+
+dev
+Concise output colored by response status for development use. 
+The :status token will be 
+	colored green for success codes, 
+	red for server error codes, 
+	yellow for client error codes, 
+	cyan for redirection codes, and 
+	uncolored for information codes.
+
+**********************************************************************
 
 
 

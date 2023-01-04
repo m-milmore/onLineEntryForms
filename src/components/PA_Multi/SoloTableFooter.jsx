@@ -10,6 +10,7 @@ const SoloTableFooter = ({ formId }) => {
       entryId: nanoid(),
       level: "",
       age: "All",
+      ageType: "1",
       syllabus: "open",
       category: "solo",
       dance: "",

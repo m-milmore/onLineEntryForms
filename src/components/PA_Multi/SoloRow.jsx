@@ -16,7 +16,10 @@ const SoloRow = ({ entry, formId }) => {
               ...form,
               entries: form.entries.map((data) =>
                 data.entryId === entry.entryId
-                  ? { ...data, dance: value }
+                  ? {
+                      ...data,
+                      dance: value,
+                    }
                   : data
               ),
             }

@@ -84,9 +84,9 @@ export const paSDLevelsOpen = [
 ];
 
 export const paSDDanceDivision = [
-  ["smooth", ["W", "T", "F", "VW", "PB"]],
+  ["Smooth", ["W", "T", "F", "VW", "PB"]],
   [
-    "rhythm",
+    "Rhythm",
     [
       "C",
       "R",
@@ -105,8 +105,8 @@ export const paSDDanceDivision = [
       "TV",
     ],
   ],
-  ["ballroom", ["W", "T", "VW", "F", "Q"]],
-  ["latin", ["C", "S", "R", "PD", "J"]],
+  ["Ballroom", ["W", "T", "VW", "F", "Q"]],
+  ["Latin", ["C", "S", "R", "PD", "J"]],
 ];
 
 // pro-am 3-dance data
@@ -116,7 +116,7 @@ export const paChampOpenLevels = ["Bronze", "Argent", "Or"];
 
 export const paChampDances = [
   "Smooth (W/T/F)",
-  "Rhythm (C/R/Sw)",
+  "Rhythm (C/R/SW)",
   "Ballroom (W/T/F)",
   "Latin (C/R/S)",
 ];
@@ -124,13 +124,13 @@ export const paChampDances = [
 // pro-am scholarships data
 export const paScholDances = [
   "Smooth (W/T/F/VW)",
-  "Rhythm (C/R/Sw/B/M)",
+  "Rhythm (C/R/SW/B/M)",
   "Ballroom (W/T/VW/F/Q)",
   "Latin (C/S/R/P/J)",
 ];
 
 // pro-am solo data
-export const divisions = ["smooth", "rhythm", "ballroom", "latin"];
+export const divisions = ["Smooth", "Rhythm", "Ballroom", "Latin"];
 
 // dance names for tooltips
 export const danceNames = {
